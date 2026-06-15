@@ -1182,9 +1182,14 @@ async function criarPeca(peca) {
 }
 
 async function atualizarPeca(id, updates) {
-  const { data, error } = await sb.from('pecas').update({ ...updates, updated_at: new Date().toISOString() }).eq('id', id).select().single();
+  const { data, error } = await sb
+    .from('pecas')
+    .update({ ...updates, updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select();
+
   if (error) throw error;
-  return data;
+  return data?.[0] || null;
 }
 
 async function criarHistorico(peca_id, tipo_evento, descricao, dados = {}) {
