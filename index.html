@@ -1182,7 +1182,7 @@ async function criarPeca(peca) {
 }
 
 async function atualizarPeca(id, updates) {
-  const { data, error } = await sb.from('pecas').update({ ...updates, updated_at: new Date().toISOString() }).eq('id', id).select().maybesingle();
+  const { data, error } = await sb.from('pecas').update({ ...updates, updated_at: new Date().toISOString() }).eq('id', id).select().maybeSingle();
   if (error) throw error;
   return data;
 }
