@@ -1128,7 +1128,7 @@ async function entrarApp() {
 
   btn.disabled = false; btn.textContent = 'Entrar na coleção';
 }
-
+window.entrarApp = entrarApp;
 // Inicialização interna do workspace — invisível para a usuária
 async function _iniciarWorkspace() {
   _atualizarChipNome();
