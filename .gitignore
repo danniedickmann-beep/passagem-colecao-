@@ -1,0 +1,10 @@
+node_modules/
+.pnpm-store/
+.env
+.env.*
+!.env.example
+dist/
+*.log
+*.docx
+passagem-colecao-mvp/
+.DS_Store

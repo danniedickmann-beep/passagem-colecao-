@@ -1,0 +1,2 @@
+import { STATUS_LABELS } from '../config/flow'
+export function Pipeline({ pieces, view, setView }) { return <nav className="pipeline" aria-label="Visão resumida do andamento"><button className={view === 'all' ? 'active' : ''} onClick={() => setView('all')}>Todas <b>{pieces.length}</b></button>{Object.entries(STATUS_LABELS).slice(0, 5).map(([id, label]) => <span className="pipe-group" key={id}><i>›</i><button className={view === id ? 'active' : ''} onClick={() => setView(id)}>{label} <b>{pieces.filter(p => p.fluxo_atual === id).length}</b></button></span>)}</nav> }
