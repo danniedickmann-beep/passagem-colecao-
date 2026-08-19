@@ -1,12 +1,32 @@
 import { useState } from 'react'
+import { PROFILES } from '../config/mvp'
+import { NexusMark } from './NexusMark'
 
 export function Login({ onEnter }) {
-  const [name, setName] = useState(localStorage.getItem('passagem-user') || '')
-  function submit(event) { event.preventDefault(); const value = name.trim(); if (!value) return; localStorage.setItem('passagem-user', value); onEnter(value) }
+  const previous = readPreviousUser()
+  const [nome, setNome] = useState(previous.nome || '')
+  const [perfil, setPerfil] = useState(previous.perfil || '')
+
+  function submit(event) {
+    event.preventDefault()
+    const user = { nome: nome.trim(), perfil }
+    if (!user.nome || !user.perfil) return
+    localStorage.setItem('passagem-user-v3', JSON.stringify(user))
+    onEnter(user)
+  }
+
   return <div className="login-screen"><form className="login-card" onSubmit={submit}>
-    <div className="brand-mark">◊</div><h1>Passagem de Coleção</h1>
-    <p>Como você quer se identificar nos registros desta coleção?</p>
-    <input value={name} onChange={e => setName(e.target.value)} placeholder="Seu nome e área — Ex: Ana, Engenharia" autoFocus />
-    <button type="submit" disabled={!name.trim()}>Entrar na coleção</button>
+    <div className="login-brand"><NexusMark /><div><strong>Nexus</strong><small>Passagem de Coleção Digital</small></div></div>
+    <span className="login-kicker">Ambiente operacional</span>
+    <h1>Bem-vinda à coleção</h1>
+    <p>Identifique-se para que decisões e alterações fiquem registradas.</p>
+    <label>Nome completo<input value={nome} onChange={event => setNome(event.target.value)} placeholder="Seu nome completo" autoFocus /></label>
+    <label>Perfil<select value={perfil} onChange={event => setPerfil(event.target.value)}><option value="">Selecione seu perfil</option>{PROFILES.map(item => <option key={item}>{item}</option>)}</select></label>
+    <button type="submit" disabled={!nome.trim() || !perfil}>Acessar a coleção</button>
   </form></div>
+}
+
+function readPreviousUser() {
+  try { return JSON.parse(localStorage.getItem('passagem-user-v3') || '{}') }
+  catch { return {} }
 }
