@@ -18,7 +18,7 @@ export function Login({ onEnter }) {
   return <div className="login-screen"><form className="login-card" onSubmit={submit}>
     <div className="login-brand"><NexusMark /><div><strong>Nexus</strong><small>Passagem de Coleção Digital</small></div></div>
     <span className="login-kicker">Ambiente operacional</span>
-    <h1>Bem-vinda à coleção</h1>
+    <h1>Acessar a Passagem de Coleção</h1>
     <p>Identifique-se para que decisões e alterações fiquem registradas.</p>
     <label>Nome completo<input value={nome} onChange={event => setNome(event.target.value)} placeholder="Seu nome completo" autoFocus /></label>
     <label>Perfil<select value={perfil} onChange={event => setPerfil(event.target.value)}><option value="">Selecione seu perfil</option>{PROFILES.map(item => <option key={item}>{item}</option>)}</select></label>

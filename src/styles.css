@@ -208,3 +208,29 @@ body{font-size:15px;line-height:1.5}
 .presentation-stage-media img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center center!important}
 @media(max-width:760px){.passage-filters{grid-template-columns:1fr 1fr}.passage-filters>span{grid-column:1/-1}.presentation-image{height:min(68vh,620px)!important;min-height:400px!important}}
 @media(max-width:520px){.passage-filters{grid-template-columns:1fr}.passage-filters>span{grid-column:auto}.presentation-image{height:58vh!important;min-height:360px!important;padding:10px!important}}
+
+/* Modo apresentação: cadastro à esquerda, imagem integral ao centro e Radar ao vivo à direita. */
+.presentation-stage>header{align-items:flex-start}
+.presentation-stage>header>div{min-width:0;flex:1}
+.presentation-stage-facts{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.presentation-stage-facts span{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid rgba(149,202,239,.2);border-radius:8px;background:rgba(14,43,73,.68);color:#f1f6fa;font-size:11px}
+.presentation-stage-facts b{color:#79cef8;font-size:9px;text-transform:uppercase;letter-spacing:.05em}
+.presentation-stage>main{grid-template-columns:minmax(0,1fr) minmax(270px,340px)!important;grid-template-rows:auto minmax(0,1fr);gap:12px 14px!important;padding:12px 0!important}
+.presentation-stage-media{width:100%;height:100%;padding:0!important;border:1px solid rgba(135,201,242,.2);border-radius:15px;background:#020a12}
+.presentation-stage-media img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important}
+.presentation-stage>main>aside{height:100%;padding:17px!important;border-radius:15px!important}
+.presentation-stage-notes{grid-column:1/-1;height:auto!important;min-height:0!important;overflow:visible!important;display:grid;grid-template-columns:120px minmax(0,1fr);align-items:start;gap:16px;padding:13px 17px!important}
+.presentation-stage-notes>p{margin:0!important;color:#f1f7fb!important;font-size:clamp(13px,1.12vw,17px)!important;line-height:1.48!important;white-space:pre-wrap}
+.presentation-stage-live>header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:12px;border-bottom:1px solid rgba(135,201,242,.18)}
+.presentation-stage-live>header div{display:grid;gap:4px}
+.presentation-stage-live>header small,.presentation-stage-notes>small{color:#70d1ff;font:700 9px 'DM Mono',monospace;letter-spacing:.12em}
+.presentation-stage-live>header b{color:#fff;font-size:14px}
+.presentation-stage-live>header>span{display:grid;place-items:center;min-width:32px;height:32px;border-radius:9px;background:#1767e8;color:#fff;font-weight:800}
+.presentation-stage-live>div{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.presentation-stage-live article{padding:11px;border:1px solid rgba(135,201,242,.16);border-radius:10px;background:rgba(6,25,45,.58)}
+.presentation-stage-live article strong{color:#fff;font-size:12px}
+.presentation-stage-live article p{margin:5px 0!important;color:#dce8f2!important;font-size:12px!important;line-height:1.45!important}
+.presentation-stage-live article small{color:#80a0ba;font-size:9px}
+.presentation-stage-no-pending{margin-top:16px!important;color:#9bb0c3!important;font-size:12px!important;line-height:1.5!important}
+@media(max-width:900px){.presentation-stage>main{grid-template-columns:minmax(0,1fr) minmax(230px,290px)!important}.presentation-stage-notes{grid-template-columns:100px minmax(0,1fr)}}
+@media(max-width:700px){.presentation-stage{overflow:auto!important}.presentation-stage>main{grid-template-columns:1fr!important;grid-template-rows:auto minmax(380px,62vh) auto!important}.presentation-stage-notes{grid-row:1;display:block}.presentation-stage-notes>p{margin-top:8px!important}.presentation-stage-media{grid-row:2}.presentation-stage-live{grid-row:3}.presentation-stage>main>aside{height:auto}.presentation-stage-facts{display:grid;grid-template-columns:1fr 1fr}.presentation-stage-facts span{display:grid;gap:2px}}

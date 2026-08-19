@@ -35,6 +35,10 @@ export default function App() {
   }, [])
 
   useEffect(() => { if (!user) return; refresh().catch(error => setNotice(readError(error))) }, [user, refresh])
+  useEffect(() => {
+    if (!user) return undefined
+    return repository.subscribePendencias(() => repository.listPendencias().then(setPendencias).catch(error => setNotice(readError(error))))
+  }, [user])
   const canEdit = useMemo(() => canEditTechnical(user?.perfil), [user])
   const collectionOptions = useMemo(() => [...new Set(['INVERNO 27', 'VERÃO 27', 'ALTO VERÃO 28', ...pieces.map(piece => piece.colecao), ...archivedPieces.map(piece => piece.colecao)].filter(Boolean))], [pieces, archivedPieces])
   const criticalityOptions = useMemo(() => [...new Set([...CRITICALITIES, ...pieces.map(piece => piece.complexidade), ...archivedPieces.map(piece => piece.complexidade)].filter(Boolean))], [pieces, archivedPieces])
@@ -131,7 +135,7 @@ export default function App() {
   return <Layout user={user} view={view} setView={setView} pieces={pieces} pendencias={pendencias}>
     {view === 'dashboard' && <DashboardView pieces={pieces} pendencias={pendencias} events={events} onNavigate={setView} onNewArticle={() => { setFormPiece(undefined); setFormOpen(true) }} canEdit={canEdit} />}
     {view === 'artigos' && <ArticlesView pieces={pieces} archivedPieces={archivedPieces} query={query} setQuery={setQuery} canEdit={canEdit} onNew={() => { setFormPiece(undefined); setFormOpen(true) }} onOpen={setDetailPiece} onRestore={piece => openStatus(piece, 'restore')} />}
-    {view === 'telao' && <TelaoView pieces={pieces} collectionOptions={collectionOptions} criticalityOptions={criticalityOptions} problemTypeOptions={problemTypeOptions} selectedId={selectedId} setSelectedId={setSelectedId} onCreatePending={createPending} saving={saving} />}
+    {view === 'telao' && <TelaoView pieces={pieces} pendencias={pendencias} collectionOptions={collectionOptions} criticalityOptions={criticalityOptions} problemTypeOptions={problemTypeOptions} selectedId={selectedId} setSelectedId={setSelectedId} onCreatePending={createPending} saving={saving} />}
     {view === 'mostruario' && <MostruarioView pieces={pieces} problemTypeOptions={problemTypeOptions} selectedId={selectedId} setSelectedId={setSelectedId} onSave={saveMostruario} saving={saving} />}
     {view === 'radar' && <RadarView pieces={pieces} pendencias={pendencias} onResolve={resolvePending} saving={saving} />}
     {view === 'historico' && <HistoryView pieces={pieces} events={events} />}

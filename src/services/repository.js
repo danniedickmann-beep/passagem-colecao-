@@ -23,6 +23,15 @@ function assertLocalPiece(db, id) {
 
 export const repository = {
   configured,
+  subscribePendencias(onChange) {
+    if (!supabase) {
+      const handleStorage = event => { if (event.key === STORAGE_KEY) onChange() }
+      window.addEventListener('storage', handleStorage)
+      return () => window.removeEventListener('storage', handleStorage)
+    }
+    const channel = supabase.channel('pendencias-em-tempo-real').on('postgres_changes', { event: '*', schema: 'public', table: 'pendencias' }, onChange).subscribe()
+    return () => { supabase.removeChannel(channel) }
+  },
   async uploadTechnicalDrawing(file) {
     if (!file) return null
     if (!file.type.startsWith('image/')) throw new Error('Selecione um arquivo de imagem válido.')

@@ -104,6 +104,18 @@ alter table public.pecas enable row level security;
 alter table public.historico_peca enable row level security;
 alter table public.pendencias enable row level security;
 
+-- Permite que os apontamentos apareçam no modo apresentação sem recarregar a tela.
+do $realtime$
+begin
+  if not exists (
+    select 1 from pg_publication_tables
+    where pubname = 'supabase_realtime' and schemaname = 'public' and tablename = 'pendencias'
+  ) then
+    alter publication supabase_realtime add table public.pendencias;
+  end if;
+end
+$realtime$;
+
 -- ATENÇÃO: estas políticas mantêm o comportamento do MVP sem autenticação real.
 -- Elas são adequadas apenas para ambiente controlado/interno.
 -- O bloco cria somente as políticas ausentes e preserva configurações existentes.
