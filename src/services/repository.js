@@ -9,9 +9,9 @@ const STORAGE_KEY = 'passagem-colecao-react-v2'
 function localRead() {
   try {
     const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}
-    return { pieces: data.pieces || [], events: data.events || [], pendencias: data.pendencias || [] }
+    return { pieces: data.pieces || [], events: data.events || [], pendencias: data.pendencias || [], votos: data.votos || [] }
   } catch {
-    return { pieces: [], events: [], pendencias: [] }
+    return { pieces: [], events: [], pendencias: [], votos: [] }
   }
 }
 function localWrite(data) { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)) }
@@ -30,6 +30,15 @@ export const repository = {
       return () => window.removeEventListener('storage', handleStorage)
     }
     const channel = supabase.channel('pendencias-em-tempo-real').on('postgres_changes', { event: '*', schema: 'public', table: 'pendencias' }, onChange).subscribe()
+    return () => { supabase.removeChannel(channel) }
+  },
+  subscribeVotes(onChange) {
+    if (!supabase) {
+      const handleStorage = event => { if (event.key === STORAGE_KEY) onChange() }
+      window.addEventListener('storage', handleStorage)
+      return () => window.removeEventListener('storage', handleStorage)
+    }
+    const channel = supabase.channel('votos-criticidade-em-tempo-real').on('postgres_changes', { event: '*', schema: 'public', table: 'votos_criticidade' }, onChange).subscribe()
     return () => { supabase.removeChannel(channel) }
   },
   async uploadTechnicalDrawing(file) {
@@ -53,6 +62,39 @@ export const repository = {
     if (!path) return
     const { error } = await supabase.storage.from('desenhos-tecnicos').remove([path])
     if (error) throw error
+  },
+  async uploadSamplePhotos(files) {
+    const selected = Array.from(files || [])
+    if (!selected.length) return []
+    return Promise.all(selected.map(async file => {
+      if (!file.type.startsWith('image/')) throw new Error('Selecione somente arquivos de imagem.')
+      if (file.size > 10 * 1024 * 1024) throw new Error('Cada imagem deve ter no máximo 10 MB.')
+      if (!supabase) return await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error('Não foi possível ler a imagem.')); reader.readAsDataURL(file) })
+      const safeName = file.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z0-9._-]/g, '-').toLowerCase()
+      const path = `mostruario/${new Date().toISOString().slice(0, 10)}/${crypto.randomUUID()}-${safeName}`
+      const { error } = await supabase.storage.from('desenhos-tecnicos').upload(path, file, { contentType: file.type, upsert: false })
+      if (error) throw error
+      return supabase.storage.from('desenhos-tecnicos').getPublicUrl(path).data.publicUrl
+    }))
+  },
+  async uploadArticleAttachments(files) {
+    const selected = Array.from(files || [])
+    if (!selected.length) return []
+    return Promise.all(selected.map(async file => {
+      const allowed = file.type.startsWith('image/') || file.type.startsWith('video/') || file.type === 'application/pdf' || file.type.startsWith('text/') || /\.(txt|csv|md)$/i.test(file.name)
+      if (!allowed) throw new Error(`O arquivo “${file.name}” não é imagem, vídeo, PDF ou texto.`)
+      if (file.size > 50 * 1024 * 1024) throw new Error(`O arquivo “${file.name}” deve ter no máximo 50 MB.`)
+      if (!supabase) {
+        const url = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error('Não foi possível ler o arquivo.')); reader.readAsDataURL(file) })
+        return { url, nome: file.name, tipo: file.type || 'text/plain', tamanho: file.size }
+      }
+      const safeName = file.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z0-9._-]/g, '-').toLowerCase()
+      const path = `anexos/${new Date().toISOString().slice(0, 10)}/${crypto.randomUUID()}-${safeName}`
+      const { error } = await supabase.storage.from('desenhos-tecnicos').upload(path, file, { contentType: file.type || 'application/octet-stream', upsert: false })
+      if (error) throw error
+      const url = supabase.storage.from('desenhos-tecnicos').getPublicUrl(path).data.publicUrl
+      return { url, nome: file.name, tipo: file.type || 'application/octet-stream', tamanho: file.size }
+    }))
   },
   async listPieces() {
     if (!supabase) return localRead().pieces.filter(piece => piece.ativa !== false)
@@ -114,10 +156,33 @@ export const repository = {
     if (error) throw error
     return data
   },
-  async resolvePendencia(id, user) {
-    const patch = { status: 'resolvida', resolved_by: user, resolved_at: new Date().toISOString() }
+  async resolvePendencia(id, user, resolution, photos = []) {
+    const patch = { status: 'resolvida', resolved_by: user, resolved_at: new Date().toISOString(), resolucao_descricao: resolution, fotos_resolucao: photos }
     if (!supabase) { const db = localRead(); db.pendencias ||= []; const index = db.pendencias.findIndex(item => item.id === id); if (index < 0) throw new Error('Pendência não encontrada.'); db.pendencias[index] = { ...db.pendencias[index], ...patch }; localWrite(db); return db.pendencias[index] }
     const { data, error } = await supabase.from('pendencias').update(patch).eq('id', id).select().single()
+    if (error) throw error
+    return data
+  },
+  async listVotes() {
+    if (!supabase) return localRead().votos || []
+    const { data, error } = await supabase.from('votos_criticidade').select('*').order('updated_at', { ascending: false })
+    if (error?.code === 'PGRST205' || error?.code === '42P01') return []
+    if (error) throw error
+    return data || []
+  },
+  async saveCriticalityVote(payload) {
+    const timestamp = new Date().toISOString()
+    const vote = { id: crypto.randomUUID(), ...payload, created_at: timestamp, updated_at: timestamp }
+    if (!supabase) {
+      const db = localRead(); db.votos ||= []
+      const index = db.votos.findIndex(item => item.peca_id === payload.peca_id && item.voter_token === payload.voter_token)
+      if (index >= 0) db.votos[index] = { ...db.votos[index], ...payload, updated_at: timestamp }
+      else db.votos.unshift(vote)
+      localWrite(db)
+      return index >= 0 ? db.votos[index] : vote
+    }
+    const { id, created_at, updated_at, ...upsert } = vote
+    const { data, error } = await supabase.from('votos_criticidade').upsert([upsert], { onConflict: 'peca_id,voter_token' }).select().single()
     if (error) throw error
     return data
   },

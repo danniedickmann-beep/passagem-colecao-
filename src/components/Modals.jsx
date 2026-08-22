@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CRITICALITIES } from '../config/mvp'
-const EMPTY = { artigo: '', colecao: '', linha: '', categoria: '', mp_base: '', tipo_peca: 'Nova', complexidade: 'Baixa', lacre: '', participa_mostruario: '', pontos_atencao: [], desenho_tecnico_url: '', observacoes: '' }
+const EMPTY = { artigo: '', colecao: '', linha: '', categoria: '', mp_base: '', tipo_peca: 'Nova', complexidade: 'Baixa', lacre: '', participa_mostruario: '', pontos_atencao: [], desenho_tecnico_url: '', anexos: [], observacoes: '' }
+const ATTACHMENT_ACCEPT = 'image/*,video/*,application/pdf,text/plain,.txt,.csv,.md'
 const SEAL_OPTIONS = ['Amarelo', 'Branco', 'Verde']
 
-export function ArticleFormModal({ open, piece, collectionOptions = [], lineOptions = [], categoryOptions = [], materialOptions = [], attentionOptions = [], onClose, onSave, saving }) {
+export function ArticleFormModal({ open, piece, defaultCollection = '', collectionOptions = [], lineOptions = [], categoryOptions = [], materialOptions = [], attentionOptions = [], onClose, onSave, saving }) {
   const [form, setForm] = useState(EMPTY)
   const [attempted, setAttempted] = useState(false)
   const [customCollection, setCustomCollection] = useState(false)
@@ -13,8 +14,10 @@ export function ArticleFormModal({ open, piece, collectionOptions = [], lineOpti
   const [technicalFile, setTechnicalFile] = useState(null)
   const [filePreview, setFilePreview] = useState('')
   const [fileError, setFileError] = useState('')
+  const [attachmentFiles, setAttachmentFiles] = useState([])
+  const [draggingAttachments, setDraggingAttachments] = useState(false)
   const [newAttention, setNewAttention] = useState('')
-  useEffect(() => { if (open) { setForm(piece ? { ...EMPTY, ...piece } : EMPTY); setAttempted(false); setCustomCollection(false); setCustomLine(false); setCustomCategory(false); setCustomMaterial(false); setTechnicalFile(null); setFilePreview(''); setFileError(''); setNewAttention('') } }, [open, piece])
+  useEffect(() => { if (open) { setForm(piece ? { ...EMPTY, ...piece, anexos: piece.anexos || [] } : { ...EMPTY, colecao: defaultCollection }); setAttempted(false); setCustomCollection(false); setCustomLine(false); setCustomCategory(false); setCustomMaterial(false); setTechnicalFile(null); setFilePreview(''); setFileError(''); setAttachmentFiles([]); setDraggingAttachments(false); setNewAttention('') } }, [open, piece, defaultCollection])
   useEffect(() => () => { if (filePreview) URL.revokeObjectURL(filePreview) }, [filePreview])
   const missing = useMemo(() => ['artigo', 'colecao'].filter(key => !String(form[key] || '').trim()).concat(form.participa_mostruario === '' || form.participa_mostruario == null ? ['participa_mostruario'] : []), [form])
   const knownCollection = collectionOptions.includes(form.colecao)
@@ -32,9 +35,18 @@ export function ArticleFormModal({ open, piece, collectionOptions = [], lineOpti
     setTechnicalFile(file); setFilePreview(URL.createObjectURL(file))
   }
   function removeDrawing() { setTechnicalFile(null); setFilePreview(''); setFileError(''); setForm(current => ({ ...current, desenho_tecnico_url: null })) }
+  function addAttachments(files) {
+    const selected = Array.from(files || [])
+    const invalid = selected.find(file => !(file.type.startsWith('image/') || file.type.startsWith('video/') || file.type === 'application/pdf' || file.type.startsWith('text/') || /\.(txt|csv|md)$/i.test(file.name)))
+    const tooLarge = selected.find(file => file.size > 50 * 1024 * 1024)
+    if (invalid) { setFileError(`O arquivo “${invalid.name}” não é imagem, vídeo, PDF ou texto.`); return }
+    if (tooLarge) { setFileError(`O arquivo “${tooLarge.name}” ultrapassa 50 MB.`); return }
+    setFileError('')
+    setAttachmentFiles(current => [...current, ...selected.filter(file => !current.some(item => item.name === file.name && item.size === file.size && item.lastModified === file.lastModified))])
+  }
   function toggleAttention(tag) { setForm(current => ({ ...current, pontos_atencao: (current.pontos_atencao || []).includes(tag) ? current.pontos_atencao.filter(item => item !== tag) : [...(current.pontos_atencao || []), tag] })) }
   function addAttention() { const tag = newAttention.trim(); if (!tag) return; setForm(current => ({ ...current, pontos_atencao: [...new Set([...(current.pontos_atencao || []), tag])] })); setNewAttention('') }
-  function submit(event) { event.preventDefault(); setAttempted(true); if (missing.length || fileError) return; onSave(form, technicalFile) }
+  function submit(event) { event.preventDefault(); setAttempted(true); if (missing.length || fileError) return; onSave(form, technicalFile, attachmentFiles) }
   return <Modal title={piece ? `Editar ${piece.artigo}` : 'Cadastrar artigo'} kicker="Preparação da Passagem" onClose={onClose} closeOnBackdrop={false}><form className="piece-form" onSubmit={submit}>
     {attempted && missing.length > 0 && <div className="form-error wide">Preencha os campos obrigatórios destacados.</div>}
     <label className={`wide ${attempted && missing.includes('artigo') ? 'invalid' : ''}`}>Código do artigo *<input {...field('artigo')} autoFocus disabled={Boolean(piece)} /></label>
@@ -53,6 +65,8 @@ export function ArticleFormModal({ open, piece, collectionOptions = [], lineOpti
     <fieldset className="wide attention-field"><legend>Pontos de atenção previstos <small>(selecione quantos precisar)</small></legend><div>{[...new Set([...attentionOptions, ...(form.pontos_atencao || [])])].map(tag => <label key={tag} className={(form.pontos_atencao || []).includes(tag) ? 'selected' : ''}><input type="checkbox" checked={(form.pontos_atencao || []).includes(tag)} onChange={() => toggleAttention(tag)} />{tag}</label>)}</div><section className="new-tag"><input value={newAttention} onChange={event => setNewAttention(event.target.value)} placeholder="Cadastrar novo ponto de atenção" onKeyDown={event => { if (event.key === 'Enter') { event.preventDefault(); addAttention() } }} /><button type="button" onClick={addAttention} disabled={!newAttention.trim()}>+ Adicionar</button></section></fieldset>
     <label className="wide upload-field">Imagem do artigo<input type="file" accept="image/*" onChange={chooseFile} /><span>Escolher imagem do computador ou celular · máximo 10 MB</span>{fileError && <em>{fileError}</em>}</label>
     {(filePreview || form.desenho_tecnico_url) && <div className="wide upload-preview"><img src={filePreview || form.desenho_tecnico_url} alt="Pré-visualização do desenho técnico" /><div><strong>{technicalFile?.name || 'Imagem atual'}</strong><small>{technicalFile ? `${(technicalFile.size / 1024 / 1024).toFixed(2)} MB · substituirá a imagem atual ao salvar.` : 'Será mantida até que outra imagem seja selecionada.'}</small></div><button type="button" className="danger-ghost" onClick={removeDrawing} disabled={saving}>Remover imagem</button></div>}
+    <label className={`wide attachment-dropzone ${draggingAttachments ? 'dragging' : ''}`} onDragEnter={event => { event.preventDefault(); setDraggingAttachments(true) }} onDragOver={event => event.preventDefault()} onDragLeave={event => { if (!event.currentTarget.contains(event.relatedTarget)) setDraggingAttachments(false) }} onDrop={event => { event.preventDefault(); setDraggingAttachments(false); addAttachments(event.dataTransfer.files) }}><strong>Anexos do artigo</strong><input type="file" accept={ATTACHMENT_ACCEPT} multiple onChange={event => { addAttachments(event.target.files); event.target.value = '' }} /><span>Arraste os arquivos para cá ou clique para escolher</span><small>Imagens, vídeos, PDF ou texto · até 50 MB por arquivo</small></label>
+    {(form.anexos?.length > 0 || attachmentFiles.length > 0) && <div className="wide attachment-list">{form.anexos.map((attachment, index) => <article key={`${attachment.url}-${index}`}><span>{attachmentIcon(attachment.tipo)}</span><div><strong>{attachment.nome || `Anexo ${index + 1}`}</strong><small>Arquivo já salvo</small></div><button type="button" onClick={() => setForm(current => ({ ...current, anexos: current.anexos.filter((_, itemIndex) => itemIndex !== index) }))}>Remover</button></article>)}{attachmentFiles.map((file, index) => <article key={`${file.name}-${file.lastModified}`}><span>{attachmentIcon(file.type)}</span><div><strong>{file.name}</strong><small>{(file.size / 1024 / 1024).toFixed(2)} MB · será enviado ao salvar</small></div><button type="button" onClick={() => setAttachmentFiles(current => current.filter((_, itemIndex) => itemIndex !== index))}>Remover</button></article>)}</div>}
     <label className="wide">Apontamentos para a passagem<textarea {...field('observacoes')} /></label>
     <div className="modal-actions wide"><button type="button" onClick={onClose} disabled={saving}>Cancelar</button><button className="primary" type="submit" disabled={saving}>{saving ? 'Salvando…' : 'Salvar artigo'}</button></div>
   </form></Modal>
@@ -65,6 +79,7 @@ export function ArticleDetailModal({ piece, canEdit, onClose, onEdit, onArchive 
     <dl><Data label="Coleção" value={piece.colecao} /><Data label="Linha" value={piece.linha} /><Data label="Categoria" value={piece.categoria} /><Data label="Matéria-prima" value={piece.mp_base} /><Data label="Classificação" value={piece.tipo_peca} /><Data label="Criticidade" value={piece.complexidade} /><Data label="Lacre" value={piece.lacre} /><Data label="Mostruário" value={piece.participa_mostruario === true ? 'Mostruário' : piece.participa_mostruario === false ? 'Sem mostruário' : 'Não informado'} /><Data label="Status" value={piece.fluxo_atual} /></dl>
     <section><h3>Pontos de atenção previstos</h3>{piece.pontos_atencao?.length ? <div className="attention-tags">{piece.pontos_atencao.map(tag => <span key={tag}>{tag}</span>)}</div> : <p>Nenhum ponto de atenção marcado.</p>}</section>
     <section><h3>Apontamentos para a passagem</h3><p>{piece.observacoes || 'Nenhum apontamento registrado.'}</p></section>
+    <section><h3>Anexos do artigo</h3>{piece.anexos?.length ? <div className="detail-attachments">{piece.anexos.map((attachment, index) => <article key={`${attachment.url}-${index}`}>{attachment.tipo?.startsWith('image/') ? <button type="button" onClick={() => window.open(attachment.url, '_blank', 'noopener,noreferrer')}><img src={attachment.url} alt={attachment.nome || `Anexo ${index + 1}`} /></button> : attachment.tipo?.startsWith('video/') ? <video src={attachment.url} controls preload="metadata" /> : <span>{attachmentIcon(attachment.tipo)}</span>}<div><strong>{attachment.nome || `Anexo ${index + 1}`}</strong><small>{attachment.tipo || 'Arquivo'}</small></div><a href={attachment.url} target="_blank" rel="noreferrer">Abrir arquivo</a></article>)}</div> : <p>Nenhum anexo registrado.</p>}</section>
     <div className="modal-actions"><button onClick={onClose}>Finalizar consulta</button>{canEdit ? <><button className="danger-ghost" onClick={() => onArchive(piece)}>Arquivar artigo</button><button className="primary" onClick={() => onEdit(piece)}>Editar dados da passagem</button></> : <span className="readonly-note">Seu perfil possui acesso somente para consulta.</span>}</div>
   </div></Modal>
 }
@@ -84,4 +99,5 @@ export function ArticleStatusModal({ piece, mode, onClose, onConfirm, saving }) 
 }
 
 function Data({ label, value }) { return <div><dt>{label}</dt><dd>{value || '—'}</dd></div> }
+function attachmentIcon(type = '') { return type.startsWith('image/') ? '▧' : type.startsWith('video/') ? '▶' : type === 'application/pdf' ? 'PDF' : 'TXT' }
 function Modal({ title, kicker, onClose, closeOnBackdrop = true, children }) { return <><div className="scrim modal-scrim" onClick={closeOnBackdrop ? onClose : undefined} aria-hidden="true" /><section className="modal"><header><div><small>{kicker}</small><h2>{title}</h2></div><button onClick={onClose} aria-label="Fechar">×</button></header><div className="modal-body">{children}</div></section></> }

@@ -16,6 +16,7 @@ create table if not exists public.pecas (
   lacre text default 'Sem lacre',
   participa_mostruario boolean,
   desenho_tecnico_url text,
+  anexos jsonb not null default '[]'::jsonb,
   observacoes text,
   pontos_atencao text[] not null default '{}'::text[],
   updated_by text,
@@ -63,6 +64,7 @@ alter table public.pecas add column if not exists apresentacao_concluida boolean
 alter table public.pecas add column if not exists ciclo_mostruario_encerrado boolean not null default false;
 alter table public.pecas add column if not exists participa_mostruario boolean;
 alter table public.pecas add column if not exists pontos_atencao text[] not null default '{}'::text[];
+alter table public.pecas add column if not exists anexos jsonb not null default '[]'::jsonb;
 alter table public.pecas add column if not exists motivo_arquivamento text;
 alter table public.pecas add column if not exists data_arquivamento timestamptz;
 alter table public.pecas add column if not exists arquivado_por text;
@@ -75,6 +77,9 @@ create table if not exists public.pendencias (
   tipo_problema text,
   gravidade text,
   etapa_origem text,
+  fotos text[] not null default '{}'::text[],
+  resolucao_descricao text,
+  fotos_resolucao text[] not null default '{}'::text[],
   status text not null default 'aberta' check (status in ('aberta', 'resolvida')),
   created_by text,
   created_at timestamptz not null default now(),
@@ -82,9 +87,24 @@ create table if not exists public.pendencias (
   resolved_at timestamptz
 );
 
+create table if not exists public.votos_criticidade (
+  id uuid primary key default gen_random_uuid(),
+  peca_id uuid not null references public.pecas(id) on delete cascade,
+  colecao text not null,
+  setor text not null,
+  nota smallint not null check (nota between 1 and 5),
+  voter_token text not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (peca_id, voter_token)
+);
+
 alter table public.pendencias add column if not exists tipo_problema text;
 alter table public.pendencias add column if not exists gravidade text;
 alter table public.pendencias add column if not exists etapa_origem text;
+alter table public.pendencias add column if not exists fotos text[] not null default '{}'::text[];
+alter table public.pendencias add column if not exists resolucao_descricao text;
+alter table public.pendencias add column if not exists fotos_resolucao text[] not null default '{}'::text[];
 
 -- Armazenamento público dos desenhos técnicos enviados pela aplicação.
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
@@ -97,12 +117,15 @@ create index if not exists historico_peca_peca_created_at_idx
   on public.historico_peca (peca_id, created_at desc);
 create index if not exists pendencias_status_created_at_idx
   on public.pendencias (status, created_at desc);
+create index if not exists votos_criticidade_peca_idx
+  on public.votos_criticidade (peca_id, updated_at desc);
 create unique index if not exists pecas_artigo_ativo_unique_idx
   on public.pecas (lower(trim(artigo))) where ativa = true;
 
 alter table public.pecas enable row level security;
 alter table public.historico_peca enable row level security;
 alter table public.pendencias enable row level security;
+alter table public.votos_criticidade enable row level security;
 
 -- Permite que os apontamentos apareçam no modo apresentação sem recarregar a tela.
 do $realtime$
@@ -115,6 +138,17 @@ begin
   end if;
 end
 $realtime$;
+
+do $votes_realtime$
+begin
+  if not exists (
+    select 1 from pg_publication_tables
+    where pubname = 'supabase_realtime' and schemaname = 'public' and tablename = 'votos_criticidade'
+  ) then
+    alter publication supabase_realtime add table public.votos_criticidade;
+  end if;
+end
+$votes_realtime$;
 
 -- ATENÇÃO: estas políticas mantêm o comportamento do MVP sem autenticação real.
 -- Elas são adequadas apenas para ambiente controlado/interno.
@@ -144,6 +178,15 @@ begin
   end if;
   if not exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'pendencias' and policyname = 'mvp_pendencias_atualizacao') then
     create policy "mvp_pendencias_atualizacao" on public.pendencias for update to anon using (true) with check (true);
+  end if;
+  if not exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'votos_criticidade' and policyname = 'mvp_votos_leitura') then
+    create policy "mvp_votos_leitura" on public.votos_criticidade for select to anon using (true);
+  end if;
+  if not exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'votos_criticidade' and policyname = 'mvp_votos_insercao') then
+    create policy "mvp_votos_insercao" on public.votos_criticidade for insert to anon with check (true);
+  end if;
+  if not exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'votos_criticidade' and policyname = 'mvp_votos_atualizacao') then
+    create policy "mvp_votos_atualizacao" on public.votos_criticidade for update to anon using (true) with check (true);
   end if;
 end
 $policies$;
