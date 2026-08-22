@@ -10,6 +10,7 @@ import { repository } from './services/repository'
 const EDITABLE_FIELDS = ['colecao', 'linha', 'categoria', 'mp_base', 'tipo_peca', 'complexidade', 'lacre', 'participa_mostruario', 'pontos_atencao', 'desenho_tecnico_url', 'anexos', 'observacoes']
 const DEFAULT_LINES = ['Adulto Feminino', 'Adulto Masculino', 'Cápsula', 'Íntima', 'Kids Menina', 'Kids Menino', 'Teen']
 const DEFAULT_CATEGORIES = ['Blusas e Camisetas', 'Calças', 'Camisas e Polo', 'Jaquetas e Casacos', 'Regatas', 'Saias', 'Shorts e Bermudas', 'Vestidos', 'Pijamas', 'Conjuntos Longos', 'Conjuntos Curtos', 'Camisola + Cardigan', 'Camisola', 'Ceroula', 'Samba-canção']
+const successNotice = message => ({ type: 'success', title: 'Sucesso!', message })
 
 export default function App() {
   const [user, setUser] = useState(null)
@@ -75,7 +76,7 @@ export default function App() {
       if (!formPiece) {
         const created = await repository.createPiece(preparedForm, user.nome)
         await repository.addEvent(created.id, 'artigo_cadastrado', `Artigo ${created.artigo} cadastrado`, user.nome, { perfil: user.perfil })
-        setNotice('Artigo cadastrado com sucesso.')
+        setNotice(successNotice(`Artigo ${created.artigo} cadastrado.`))
       } else {
         const updates = Object.fromEntries(EDITABLE_FIELDS.map(key => [key, preparedForm[key] ?? null]))
         const changes = Object.fromEntries(EDITABLE_FIELDS.filter(key => JSON.stringify(formPiece[key] ?? null) !== JSON.stringify(preparedForm[key] ?? null)).map(key => [key, { antes: formPiece[key] ?? null, depois: preparedForm[key] ?? null }]))
@@ -86,7 +87,7 @@ export default function App() {
         if (formPiece.desenho_tecnico_url && formPiece.desenho_tecnico_url !== preparedForm.desenho_tecnico_url) {
           try { await repository.deleteTechnicalDrawing(formPiece.desenho_tecnico_url) } catch { cleanupWarning = true }
         }
-        setNotice(cleanupWarning ? 'Alterações salvas. A imagem antiga não pôde ser apagada; solicite a limpeza administrativa.' : 'Alterações salvas e registradas no histórico.')
+        setNotice(cleanupWarning ? 'Alterações salvas. A imagem antiga não pôde ser apagada; solicite a limpeza administrativa.' : successNotice(`Alterações do artigo ${updated.artigo} salvas e registradas no histórico.`))
       }
       setFormOpen(false); setFormPiece(undefined); await refresh()
     } catch (error) { setNotice(readError(error)) } finally { setSaving(false) }
@@ -99,7 +100,7 @@ export default function App() {
       await repository.createPendencia({ peca_id: piece.id, descricao: description, area_responsavel: area, tipo_problema: problemType, gravidade: severity, etapa_origem: stage, created_by: user.nome })
       await repository.updatePiece(piece.id, { saude_operacional: 'atencao', updated_by: user.nome })
       await repository.addEvent(piece.id, 'pendencia_criada', `Pendência de ${problemType} criada para ${area}: ${description}`, user.nome, { perfil: user.perfil, area, tipo_problema: problemType, gravidade: severity, etapa_origem: stage })
-      await refresh(); setNotice('Apontamento enviado para o Radar Operacional.')
+      await refresh(); setNotice(successNotice(`Apontamento do artigo ${piece.artigo} enviado para o Radar Operacional.`))
     } catch (error) { setNotice(readError(error)) } finally { setSaving(false) }
   }
 
@@ -113,7 +114,7 @@ export default function App() {
       await repository.saveCriticalityVote({ peca_id: piece.id, colecao: piece.colecao || 'Não informada', setor: sector, nota: Number(score), voter_token: voterToken })
       await repository.addEvent(piece.id, 'voto_criticidade', `Criticidade avaliada pelo setor ${sector}: nota ${score}`, `Setor: ${sector}`, { setor: sector, nota: Number(score) })
       setCriticalityVotes(await repository.listVotes())
-      setNotice('Avaliação de criticidade registrada. Você pode atualizar sua nota quando precisar.')
+      setNotice(successNotice(`Avaliação de criticidade do artigo ${piece.artigo} registrada.`))
       return true
     } catch (error) { setNotice(readError(error)); return false } finally { setSaving(false) }
   }
@@ -129,7 +130,7 @@ export default function App() {
       await repository.addEvent(piece.id, 'registro_mostruario', form.ciclo_mostruario_encerrado ? 'Apontamento salvo e ciclo do mostruário encerrado' : 'Novo apontamento do mostruário', user.nome, { perfil: user.perfil, setor, registro: form.feedback_tecnico, ocorrencia: form.ocorrencia_mostruario, foto: uploadedPhotos[0] || null, fotos: uploadedPhotos })
       const hasNewOccurrence = Boolean(form.ocorrencia_mostruario.trim())
       if (hasNewOccurrence) await repository.createPendencia({ peca_id: piece.id, descricao: form.ocorrencia_mostruario.trim(), area_responsavel: setor, tipo_problema, gravidade, etapa_origem: 'mostruario', fotos: uploadedPhotos, created_by: user.nome })
-      await refresh(); setNotice('Feedback do mostruário salvo.')
+      await refresh(); setNotice(successNotice(`Apontamento de mostruário do artigo ${piece.artigo} salvo.`))
       return true
     } catch (error) { setNotice(readError(error)); return false } finally { setSaving(false) }
   }
@@ -143,7 +144,7 @@ export default function App() {
       await repository.addEvent(item.peca_id, 'pendencia_resolvida', `Pendência resolvida: ${item.descricao}`, user.nome, { perfil: user.perfil, pendencia_id: item.id, resolucao: resolution, fotos: resolutionPhotos })
       const stillOpen = pendencias.some(other => other.peca_id === item.peca_id && other.id !== item.id && other.status === 'aberta')
       if (!stillOpen) await repository.updatePiece(item.peca_id, { saude_operacional: 'saudavel', updated_by: user.nome })
-      await refresh(); setNotice('Pendência marcada como resolvida.')
+      await refresh(); setNotice(successNotice('Pendência marcada como resolvida.'))
       return true
     } catch (error) { setNotice(readError(error)); return false } finally { setSaving(false) }
   }
@@ -159,7 +160,7 @@ export default function App() {
         : { ativa: true, motivo_arquivamento: null, data_arquivamento: null, arquivado_por: null, updated_by: user.nome })
       await repository.addEvent(piece.id, archive ? 'artigo_arquivado' : 'artigo_restaurado', archive ? `Artigo ${piece.artigo} arquivado: ${reason}` : `Artigo ${piece.artigo} restaurado`, user.nome, { perfil: user.perfil, motivo: archive ? reason : piece.motivo_arquivamento })
       setDetailPiece(null); setStatusPiece(null); await refresh()
-      setNotice(archive ? 'Artigo arquivado com segurança.' : 'Artigo restaurado com sucesso.')
+      setNotice(successNotice(archive ? `Artigo ${piece.artigo} arquivado com segurança.` : `Artigo ${piece.artigo} restaurado.`))
     } catch (error) { setNotice(readError(error)) } finally { setSaving(false) }
   }
 
@@ -178,7 +179,7 @@ export default function App() {
     <ArticleDetailModal piece={detailPiece} canEdit={canEdit} onClose={() => setDetailPiece(null)} onArchive={piece => openStatus(piece, 'archive')} onEdit={piece => { setDetailPiece(null); setFormPiece(piece); setFormOpen(true) }} />
     <ArticleFormModal open={formOpen} piece={formPiece} defaultCollection={operationalCollection} collectionOptions={collectionOptions} lineOptions={lineOptions} categoryOptions={categoryOptions} materialOptions={materialOptions} attentionOptions={problemTypeOptions.filter(type => type !== 'Outro')} onClose={() => { if (!saving) { setFormOpen(false); setFormPiece(undefined) } }} onSave={saveArticle} saving={saving} />
     <ArticleStatusModal piece={statusPiece} mode={statusMode} onClose={() => { if (!saving) setStatusPiece(null) }} onConfirm={changeArticleStatus} saving={saving} />
-    {notice && <button className="toast" onClick={() => setNotice('')}>{notice}</button>}
+    {notice && (typeof notice === 'object' ? <aside className={`toast toast-${notice.type || 'info'}`} role="status"><i aria-hidden="true" /><div><strong>{notice.title}</strong><span>{notice.message}</span></div><button type="button" onClick={() => setNotice('')} aria-label="Fechar mensagem">×</button></aside> : <button className="toast" onClick={() => setNotice('')}>{notice}</button>)}
     {!repository.configured && <div className="env-note">Modo local · configure o Supabase no arquivo <code>.env</code></div>}
   </Layout>
 }

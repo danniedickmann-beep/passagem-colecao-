@@ -66,7 +66,9 @@ export const repository = {
   async uploadSamplePhotos(files) {
     const selected = Array.from(files || [])
     if (!selected.length) return []
-    return Promise.all(selected.map(async file => {
+    return Promise.all(selected.map(async attachment => {
+      const file = attachment.file || attachment
+      const descricao = attachment.descricao || ''
       if (!file.type.startsWith('image/')) throw new Error('Selecione somente arquivos de imagem.')
       if (file.size > 10 * 1024 * 1024) throw new Error('Cada imagem deve ter no máximo 10 MB.')
       if (!supabase) return await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error('Não foi possível ler a imagem.')); reader.readAsDataURL(file) })
@@ -80,20 +82,23 @@ export const repository = {
   async uploadArticleAttachments(files) {
     const selected = Array.from(files || [])
     if (!selected.length) return []
-    return Promise.all(selected.map(async file => {
+    return Promise.all(selected.map(async entry => {
+      const file = entry?.file || entry
+      const descricao = entry?.descricao?.trim?.() || ''
+      if (!file?.name || typeof file.type !== 'string') throw new Error('Não foi possível identificar o arquivo do detalhe.')
       const allowed = file.type.startsWith('image/') || file.type.startsWith('video/') || file.type === 'application/pdf' || file.type.startsWith('text/') || /\.(txt|csv|md)$/i.test(file.name)
       if (!allowed) throw new Error(`O arquivo “${file.name}” não é imagem, vídeo, PDF ou texto.`)
       if (file.size > 50 * 1024 * 1024) throw new Error(`O arquivo “${file.name}” deve ter no máximo 50 MB.`)
       if (!supabase) {
         const url = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error('Não foi possível ler o arquivo.')); reader.readAsDataURL(file) })
-        return { url, nome: file.name, tipo: file.type || 'text/plain', tamanho: file.size }
+        return { url, nome: file.name, tipo: file.type || 'text/plain', tamanho: file.size, descricao }
       }
       const safeName = file.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z0-9._-]/g, '-').toLowerCase()
       const path = `anexos/${new Date().toISOString().slice(0, 10)}/${crypto.randomUUID()}-${safeName}`
       const { error } = await supabase.storage.from('desenhos-tecnicos').upload(path, file, { contentType: file.type || 'application/octet-stream', upsert: false })
       if (error) throw error
       const url = supabase.storage.from('desenhos-tecnicos').getPublicUrl(path).data.publicUrl
-      return { url, nome: file.name, tipo: file.type || 'application/octet-stream', tamanho: file.size }
+      return { url, nome: file.name, tipo: file.type || 'application/octet-stream', tamanho: file.size, descricao }
     }))
   },
   async listPieces() {
