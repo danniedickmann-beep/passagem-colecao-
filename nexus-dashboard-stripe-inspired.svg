@@ -1,0 +1,146 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Nexus — Dashboard operacional inspirado na Stripe</title>
+  <desc>Segunda tela do fluxo Nexus: dashboard com indicadores, riscos, ações rápidas e apontamentos.</desc>
+  <defs>
+    <linearGradient id="nav-bg" x1="0" y1="0" x2="260" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A2540"/>
+      <stop offset="1" stop-color="#071B30"/>
+    </linearGradient>
+    <linearGradient id="page-wash" x1="260" y1="0" x2="1370" y2="860" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6F9FC"/>
+      <stop offset="0.65" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F4F5FF"/>
+    </linearGradient>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#635BFF"/>
+      <stop offset="1" stop-color="#5146E5"/>
+    </linearGradient>
+    <linearGradient id="cyan-bar" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#635BFF"/>
+      <stop offset="1" stop-color="#00D4FF"/>
+    </linearGradient>
+    <linearGradient id="nexus-mark-dashboard" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#80E9FF"/>
+      <stop offset="0.55" stop-color="#B8A8FF"/>
+      <stop offset="1" stop-color="#FF9DD5"/>
+    </linearGradient>
+    <filter id="card-shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#0A2540" flood-opacity="0.06"/>
+    </filter>
+    <filter id="button-shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="7" stdDeviation="12" flood-color="#635BFF" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <g id="02 — Dashboard / Stripe Inspired">
+    <rect width="1440" height="900" fill="url(#page-wash)"/>
+
+    <g id="Sidebar">
+      <rect width="248" height="900" fill="url(#nav-bg)"/>
+      <g id="Sidebar Brand" transform="translate(24 25)">
+        <rect width="38" height="38" rx="10" fill="#FFFFFF" fill-opacity="0.08"/>
+        <path d="M9 29V9L29 29V9" stroke="url(#nexus-mark-dashboard)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="9" cy="9" r="2.6" fill="#80E9FF"/><circle cx="9" cy="29" r="2.6" fill="#A8B7FF"/><circle cx="29" cy="9" r="2.6" fill="#FF9DD5"/><circle cx="29" cy="29" r="2.6" fill="#B8A8FF"/>
+        <text x="51" y="17" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Nexus</text>
+        <text x="51" y="32" fill="#8FA3B8" font-family="Inter, Arial, sans-serif" font-size="7.5" font-weight="550" letter-spacing="0.7">PASSAGEM DE COLEÇÃO</text>
+      </g>
+      <path d="M20 84H228" stroke="#FFFFFF" stroke-opacity="0.1"/>
+      <text x="24" y="122" fill="#6F879E" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="650" letter-spacing="1.2">COLEÇÃO</text>
+
+      <g id="Navigation">
+        <g id="Dashboard Active">
+          <rect x="14" y="139" width="220" height="42" rx="9" fill="#FFFFFF" fill-opacity="0.11"/>
+          <rect x="14" y="139" width="3" height="42" rx="1.5" fill="#80E9FF"/>
+          <rect x="29" y="153" width="14" height="14" rx="3" stroke="#DDE8F1" stroke-width="1.2"/>
+          <path d="M32.5 163V159M36 163V156M39.5 163V158M43 163V155" stroke="#DDE8F1" stroke-width="1.2" stroke-linecap="round"/>
+          <text x="56" y="165" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="11.5" font-weight="600">Dashboard</text>
+        </g>
+        <g transform="translate(0 50)"><path d="M30 155.5L35 151H42V158L36.5 165.5L30 159V155.5Z" stroke="#7790A8" stroke-width="1.2" stroke-linejoin="round"/><circle cx="38.5" cy="154.5" r="1.2" fill="#7790A8"/><text x="56" y="164" fill="#9CB0C2" font-family="Inter, Arial, sans-serif" font-size="11.5">Artigos</text><rect x="195" y="150" width="27" height="20" rx="7" fill="#163653"/><text x="208.5" y="164" text-anchor="middle" fill="#A9C4D8" font-family="Inter" font-size="9">24</text></g>
+        <g transform="translate(0 100)"><rect x="29" y="153" width="5" height="14" rx="1.5" stroke="#7790A8" stroke-width="1.2"/><rect x="39" y="153" width="5" height="14" rx="1.5" stroke="#7790A8" stroke-width="1.2"/><path d="M34.5 157H38.5M37 155.5L38.5 157L37 158.5M38.5 163H34.5M36 161.5L34.5 163L36 164.5" stroke="#7790A8" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/><text x="56" y="164" fill="#9CB0C2" font-family="Inter, Arial, sans-serif" font-size="11.5">Passagem</text></g>
+        <g transform="translate(0 150)"><path d="M36 153C36 151.5 38.3 151 39 152.4C39.6 153.7 38.5 154.5 37.3 155.2L44 160.5C44.8 161.1 44.3 162.5 43.3 162.5H28.7C27.7 162.5 27.2 161.1 28 160.5L34.7 155.2" stroke="#7790A8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><text x="56" y="164" fill="#9CB0C2" font-family="Inter, Arial, sans-serif" font-size="11.5">Mostruário</text></g>
+        <g transform="translate(0 200)"><circle cx="36" cy="160" r="7" stroke="#7790A8" stroke-width="1.2"/><circle cx="36" cy="160" r="4" stroke="#7790A8" stroke-width="1.1"/><circle cx="36" cy="160" r="1.5" fill="#7790A8"/><path d="M41 155L44 152M41 152H44V155" stroke="#7790A8" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/><text x="56" y="164" fill="#9CB0C2" font-family="Inter, Arial, sans-serif" font-size="11.5">Radar</text><rect x="201" y="150" width="21" height="20" rx="7" fill="#3D2848"/><text x="211.5" y="164" text-anchor="middle" fill="#F3A6C7" font-family="Inter" font-size="9">6</text></g>
+        <g transform="translate(0 250)"><circle cx="36" cy="160" r="7" stroke="#7790A8" stroke-width="1.2"/><path d="M36 156V160L39 162M31 154L29 154V152" stroke="#7790A8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M29.5 154.5C31 151.8 34.5 151 37.4 152" stroke="#7790A8" stroke-width="1.1" stroke-linecap="round"/><text x="56" y="164" fill="#9CB0C2" font-family="Inter, Arial, sans-serif" font-size="11.5">Histórico</text></g>
+      </g>
+
+      <g id="Sidebar Footer">
+        <rect x="16" y="782" width="216" height="94" rx="12" fill="#FFFFFF" fill-opacity="0.06"/>
+        <text x="32" y="814" fill="#88A0B5" font-family="Inter" font-size="9" font-weight="600" letter-spacing="0.8">COLEÇÃO ATIVA</text>
+        <text x="32" y="842" fill="#FFFFFF" font-family="Inter" font-size="15" font-weight="650">Inverno 27</text>
+        <circle cx="33" cy="860" r="3.5" fill="#52D6A0"/>
+        <text x="44" y="863" fill="#92AABC" font-family="Inter" font-size="9.5">24 artigos sincronizados</text>
+      </g>
+    </g>
+
+    <g id="Topbar">
+      <rect x="248" width="1192" height="72" fill="#FFFFFF" fill-opacity="0.86"/>
+      <path d="M248 71.5H1440" stroke="#E3E8EF"/>
+      <text x="284" y="43" fill="#6B7C93" font-family="Inter" font-size="11">Dashboard operacional</text>
+      <g id="Top Actions">
+        <rect x="1162" y="19" width="106" height="34" rx="9" fill="#F6F9FC" stroke="#E0E6ED"/>
+        <circle cx="1181" cy="36" r="4" fill="#52D6A0"/>
+        <text x="1193" y="40" fill="#425466" font-family="Inter" font-size="10">MVP ativo</text>
+        <circle cx="1302" cy="36" r="17" fill="#E7E4FF"/>
+        <text x="1302" y="40" text-anchor="middle" fill="#5146E5" font-family="Inter" font-size="9" font-weight="700">DD</text>
+        <text x="1329" y="33" fill="#0A2540" font-family="Inter" font-size="10.5" font-weight="650">Daniela</text>
+        <text x="1329" y="47" fill="#8796A8" font-family="Inter" font-size="8.5">Produto</text>
+      </g>
+    </g>
+
+    <g id="Main Content" transform="translate(280 104)">
+      <g id="Page Header">
+        <text x="0" y="12" fill="#635BFF" font-family="Inter" font-size="9.5" font-weight="700" letter-spacing="1.2">IMPACTOS DA COLEÇÃO</text>
+        <text x="0" y="51" fill="#0A2540" font-family="Inter" font-size="31" font-weight="720" letter-spacing="-1">Visão operacional</text>
+        <text x="0" y="77" fill="#6B7C93" font-family="Inter" font-size="12.5">Artigos, riscos e concentrações que exigem atenção agora.</text>
+        <g id="Collection Filter">
+          <text x="874" y="10" fill="#6B7C93" font-family="Inter" font-size="9.5" font-weight="600">COLEÇÃO</text>
+          <rect x="874.5" y="22.5" width="244" height="43" rx="9.5" fill="#FFFFFF" stroke="#D9E1EA"/>
+          <text x="890" y="49" fill="#425466" font-family="Inter" font-size="11">Inverno 27</text>
+          <path d="M1091 40L1096 45L1101 40" stroke="#6B7C93" stroke-width="1.4"/>
+        </g>
+      </g>
+
+      <g id="KPI Cards" transform="translate(0 112)">
+        <g id="KPI Active" filter="url(#card-shadow)"><rect width="262" height="132" rx="14" fill="#FFFFFF"/><rect x="0.5" y="0.5" width="261" height="131" rx="13.5" stroke="#E1E7EE"/><circle cx="28" cy="28" r="10" fill="#E8F1FF"/><path d="M24 28H32M28 24V32" stroke="#3B72D9"/><text x="20" y="59" fill="#6B7C93" font-family="Inter" font-size="10">Artigos ativos</text><text x="20" y="96" fill="#0A2540" font-family="Inter" font-size="30" font-weight="720">24</text><text x="74" y="95" fill="#8796A8" font-family="Inter" font-size="9.5">na coleção</text><text x="20" y="117" fill="#635BFF" font-family="Inter" font-size="9.5" font-weight="650">Ver artigos →</text></g>
+        <g id="KPI Pending" transform="translate(278)" filter="url(#card-shadow)"><rect width="262" height="132" rx="14" fill="#FFFFFF"/><rect x="0.5" y="0.5" width="261" height="131" rx="13.5" stroke="#E1E7EE"/><circle cx="28" cy="28" r="10" fill="#FFF0F4"/><circle cx="28" cy="28" r="4" fill="#E86A92"/><text x="20" y="59" fill="#6B7C93" font-family="Inter" font-size="10">Pendências abertas</text><text x="20" y="96" fill="#0A2540" font-family="Inter" font-size="30" font-weight="720">06</text><text x="74" y="95" fill="#8796A8" font-family="Inter" font-size="9.5">3 resolvidas</text><text x="20" y="117" fill="#635BFF" font-family="Inter" font-size="9.5" font-weight="650">Abrir Radar →</text></g>
+        <g id="KPI Critical" transform="translate(556)" filter="url(#card-shadow)"><rect width="262" height="132" rx="14" fill="#FFFFFF"/><rect x="0.5" y="0.5" width="261" height="131" rx="13.5" stroke="#E1E7EE"/><circle cx="28" cy="28" r="10" fill="#FFF5E6"/><path d="M28 22L34 33H22L28 22Z" fill="#F0A23A"/><text x="20" y="59" fill="#6B7C93" font-family="Inter" font-size="10">Criticidade alta</text><text x="20" y="96" fill="#0A2540" font-family="Inter" font-size="30" font-weight="720">04</text><text x="74" y="95" fill="#8796A8" font-family="Inter" font-size="9.5">pedem atenção</text><text x="20" y="117" fill="#635BFF" font-family="Inter" font-size="9.5" font-weight="650">Ver riscos →</text></g>
+        <g id="KPI Showroom" transform="translate(834)" filter="url(#card-shadow)"><rect width="284" height="132" rx="14" fill="#FFFFFF"/><rect x="0.5" y="0.5" width="283" height="131" rx="13.5" stroke="#E1E7EE"/><circle cx="28" cy="28" r="10" fill="#EAF8F3"/><path d="M23 28L27 32L34 24" stroke="#38A57A" stroke-width="1.6"/><text x="20" y="59" fill="#6B7C93" font-family="Inter" font-size="10">Com mostruário</text><text x="20" y="96" fill="#0A2540" font-family="Inter" font-size="30" font-weight="720">18</text><text x="74" y="95" fill="#8796A8" font-family="Inter" font-size="9.5">6 sem mostruário</text><text x="20" y="117" fill="#635BFF" font-family="Inter" font-size="9.5" font-weight="650">Abrir mostruário →</text></g>
+      </g>
+
+      <g id="Quick Actions" transform="translate(0 270)">
+        <text x="0" y="0" fill="#0A2540" font-family="Inter" font-size="13" font-weight="680">Ações rápidas</text>
+        <g transform="translate(0 18)" filter="url(#button-shadow)"><rect width="188" height="46" rx="10" fill="url(#primary)"/><path d="M19 16H31V30H19V16ZM22 13V19M19 16H25" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 25H33M30 22V28" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"/><text x="52" y="28" fill="#FFFFFF" font-family="Inter" font-size="11" font-weight="650">Novo artigo</text></g>
+        <g transform="translate(204 18)"><rect width="188" height="46" rx="10" fill="#FFFFFF" stroke="#DCE3EB"/><rect x="18" y="15" width="5" height="16" rx="1.5" stroke="#635BFF" stroke-width="1.3"/><rect x="31" y="15" width="5" height="16" rx="1.5" stroke="#635BFF" stroke-width="1.3"/><path d="M23.5 20H30.5M28 18L30.5 20L28 22M30.5 27H23.5M26 25L23.5 27L26 29" stroke="#635BFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><text x="50" y="28" fill="#425466" font-family="Inter" font-size="11" font-weight="600">Abrir Passagem</text></g>
+        <g transform="translate(408 18)"><rect width="188" height="46" rx="10" fill="#FFFFFF" stroke="#DCE3EB"/><circle cx="27" cy="23" r="9" stroke="#635BFF" stroke-width="1.3"/><circle cx="27" cy="23" r="5" stroke="#635BFF" stroke-width="1.2"/><circle cx="27" cy="23" r="2" fill="#635BFF"/><path d="M33.5 16.5L37 13M33.5 13H37V16.5" stroke="#635BFF" stroke-width="1.1"/><text x="50" y="28" fill="#425466" font-family="Inter" font-size="11" font-weight="600">Ver Radar</text></g>
+        <g transform="translate(612 18)"><rect width="188" height="46" rx="10" fill="#FFFFFF" stroke="#DCE3EB"/><circle cx="27" cy="23" r="9" stroke="#635BFF" stroke-width="1.3"/><path d="M27 18V23L31 26M20 16L17 16V13" stroke="#635BFF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 16.5C19.5 12.8 24 11.5 28 13" stroke="#635BFF" stroke-width="1.1"/><text x="50" y="28" fill="#425466" font-family="Inter" font-size="11" font-weight="600">Histórico</text></g>
+      </g>
+
+      <g id="Insights Row" transform="translate(0 362)">
+        <g id="Problem Ranking" filter="url(#card-shadow)">
+          <rect width="546" height="300" rx="15" fill="#FFFFFF"/><rect x="0.5" y="0.5" width="545" height="299" rx="14.5" stroke="#E1E7EE"/>
+          <text x="22" y="30" fill="#635BFF" font-family="Inter" font-size="8.5" font-weight="700" letter-spacing="1">CONCENTRAÇÕES</text><text x="22" y="57" fill="#0A2540" font-family="Inter" font-size="16" font-weight="680">Problemas mais citados</text><text x="22" y="77" fill="#8796A8" font-family="Inter" font-size="9.5">Pendências abertas por tipo confirmado</text>
+          <g transform="translate(22 105)"><text x="0" y="12" fill="#A0AEC0" font-family="Inter" font-size="9">01</text><text x="34" y="12" fill="#425466" font-family="Inter" font-size="10.5" font-weight="600">Modelagem</text><text x="490" y="12" text-anchor="end" fill="#0A2540" font-family="Inter" font-size="10.5" font-weight="700">8</text><rect x="34" y="24" width="456" height="6" rx="3" fill="#EDF1F5"/><rect x="34" y="24" width="392" height="6" rx="3" fill="url(#cyan-bar)"/></g>
+          <g transform="translate(22 157)"><text x="0" y="12" fill="#A0AEC0" font-family="Inter" font-size="9">02</text><text x="34" y="12" fill="#425466" font-family="Inter" font-size="10.5" font-weight="600">Acabamento</text><text x="490" y="12" text-anchor="end" fill="#0A2540" font-family="Inter" font-size="10.5" font-weight="700">5</text><rect x="34" y="24" width="456" height="6" rx="3" fill="#EDF1F5"/><rect x="34" y="24" width="270" height="6" rx="3" fill="url(#cyan-bar)"/></g>
+          <g transform="translate(22 209)"><text x="0" y="12" fill="#A0AEC0" font-family="Inter" font-size="9">03</text><text x="34" y="12" fill="#425466" font-family="Inter" font-size="10.5" font-weight="600">Matéria-prima</text><text x="490" y="12" text-anchor="end" fill="#0A2540" font-family="Inter" font-size="10.5" font-weight="700">3</text><rect x="34" y="24" width="456" height="6" rx="3" fill="#EDF1F5"/><rect x="34" y="24" width="168" height="6" rx="3" fill="url(#cyan-bar)"/></g>
+        </g>
+
+        <g id="Recent Activity" transform="translate(566)" filter="url(#card-shadow)">
+          <rect width="552" height="300" rx="15" fill="#FFFFFF"/><rect x="0.5" y="0.5" width="551" height="299" rx="14.5" stroke="#E1E7EE"/>
+          <text x="22" y="30" fill="#635BFF" font-family="Inter" font-size="8.5" font-weight="700" letter-spacing="1">ACOMPANHAMENTO</text><text x="22" y="57" fill="#0A2540" font-family="Inter" font-size="16" font-weight="680">Apontamentos recentes</text><text x="522" y="56" text-anchor="end" fill="#635BFF" font-family="Inter" font-size="9.5" font-weight="650">Abrir Radar →</text>
+          <g transform="translate(22 86)"><circle cx="8" cy="13" r="5" fill="#F1799E"/><text x="28" y="10" fill="#425466" font-family="Inter" font-size="10.5" font-weight="650">Casaco Alba · Modelagem</text><text x="28" y="29" fill="#8796A8" font-family="Inter" font-size="9.5">Ajustar cava antes da próxima prova.</text><rect x="444" y="3" width="62" height="21" rx="7" fill="#FFF0F4"/><text x="475" y="17" text-anchor="middle" fill="#C94E74" font-family="Inter" font-size="8.5">Pendente</text><path d="M0 49H508" stroke="#EEF1F5"/></g>
+          <g transform="translate(22 145)"><circle cx="8" cy="13" r="5" fill="#55C99A"/><text x="28" y="10" fill="#425466" font-family="Inter" font-size="10.5" font-weight="650">Tricot Íris · Qualidade</text><text x="28" y="29" fill="#8796A8" font-family="Inter" font-size="9.5">Tonalidade aprovada no mostruário.</text><rect x="438" y="3" width="68" height="21" rx="7" fill="#EAF8F3"/><text x="472" y="17" text-anchor="middle" fill="#2B8A65" font-family="Inter" font-size="8.5">Resolvida</text><path d="M0 49H508" stroke="#EEF1F5"/></g>
+          <g transform="translate(22 204)"><circle cx="8" cy="13" r="5" fill="#F2B455"/><text x="28" y="10" fill="#425466" font-family="Inter" font-size="10.5" font-weight="650">Calça Horizonte · Engenharia</text><text x="28" y="29" fill="#8796A8" font-family="Inter" font-size="9.5">Revisar consumo da matéria-prima.</text><rect x="444" y="3" width="62" height="21" rx="7" fill="#FFF6E8"/><text x="475" y="17" text-anchor="middle" fill="#A8701D" font-family="Inter" font-size="8.5">Pendente</text></g>
+        </g>
+      </g>
+
+      <g id="Bottom Status" transform="translate(0 684)">
+        <rect width="1118" height="56" rx="12" fill="#0A2540"/>
+        <circle cx="25" cy="28" r="6" fill="#55D5A3"/>
+        <text x="43" y="25" fill="#FFFFFF" font-family="Inter" font-size="10.5" font-weight="650">Saúde da coleção</text>
+        <text x="43" y="40" fill="#9FB3C5" font-family="Inter" font-size="9">75% dos artigos avançam sem bloqueios críticos.</text>
+        <rect x="795" y="23" width="279" height="8" rx="4" fill="#1E3B55"/>
+        <rect x="795" y="23" width="209" height="8" rx="4" fill="url(#cyan-bar)"/>
+        <text x="1088" y="34" fill="#FFFFFF" font-family="Inter" font-size="10" font-weight="650">75%</text>
+      </g>
+    </g>
+  </g>
+</svg>

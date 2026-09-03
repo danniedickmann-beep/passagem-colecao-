@@ -1,0 +1,138 @@
+<svg width="1440" height="1960" viewBox="0 0 1440 1960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Nexus — Style Guide</title>
+  <desc>Guia visual da interface Nexus baseada na última tela de login e dashboard.</desc>
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="1440" y2="1200" gradientUnits="userSpaceOnUse"><stop stop-color="#F7F6F3"/><stop offset="1" stop-color="#F1F0ED"/></linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7057EB"/><stop offset="1" stop-color="#8065ED"/></linearGradient>
+    <linearGradient id="soft-purple" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F0ECFF"/><stop offset="1" stop-color="#E6E0FF"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="24" flood-color="#292529" flood-opacity="0.055"/></filter>
+    <filter id="button-shadow" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#7057EB" flood-opacity="0.18"/></filter>
+  </defs>
+
+  <g id="Nexus Style Guide">
+    <rect width="1440" height="1960" fill="url(#page)"/>
+    <rect x="32.5" y="32.5" width="1375" height="1895" rx="22.5" fill="#FCFBF9" stroke="#DFDCD7"/>
+
+    <g id="Header" transform="translate(72 68)">
+      <rect width="46" height="46" rx="11" fill="url(#soft-purple)" stroke="#D7CFFF"/>
+      <path d="M11 35V11L35 35V11" stroke="#775FEA" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="11" cy="11" r="2.5" fill="#9C8BFF"/><circle cx="11" cy="35" r="2.5" fill="#775FEA"/><circle cx="35" cy="11" r="2.5" fill="#B5A8FF"/><circle cx="35" cy="35" r="2.5" fill="#8065ED"/>
+      <text x="62" y="20" fill="#282527" font-family="Inter, Arial" font-size="18" font-weight="700">Nexus</text>
+      <text x="62" y="37" fill="#9B9692" font-family="Inter, Arial" font-size="8" letter-spacing="0.7">PASSAGEM DE COLEÇÃO DIGITAL</text>
+      <text x="0" y="94" fill="#8278B6" font-family="Inter" font-size="9" font-weight="700" letter-spacing="1.2">STYLE GUIDE · V1.0</text>
+      <text x="0" y="135" fill="#292628" font-family="Inter" font-size="32" font-weight="700" letter-spacing="-1">Sistema visual Nexus</text>
+      <text x="0" y="162" fill="#8F8A86" font-family="Inter" font-size="12">Fundamentos e componentes da experiência Passagem de Coleção.</text>
+      <path d="M0 194H1296" stroke="#E7E3DE"/>
+    </g>
+
+    <g id="Brand and Color" transform="translate(72 294)">
+      <text x="0" y="0" fill="#8278B6" font-family="Inter" font-size="9" font-weight="700" letter-spacing="1.2">01 · IDENTIDADE E COR</text>
+      <text x="0" y="31" fill="#353133" font-family="Inter" font-size="18" font-weight="650">Paleta principal</text>
+      <text x="0" y="52" fill="#99948F" font-family="Inter" font-size="10">Violeta conduz ações. Os neutros quentes mantêm a experiência calma e operacional.</text>
+
+      <g transform="translate(0 78)" font-family="Inter">
+        <g><rect width="138" height="100" rx="11" fill="#7057EB"/><text x="0" y="123" fill="#403B3D" font-size="10" font-weight="650">Violeta 600</text><text x="0" y="140" fill="#99948F" font-size="8.5">#7057EB · Ação</text></g>
+        <g transform="translate(158)"><rect width="138" height="100" rx="11" fill="#8065ED"/><text x="0" y="123" fill="#403B3D" font-size="10" font-weight="650">Violeta 500</text><text x="0" y="140" fill="#99948F" font-size="8.5">#8065ED · Gradiente</text></g>
+        <g transform="translate(316)"><rect width="138" height="100" rx="11" fill="#F0ECFF" stroke="#D7CFFF"/><text x="0" y="123" fill="#403B3D" font-size="10" font-weight="650">Violeta 050</text><text x="0" y="140" fill="#99948F" font-size="8.5">#F0ECFF · Seleção</text></g>
+        <g transform="translate(474)"><rect width="138" height="100" rx="11" fill="#292628"/><text x="0" y="123" fill="#403B3D" font-size="10" font-weight="650">Tinta 900</text><text x="0" y="140" fill="#99948F" font-size="8.5">#292628 · Títulos</text></g>
+        <g transform="translate(632)"><rect width="138" height="100" rx="11" fill="#8F8A86"/><text x="0" y="123" fill="#403B3D" font-size="10" font-weight="650">Neutro 500</text><text x="0" y="140" fill="#99948F" font-size="8.5">#8F8A86 · Apoio</text></g>
+        <g transform="translate(790)"><rect width="138" height="100" rx="11" fill="#DFDCD7"/><text x="0" y="123" fill="#403B3D" font-size="10" font-weight="650">Neutro 200</text><text x="0" y="140" fill="#99948F" font-size="8.5">#DFDCD7 · Bordas</text></g>
+        <g transform="translate(948)"><rect width="138" height="100" rx="11" fill="#FCFBF9" stroke="#DFDCD7"/><text x="0" y="123" fill="#403B3D" font-size="10" font-weight="650">Superfície</text><text x="0" y="140" fill="#99948F" font-size="8.5">#FCFBF9 · Cards</text></g>
+        <g transform="translate(1106)"><rect width="138" height="100" rx="11" fill="#F7F6F3" stroke="#DFDCD7"/><text x="0" y="123" fill="#403B3D" font-size="10" font-weight="650">Fundo</text><text x="0" y="140" fill="#99948F" font-size="8.5">#F7F6F3 · Canvas</text></g>
+      </g>
+    </g>
+
+    <g id="Typography" transform="translate(72 535)">
+      <text x="0" y="0" fill="#8278B6" font-family="Inter" font-size="9" font-weight="700" letter-spacing="1.2">02 · TIPOGRAFIA</text>
+      <text x="0" y="31" fill="#353133" font-family="Inter" font-size="18" font-weight="650">Inter</text>
+      <text x="0" y="52" fill="#99948F" font-family="Inter" font-size="10">Uma única família para criar clareza, consistência e boa leitura em interfaces densas.</text>
+      <g transform="translate(0 80)" font-family="Inter">
+        <text x="0" y="30" fill="#292628" font-size="32" font-weight="700" letter-spacing="-1">Impactos da coleção</text><text x="460" y="23" fill="#8F8A86" font-size="9">Display · 32 / 38 · Bold</text>
+        <text x="0" y="83" fill="#292628" font-size="24" font-weight="700" letter-spacing="-0.6">Visão operacional</text><text x="460" y="78" fill="#8F8A86" font-size="9">Título · 24 / 30 · Bold</text>
+        <text x="0" y="128" fill="#353133" font-size="18" font-weight="650">Pendências da coleção</text><text x="460" y="124" fill="#8F8A86" font-size="9">Seção · 18 / 24 · Semi Bold</text>
+        <text x="0" y="169" fill="#56514E" font-size="12" font-weight="600">Casaco Alba · Modelagem</text><text x="460" y="166" fill="#8F8A86" font-size="9">Item · 12 / 18 · Semi Bold</text>
+        <text x="0" y="207" fill="#8F8A86" font-size="11">Visão consolidada dos artigos, riscos e pendências.</text><text x="460" y="204" fill="#8F8A86" font-size="9">Corpo · 11 / 17 · Regular</text>
+        <text x="0" y="244" fill="#8278B6" font-size="8" font-weight="700" letter-spacing="1.1">DASHBOARD OPERACIONAL</text><text x="460" y="241" fill="#8F8A86" font-size="9">Kicker · 8 / 12 · Bold · +1.1</text>
+      </g>
+    </g>
+
+    <g id="Spacing" transform="translate(705 535)">
+      <text x="0" y="0" fill="#8278B6" font-family="Inter" font-size="9" font-weight="700" letter-spacing="1.2">03 · LAYOUT</text>
+      <text x="0" y="31" fill="#353133" font-family="Inter" font-size="18" font-weight="650">Espaçamento e forma</text>
+      <text x="0" y="52" fill="#99948F" font-family="Inter" font-size="10">Base de 4 px, com intervalos confortáveis e formas suaves.</text>
+      <g transform="translate(0 82)" font-family="Inter" font-size="9">
+        <g><rect x="0" y="14" width="4" height="4" fill="#7057EB"/><text x="0" y="39" fill="#77716E">4</text></g>
+        <g transform="translate(45)"><rect x="0" y="12" width="8" height="8" rx="2" fill="#7057EB"/><text x="0" y="39" fill="#77716E">8</text></g>
+        <g transform="translate(96)"><rect x="0" y="10" width="12" height="12" rx="3" fill="#7057EB"/><text x="0" y="39" fill="#77716E">12</text></g>
+        <g transform="translate(153)"><rect x="0" y="8" width="16" height="16" rx="4" fill="#7057EB"/><text x="0" y="39" fill="#77716E">16</text></g>
+        <g transform="translate(216)"><rect x="0" y="4" width="24" height="24" rx="5" fill="#7057EB"/><text x="0" y="39" fill="#77716E">24</text></g>
+        <g transform="translate(286)"><rect width="32" height="32" rx="6" fill="#7057EB"/><text x="0" y="39" fill="#77716E">32</text></g>
+      </g>
+      <g transform="translate(0 150)" font-family="Inter">
+        <text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">RAIOS</text>
+        <rect x="0" y="18" width="74" height="54" rx="8" fill="#FFFFFF" stroke="#DFDCD7"/><text x="37" y="49" text-anchor="middle" fill="#77716E" font-size="9">8 px</text>
+        <rect x="92" y="18" width="74" height="54" rx="12" fill="#FFFFFF" stroke="#DFDCD7"/><text x="129" y="49" text-anchor="middle" fill="#77716E" font-size="9">12 px</text>
+        <rect x="184" y="18" width="74" height="54" rx="18" fill="#FFFFFF" stroke="#DFDCD7"/><text x="221" y="49" text-anchor="middle" fill="#77716E" font-size="9">18 px</text>
+        <text x="300" y="0" fill="#6E6965" font-size="9" font-weight="650">SOMBRA</text>
+        <rect x="300" y="18" width="150" height="54" rx="12" fill="#FFFFFF" filter="url(#shadow)"/><text x="375" y="49" text-anchor="middle" fill="#77716E" font-size="9">0 · 10 · 24 · 5%</text>
+      </g>
+    </g>
+
+    <path d="M72 852H1368" stroke="#E7E3DE"/>
+
+    <g id="Components" transform="translate(72 892)">
+      <text x="0" y="0" fill="#8278B6" font-family="Inter" font-size="9" font-weight="700" letter-spacing="1.2">04 · COMPONENTES</text>
+      <text x="0" y="31" fill="#353133" font-family="Inter" font-size="18" font-weight="650">Elementos de interface</text>
+
+      <g id="Buttons" transform="translate(0 65)" font-family="Inter">
+        <text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">BOTÕES</text>
+        <g transform="translate(0 18)" filter="url(#button-shadow)"><rect width="170" height="44" rx="9" fill="url(#purple)"/><text x="85" y="27" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="650">Ação principal</text></g>
+        <g transform="translate(184 18)"><rect x="0.5" y="0.5" width="169" height="43" rx="8.5" fill="#FFFFFF" stroke="#DDD9D3"/><text x="85" y="27" text-anchor="middle" fill="#625D59" font-size="10" font-weight="600">Ação secundária</text></g>
+        <g transform="translate(368 18)"><rect width="170" height="44" rx="9" fill="#F0ECFF"/><text x="85" y="27" text-anchor="middle" fill="#604DBD" font-size="10" font-weight="600">Ação suave</text></g>
+      </g>
+
+      <g id="Fields" transform="translate(580 65)" font-family="Inter">
+        <text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">CAMPO</text>
+        <text x="0" y="31" fill="#5F5A57" font-size="9" font-weight="600">Coleção</text>
+        <rect x="0.5" y="43.5" width="260" height="43" rx="8.5" fill="#FFFFFF" stroke="#DDD9D3"/>
+        <text x="14" y="70" fill="#77716E" font-size="10">Inverno 27</text><path d="M232 59L237 64L242 59" stroke="#918C88"/>
+      </g>
+
+      <g id="Status" transform="translate(884 65)" font-family="Inter">
+        <text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">STATUS</text>
+        <g transform="translate(0 20)"><rect width="90" height="26" rx="8" fill="#EAF5EF"/><circle cx="13" cy="13" r="3" fill="#58B883"/><text x="24" y="17" fill="#438361" font-size="8.5">Resolvida</text></g>
+        <g transform="translate(100 20)"><rect width="90" height="26" rx="8" fill="#F9ECEF"/><circle cx="13" cy="13" r="3" fill="#C46784"/><text x="24" y="17" fill="#A85270" font-size="8.5">Pendente</text></g>
+        <g transform="translate(200 20)"><rect width="90" height="26" rx="8" fill="#FCF1E0"/><circle cx="13" cy="13" r="3" fill="#D29A47"/><text x="24" y="17" fill="#966B2D" font-size="8.5">Atenção</text></g>
+        <g transform="translate(0 58)"><rect width="90" height="26" rx="8" fill="#F0ECFF"/><circle cx="13" cy="13" r="3" fill="#775FEA"/><text x="24" y="17" fill="#604DBD" font-size="8.5">Em fluxo</text></g>
+      </g>
+
+      <g id="Cards" transform="translate(0 173)" font-family="Inter">
+        <text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">CARDS E INDICADORES</text>
+        <g transform="translate(0 20)" filter="url(#shadow)"><rect width="252" height="114" rx="12" fill="#FFFFFF"/><rect x="0.5" y="0.5" width="251" height="113" rx="11.5" stroke="#E3DFD9"/><rect x="18" y="17" width="28" height="28" rx="8" fill="#F0ECFF"/><path d="M25 36V30M32 36V25M39 36V28" stroke="#7057E6" stroke-width="1.4" stroke-linecap="round"/><text x="18" y="64" fill="#8E8985" font-size="9">Artigos ativos</text><text x="18" y="98" fill="#302C2E" font-size="27" font-weight="700">24</text><text x="61" y="97" fill="#AAA5A0" font-size="8.5">na coleção</text></g>
+        <g transform="translate(278 20)"><rect width="352" height="114" rx="12" fill="#FFFFFF" stroke="#E3DFD9"/><text x="18" y="26" fill="#8278B6" font-size="7.5" font-weight="700" letter-spacing="0.8">CONCENTRAÇÃO</text><text x="18" y="51" fill="#4E4947" font-size="11" font-weight="650">Malhas com mais problemas</text><text x="18" y="75" fill="#77716E" font-size="9">Malha canelada</text><text x="320" y="75" text-anchor="end" fill="#4E4947" font-size="9" font-weight="700">8</text><rect x="18" y="88" width="302" height="5" rx="2.5" fill="#EEEAE6"/><rect x="18" y="88" width="242" height="5" rx="2.5" fill="#7A61E7"/></g>
+        <g transform="translate(656 20)"><rect width="340" height="114" rx="12" fill="#FFFFFF" stroke="#E3DFD9"/><circle cx="24" cy="28" r="4" fill="#C46784"/><text x="40" y="28" fill="#56514E" font-size="10" font-weight="600">Casaco Alba · Modelagem</text><text x="40" y="50" fill="#9A9591" font-size="8.5">Ajustar cava antes da próxima prova.</text><rect x="40" y="70" width="59" height="20" rx="6" fill="#F9ECEF"/><text x="69.5" y="83.5" text-anchor="middle" fill="#A85270" font-size="7.5">Pendente</text></g>
+      </g>
+    </g>
+
+    <g id="Article Components" transform="translate(72 1235)" font-family="Inter">
+      <text x="0" y="0" fill="#8278B6" font-size="9" font-weight="700" letter-spacing="1.2">05 · FLUXO DE ARTIGOS</text>
+      <text x="0" y="31" fill="#353133" font-size="18" font-weight="650">Busca, abas e listagem</text>
+      <g transform="translate(0 57)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">BUSCA</text><rect x="0.5" y="16.5" width="360" height="42" rx="8.5" fill="#FFFFFF" stroke="#DDD9D3"/><circle cx="20" cy="37" r="6" stroke="#99948F"/><path d="M24.5 41.5L29 46" stroke="#99948F"/><text x="40" y="42" fill="#AAA5A0" font-size="9.5">Artigo, linha, categoria ou matéria-prima</text></g>
+      <g transform="translate(402 57)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">ABAS</text><path d="M0 58H246" stroke="#E3DFD9"/><text x="0" y="42" fill="#5C49B3" font-size="10" font-weight="650">Ativos</text><rect x="39" y="26" width="28" height="21" rx="7" fill="#F0ECFF"/><text x="53" y="40" text-anchor="middle" fill="#7057E6" font-size="8.5">24</text><rect x="0" y="56" width="67" height="2" rx="1" fill="#7057EB"/><text x="100" y="42" fill="#8F8A86" font-size="10">Arquivados</text></g>
+      <g transform="translate(692 57)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">CRITICIDADE</text><g transform="translate(0 22)"><rect width="55" height="23" rx="7" fill="#F9ECEF"/><text x="27.5" y="15" text-anchor="middle" fill="#A85270" font-size="8">Alta</text></g><g transform="translate(65 22)"><rect width="68" height="23" rx="7" fill="#FCF1E0"/><text x="34" y="15" text-anchor="middle" fill="#966B2D" font-size="8">Moderada</text></g><g transform="translate(143 22)"><rect width="55" height="23" rx="7" fill="#EAF5EF"/><text x="27.5" y="15" text-anchor="middle" fill="#438361" font-size="8">Baixa</text></g></g>
+      <g transform="translate(930 57)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">LINHA DE ARTIGO</text><rect y="16" width="366" height="58" rx="10" fill="#FFFFFF" stroke="#E3DFD9"/><rect x="14" y="27" width="36" height="36" rx="8" fill="#F0ECFF"/><path d="M25 52L32 38L39 52M27 48H37" stroke="#7057E6"/><text x="62" y="42" fill="#454042" font-size="10" font-weight="650">Casaco Alba</text><text x="62" y="57" fill="#99948F" font-size="8">Outerwear · Malha estruturada</text><text x="344" y="49" text-anchor="end" fill="#7057E6" font-size="8.5" font-weight="650">Abrir →</text></g>
+    </g>
+
+    <g id="Form Components" transform="translate(72 1480)" font-family="Inter">
+      <text x="0" y="0" fill="#8278B6" font-size="9" font-weight="700" letter-spacing="1.2">06 · FORMULÁRIOS</text><text x="0" y="31" fill="#353133" font-size="18" font-weight="650">Modal, upload e seleção</text>
+      <g transform="translate(0 58)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">MODAL</text><rect x="0.5" y="16.5" width="330" height="118" rx="13.5" fill="#FFFFFF" stroke="#DEDAD5"/><text x="18" y="43" fill="#8278B6" font-size="7.5" font-weight="700" letter-spacing="0.8">PREPARAÇÃO DA PASSAGEM</text><text x="18" y="69" fill="#292628" font-size="15" font-weight="700">Cadastrar artigo</text><path d="M0 88H330" stroke="#E5E1DC"/><rect x="196" y="98" width="52" height="25" rx="6" fill="#FFFFFF" stroke="#DDD9D3"/><rect x="258" y="98" width="58" height="25" rx="6" fill="#7057EB"/></g>
+      <g transform="translate(370 58)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">UPLOAD</text><rect x="0.5" y="16.5" width="330" height="82" rx="9.5" fill="#FAF8F5" stroke="#CFCAC4" stroke-dasharray="5 4"/><path d="M31 40V62M22 49L31 40L40 49" stroke="#8F8A86"/><text x="53" y="49" fill="#625D59" font-size="9.5" font-weight="600">Arraste arquivos ou clique</text><text x="53" y="67" fill="#AAA5A0" font-size="8">Imagem, vídeo, PDF ou texto</text></g>
+      <g transform="translate(740 58)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">SELEÇÃO MÚLTIPLA</text><g transform="translate(0 19)"><rect width="92" height="30" rx="8" fill="#F5F2EE" stroke="#DFDAD4"/><rect x="10" y="10" width="10" height="10" rx="2" fill="#FFFFFF" stroke="#AAA5A0"/><text x="28" y="19" fill="#6E6965" font-size="8.5">Modelagem</text><rect x="102" width="83" height="30" rx="8" fill="#F0ECFF" stroke="#D7CFFF"/><rect x="112" y="10" width="10" height="10" rx="2" fill="#7057EB"/><path d="M114 15L117 18L121 12" stroke="#FFFFFF"/><text x="130" y="19" fill="#604DBD" font-size="8.5">Costura</text></g></g>
+      <g transform="translate(980 58)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">TEXTAREA</text><rect x="0.5" y="16.5" width="316" height="82" rx="8.5" fill="#FFFFFF" stroke="#CFCAC4"/><text x="13" y="40" fill="#AAA5A0" font-size="8.5">Registre observações técnicas...</text></g>
+    </g>
+
+    <g id="Detail Components" transform="translate(72 1740)" font-family="Inter"><text x="0" y="0" fill="#8278B6" font-size="9" font-weight="700" letter-spacing="1.2">07 · DETALHES DO ARTIGO</text><text x="0" y="31" fill="#353133" font-size="18" font-weight="650">Ficha técnica e andamento</text><g transform="translate(0 58)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">FATO</text><rect x="0.5" y="16.5" width="226" height="65" rx="9.5" fill="#FFFFFF" stroke="#E3DFD9"/><text x="14" y="38" fill="#AAA5A0" font-size="7.5">MATÉRIA-PRIMA</text><text x="14" y="60" fill="#4E4947" font-size="10" font-weight="600">J26MP</text></g><g transform="translate(270 58)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">STEPPER DE FLUXO</text><rect x="0.5" y="16.5" width="700" height="65" rx="9.5" fill="#FFFFFF" stroke="#E3DFD9"/><g transform="translate(20 34)"><circle cx="9" cy="9" r="9" fill="#EAF5EF"/><path d="M5 9L8 12L14 6" stroke="#438361"/><path d="M18 9H78" stroke="#CFCAC4"/><circle cx="87" cy="9" r="9" fill="#7057EB"/><circle cx="87" cy="9" r="3" fill="#FFFFFF"/><path d="M96 9H156" stroke="#DCD7D1"/><circle cx="165" cy="9" r="9" fill="#F2F0ED" stroke="#D1CCC6"/><text x="0" y="32" fill="#77716E" font-size="7.5">Concluído</text><text x="68" y="32" fill="#604DBD" font-size="7.5" font-weight="700">Atual</text><text x="145" y="32" fill="#AAA5A0" font-size="7.5">Próximo</text></g></g><g transform="translate(1010 58)"><text x="0" y="0" fill="#6E6965" font-size="9" font-weight="650">AÇÃO DE RISCO</text><rect x="0.5" y="16.5" width="180" height="42" rx="8.5" fill="#FFFFFF" stroke="#E2C9CF"/><text x="90" y="42" text-anchor="middle" fill="#A85270" font-size="9.5" font-weight="600">Arquivar artigo</text></g></g>
+
+    <text x="1368" y="1902" text-anchor="end" fill="#AAA5A0" font-family="Inter" font-size="8">Nexus · Passagem de Coleção · Style Guide 2026</text>
+  </g>
+</svg>

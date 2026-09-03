@@ -1,0 +1,146 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Nexus — Login inspirado na Attio</title>
+  <desc>Quarta proposta de login Nexus com composição editorial, modular e orientada a dados.</desc>
+  <defs>
+    <linearGradient id="nexus-mark-attio" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7759FF"/>
+      <stop offset="1" stop-color="#4E36D9"/>
+    </linearGradient>
+    <linearGradient id="panel-glow" x1="94" y1="68" x2="604" y2="794" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6F2FF"/>
+      <stop offset="0.52" stop-color="#F8F8F7"/>
+      <stop offset="1" stop-color="#EDF7F3"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="16" stdDeviation="28" flood-color="#18171A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <g id="04 — Login / Attio Inspired">
+    <rect width="1440" height="900" fill="#F8F8F7"/>
+
+    <g id="Top Annotation">
+      <text x="52" y="50" fill="#757178" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600" letter-spacing="1.6">04 / ATTIO-INSPIRED</text>
+      <text x="52" y="70" fill="#A09CA2" font-family="Inter, Arial, sans-serif" font-size="10.5">Editorial • modular • data-aware</text>
+    </g>
+
+    <g id="Application Shell" filter="url(#soft-shadow)">
+      <rect x="104" y="92" width="1232" height="716" rx="20" fill="#FFFFFF"/>
+      <rect x="104.5" y="92.5" width="1231" height="715" rx="19.5" stroke="#DFDEE0"/>
+
+      <g id="Insight Panel">
+        <path d="M104 112C104 100.954 112.954 92 124 92H650V808H124C112.954 808 104 799.046 104 788V112Z" fill="url(#panel-glow)"/>
+        <path d="M650 92V808" stroke="#E4E2E5"/>
+
+        <g id="Panel Brand" transform="translate(148 132)">
+          <rect width="38" height="38" rx="10" fill="#FFFFFF"/>
+          <rect x="0.5" y="0.5" width="37" height="37" rx="9.5" stroke="#DDD9E6"/>
+          <path d="M10 28V10L28 28V10" stroke="url(#nexus-mark-attio)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="10" r="2.5" fill="#8267FF"/>
+          <circle cx="10" cy="28" r="2.5" fill="#6A4DEE"/>
+          <circle cx="28" cy="10" r="2.5" fill="#4E36D9"/>
+          <circle cx="28" cy="28" r="2.5" fill="#7357F5"/>
+          <text x="50" y="17" fill="#19181B" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="680">Nexus</text>
+          <text x="50" y="32" fill="#77737A" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="550" letter-spacing="0.7">PASSAGEM DE COLEÇÃO DIGITAL</text>
+        </g>
+
+        <g id="Panel Headline">
+          <text x="148" y="260" fill="#19181B" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="620" letter-spacing="-1.2">Decisões de coleção,</text>
+          <text x="148" y="302" fill="#19181B" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="620" letter-spacing="-1.2">conectadas em um só lugar.</text>
+          <text x="148" y="343" fill="#6E6A71" font-family="Inter, Arial, sans-serif" font-size="13.5">Acompanhe artigos, responsáveis e passagens com contexto.</text>
+        </g>
+
+        <g id="Data Preview" transform="translate(148 398)">
+          <rect width="458" height="280" rx="14" fill="#FFFFFF"/>
+          <rect x="0.5" y="0.5" width="457" height="279" rx="13.5" stroke="#DFDDE1"/>
+          <g id="Preview Header">
+            <circle cx="24" cy="24" r="4" fill="#6B4EEB"/>
+            <text x="38" y="28" fill="#27252A" font-family="Inter, Arial, sans-serif" font-size="11.5" font-weight="600">Coleção Inverno 27</text>
+            <rect x="351" y="12" width="91" height="24" rx="7" fill="#F4F2F7"/>
+            <text x="396.5" y="28" text-anchor="middle" fill="#6F6B73" font-family="Inter, Arial, sans-serif" font-size="9.5">24 artigos</text>
+            <path d="M0 49H458" stroke="#E8E6E9"/>
+          </g>
+          <g id="Table Header">
+            <text x="20" y="78" fill="#97939A" font-family="Inter, Arial, sans-serif" font-size="8.5" font-weight="600" letter-spacing="0.7">ARTIGO</text>
+            <text x="248" y="78" fill="#97939A" font-family="Inter, Arial, sans-serif" font-size="8.5" font-weight="600" letter-spacing="0.7">ETAPA</text>
+            <text x="372" y="78" fill="#97939A" font-family="Inter, Arial, sans-serif" font-size="8.5" font-weight="600" letter-spacing="0.7">DONO</text>
+          </g>
+          <g id="Record Row 1">
+            <circle cx="24" cy="108" r="9" fill="#F8DDE4"/>
+            <text x="42" y="112" fill="#343137" font-family="Inter, Arial, sans-serif" font-size="10.5" font-weight="550">Casaco Alba</text>
+            <rect x="244" y="97" width="82" height="22" rx="7" fill="#EEEAFE"/>
+            <text x="285" y="112" text-anchor="middle" fill="#6248D9" font-family="Inter, Arial, sans-serif" font-size="9">Análise</text>
+            <circle cx="386" cy="108" r="10" fill="#FFE3B5"/>
+            <text x="386" y="111.5" text-anchor="middle" fill="#8A5B10" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="650">MC</text>
+            <path d="M20 132H438" stroke="#EFEDF0"/>
+          </g>
+          <g id="Record Row 2">
+            <circle cx="24" cy="157" r="9" fill="#D9F0E7"/>
+            <text x="42" y="161" fill="#343137" font-family="Inter, Arial, sans-serif" font-size="10.5" font-weight="550">Tricot Íris</text>
+            <rect x="244" y="146" width="93" height="22" rx="7" fill="#E8F5F0"/>
+            <text x="290.5" y="161" text-anchor="middle" fill="#287359" font-family="Inter, Arial, sans-serif" font-size="9">Mostruário</text>
+            <circle cx="386" cy="157" r="10" fill="#DDE8FF"/>
+            <text x="386" y="160.5" text-anchor="middle" fill="#355EAE" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="650">AD</text>
+            <path d="M20 181H438" stroke="#EFEDF0"/>
+          </g>
+          <g id="Record Row 3">
+            <circle cx="24" cy="206" r="9" fill="#E5E1F8"/>
+            <text x="42" y="210" fill="#343137" font-family="Inter, Arial, sans-serif" font-size="10.5" font-weight="550">Calça Horizonte</text>
+            <rect x="244" y="195" width="82" height="22" rx="7" fill="#FFF1D8"/>
+            <text x="285" y="210" text-anchor="middle" fill="#8B611E" font-family="Inter, Arial, sans-serif" font-size="9">Ajustes</text>
+            <circle cx="386" cy="206" r="10" fill="#F6DDE8"/>
+            <text x="386" y="209.5" text-anchor="middle" fill="#95476B" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="650">LR</text>
+          </g>
+          <g id="Preview Footer">
+            <path d="M0 236H458" stroke="#E8E6E9"/>
+            <circle cx="24" cy="258" r="3.5" fill="#4FB989"/>
+            <text x="36" y="262" fill="#77737A" font-family="Inter, Arial, sans-serif" font-size="9.5">Fluxo sincronizado</text>
+            <text x="438" y="262" text-anchor="end" fill="#97939A" font-family="Inter, Arial, sans-serif" font-size="9.5">Atualizado agora</text>
+          </g>
+        </g>
+      </g>
+
+      <g id="Login Area">
+        <g id="Login Content" transform="translate(754 167)">
+          <text x="0" y="0" fill="#19181B" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="650" letter-spacing="-0.7">Acesse sua conta</text>
+          <text x="0" y="31" fill="#77737A" font-family="Inter, Arial, sans-serif" font-size="13">Entre para continuar na passagem de coleção.</text>
+
+          <g id="Name Field" transform="translate(0 82)">
+            <text x="0" y="0" fill="#4D4A50" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600">Nome completo</text>
+            <rect x="0.5" y="16.5" width="438" height="49" rx="9.5" fill="#FFFFFF"/>
+            <rect x="0.5" y="16.5" width="438" height="49" rx="9.5" stroke="#D9D7DB"/>
+            <text x="15" y="47" fill="#A09CA2" font-family="Inter, Arial, sans-serif" font-size="13">Seu nome completo</text>
+          </g>
+
+          <g id="Profile Field" transform="translate(0 178)">
+            <text x="0" y="0" fill="#4D4A50" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600">Perfil</text>
+            <rect x="0.5" y="16.5" width="438" height="49" rx="9.5" fill="#FFFFFF"/>
+            <rect x="0.5" y="16.5" width="438" height="49" rx="9.5" stroke="#D9D7DB"/>
+            <text x="15" y="47" fill="#A09CA2" font-family="Inter, Arial, sans-serif" font-size="13">Selecione seu perfil</text>
+            <path d="M412 37L417 42L422 37" stroke="#807C83" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+
+          <g id="Primary Action" transform="translate(0 282)">
+            <rect width="439" height="49" rx="10" fill="#1D1C1F"/>
+            <text x="219.5" y="30.5" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="620">Acessar a coleção</text>
+          </g>
+
+          <g id="Access Context" transform="translate(0 359)">
+            <path d="M0 0H439" stroke="#E6E4E7"/>
+            <rect y="28" width="439" height="66" rx="10" fill="#F8F7F9"/>
+            <rect x="0.5" y="28.5" width="438" height="65" rx="9.5" stroke="#E5E3E6"/>
+            <circle cx="24" cy="61" r="7" fill="#E7E2FA"/>
+            <circle cx="24" cy="61" r="3" fill="#6B4EEB"/>
+            <text x="42" y="58" fill="#454248" font-family="Inter, Arial, sans-serif" font-size="10.5" font-weight="600">Ambiente operacional</text>
+            <text x="42" y="75" fill="#88848B" font-family="Inter, Arial, sans-serif" font-size="9.5">Decisões e alterações ficam registradas.</text>
+          </g>
+
+          <g id="Login Footer" transform="translate(0 488)">
+            <text x="0" y="0" fill="#99959B" font-family="Inter, Arial, sans-serif" font-size="10">Nexus • Passagem de Coleção Digital</text>
+            <text x="439" y="0" text-anchor="end" fill="#6B4EEB" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600">Ajuda</text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

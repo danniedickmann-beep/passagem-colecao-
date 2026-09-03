@@ -1,0 +1,105 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Nexus — Login inspirado no dashboard Nexus</title>
+  <desc>Tela de acesso com a mesma linguagem visual do dashboard operacional Nexus.</desc>
+  <defs>
+    <linearGradient id="login-bg" x1="0" y1="0" x2="1440" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6F9FC"/><stop offset="0.62" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F5FF"/>
+    </linearGradient>
+    <linearGradient id="brand-bg" x1="0" y1="0" x2="620" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A2540"/><stop offset="1" stop-color="#071B30"/>
+    </linearGradient>
+    <linearGradient id="brand-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#80E9FF"/><stop offset="0.55" stop-color="#B8A8FF"/><stop offset="1" stop-color="#FF9DD5"/>
+    </linearGradient>
+    <linearGradient id="button" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#635BFF"/><stop offset="1" stop-color="#5146E5"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="0" y1="0" x2="398" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#635BFF"/><stop offset="1" stop-color="#00D4FF"/>
+    </linearGradient>
+    <filter id="card-shadow" x="-25%" y="-25%" width="150%" height="170%">
+      <feDropShadow dx="0" dy="18" stdDeviation="30" flood-color="#0A2540" flood-opacity="0.10"/>
+    </filter>
+    <filter id="button-shadow" x="-25%" y="-35%" width="150%" height="190%">
+      <feDropShadow dx="0" dy="9" stdDeviation="14" flood-color="#635BFF" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <g id="03 — Login / Nexus Dashboard Language">
+    <rect width="1440" height="900" fill="url(#login-bg)"/>
+
+    <g id="Brand Panel">
+      <rect width="594" height="900" fill="url(#brand-bg)"/>
+      <circle cx="82" cy="112" r="190" fill="#143C5E" fill-opacity="0.34"/>
+      <circle cx="514" cy="748" r="260" fill="#312B72" fill-opacity="0.22"/>
+      <path d="M-40 650C136 514 270 555 386 456C480 375 506 236 650 175" stroke="url(#flow)" stroke-opacity="0.18" stroke-width="2"/>
+      <path d="M-34 706C143 570 291 620 418 503C514 415 541 306 660 240" stroke="#80E9FF" stroke-opacity="0.09"/>
+
+      <g id="Nexus Brand" transform="translate(64 56)">
+        <rect width="44" height="44" rx="12" fill="#FFFFFF" fill-opacity="0.08"/>
+        <path d="M10 34V10L34 34V10" stroke="url(#brand-mark)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="10" cy="10" r="2.8" fill="#80E9FF"/><circle cx="10" cy="34" r="2.8" fill="#A8B7FF"/><circle cx="34" cy="10" r="2.8" fill="#FF9DD5"/><circle cx="34" cy="34" r="2.8" fill="#B8A8FF"/>
+        <text x="59" y="21" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="700">Nexus</text>
+        <text x="59" y="39" fill="#8FA3B8" font-family="Inter, Arial, sans-serif" font-size="8.5" font-weight="600" letter-spacing="0.9">PASSAGEM DE COLEÇÃO</text>
+      </g>
+
+      <g id="Message" transform="translate(64 244)">
+        <text x="0" y="12" fill="#80E9FF" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">VISÃO OPERACIONAL</text>
+        <text x="0" y="62" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="700" letter-spacing="-1.4">Sua coleção,</text>
+        <text x="0" y="110" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="700" letter-spacing="-1.4">em movimento.</text>
+        <text x="0" y="153" fill="#A9BBCB" font-family="Inter, Arial, sans-serif" font-size="14">Acompanhe artigos, passagens e decisões</text>
+        <text x="0" y="176" fill="#A9BBCB" font-family="Inter, Arial, sans-serif" font-size="14">da coleção em um único fluxo.</text>
+      </g>
+
+      <g id="Collection Flow" transform="translate(64 516)">
+        <rect width="466" height="178" rx="16" fill="#FFFFFF" fill-opacity="0.055" stroke="#FFFFFF" stroke-opacity="0.09"/>
+        <text x="24" y="31" fill="#8299AE" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="650" letter-spacing="1.1">FLUXO DA COLEÇÃO</text>
+        <g transform="translate(24 58)">
+          <g><circle cx="18" cy="18" r="18" fill="#E8F1FF" fill-opacity="0.14"/><path d="M11 14H25V26H11V14ZM14 11V17M11 14H17" stroke="#9CC4FF" stroke-width="1.5" stroke-linecap="round"/><text x="0" y="58" fill="#D8E3EC" font-family="Inter" font-size="9.5">Artigos</text></g>
+          <path d="M56 18H107" stroke="#38536B" stroke-width="2"/><path d="M102 13L107 18L102 23" stroke="#80E9FF" stroke-width="1.5"/>
+          <g transform="translate(122)"><circle cx="18" cy="18" r="18" fill="#B8A8FF" fill-opacity="0.14"/><rect x="11" y="10" width="5" height="16" rx="1.5" stroke="#B8A8FF"/><rect x="21" y="10" width="5" height="16" rx="1.5" stroke="#B8A8FF"/><path d="M16.5 15H20.5M19 13.5L20.5 15L19 16.5M20.5 22H16.5M18 20.5L16.5 22L18 23.5" stroke="#B8A8FF" stroke-linecap="round"/><text x="-3" y="58" fill="#D8E3EC" font-family="Inter" font-size="9.5">Passagem</text></g>
+          <path d="M178 18H229" stroke="#38536B" stroke-width="2"/><path d="M224 13L229 18L224 23" stroke="#80E9FF" stroke-width="1.5"/>
+          <g transform="translate(244)"><circle cx="18" cy="18" r="18" fill="#80E9FF" fill-opacity="0.12"/><path d="M18 10C18 8.7 20 8.2 20.7 9.5C21.3 10.7 20.3 11.5 19.2 12.2L26 17.5C26.8 18.1 26.3 19.5 25.3 19.5H10.7C9.7 19.5 9.2 18.1 10 17.5L16.8 12.2" stroke="#80E9FF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><text x="-7" y="58" fill="#D8E3EC" font-family="Inter" font-size="9.5">Mostruário</text></g>
+          <path d="M300 18H351" stroke="#38536B" stroke-width="2"/><path d="M346 13L351 18L346 23" stroke="#80E9FF" stroke-width="1.5"/>
+          <g transform="translate(366)"><circle cx="18" cy="18" r="18" fill="#FF9DD5" fill-opacity="0.12"/><circle cx="18" cy="18" r="8" stroke="#FF9DD5"/><circle cx="18" cy="18" r="4" stroke="#FF9DD5"/><circle cx="18" cy="18" r="1.5" fill="#FF9DD5"/><text x="4" y="58" fill="#D8E3EC" font-family="Inter" font-size="9.5">Radar</text></g>
+        </g>
+      </g>
+
+      <g id="Status" transform="translate(64 820)"><circle cx="5" cy="5" r="5" fill="#55D5A3"/><text x="18" y="9" fill="#92AABC" font-family="Inter" font-size="10">Ambiente seguro · Dados sincronizados</text></g>
+    </g>
+
+    <g id="Login Area">
+      <text x="1376" y="66" text-anchor="end" fill="#8796A8" font-family="Inter" font-size="11">Precisa de ajuda?</text>
+      <g id="Login Card" transform="translate(817 162)" filter="url(#card-shadow)">
+        <rect width="454" height="576" rx="18" fill="#FFFFFF"/>
+        <rect x="0.5" y="0.5" width="453" height="575" rx="17.5" stroke="#E1E7EE"/>
+        <g transform="translate(44 43)">
+          <text x="0" y="12" fill="#635BFF" font-family="Inter" font-size="9.5" font-weight="700" letter-spacing="1.2">BEM-VINDA DE VOLTA</text>
+          <text x="0" y="54" fill="#0A2540" font-family="Inter" font-size="29" font-weight="720" letter-spacing="-0.8">Acesse o Nexus</text>
+          <text x="0" y="82" fill="#6B7C93" font-family="Inter" font-size="12.5">Entre para continuar acompanhando sua coleção.</text>
+
+          <text x="0" y="129" fill="#425466" font-family="Inter" font-size="10.5" font-weight="650">E-mail</text>
+          <rect x="0.5" y="143.5" width="365" height="49" rx="9.5" fill="#FFFFFF" stroke="#D9E1EA"/>
+          <path d="M17 159H31V171H17V159ZM17 160L24 166L31 160" stroke="#8796A8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="44" y="174" fill="#A0AEC0" font-family="Inter" font-size="11.5">nome@empresa.com</text>
+
+          <text x="0" y="226" fill="#425466" font-family="Inter" font-size="10.5" font-weight="650">Senha</text>
+          <text x="365" y="226" text-anchor="end" fill="#635BFF" font-family="Inter" font-size="10" font-weight="600">Esqueci minha senha</text>
+          <rect x="0.5" y="240.5" width="365" height="49" rx="9.5" fill="#FFFFFF" stroke="#D9E1EA"/>
+          <rect x="17" y="257" width="14" height="12" rx="2.5" stroke="#8796A8" stroke-width="1.25"/>
+          <path d="M20 257V254.5C20 252.3 21.8 250.5 24 250.5C26.2 250.5 28 252.3 28 254.5V257" stroke="#8796A8" stroke-width="1.25"/>
+          <circle cx="47" cy="265" r="2" fill="#8796A8"/><circle cx="56" cy="265" r="2" fill="#8796A8"/><circle cx="65" cy="265" r="2" fill="#8796A8"/><circle cx="74" cy="265" r="2" fill="#8796A8"/><circle cx="83" cy="265" r="2" fill="#8796A8"/><circle cx="92" cy="265" r="2" fill="#8796A8"/>
+          <path d="M333 265C337 260 343 260 347 265C343 270 337 270 333 265Z" stroke="#8796A8" stroke-width="1.2"/><circle cx="340" cy="265" r="2" fill="#8796A8"/>
+
+          <g id="Remember" transform="translate(0 310)"><rect x="0.5" y="0.5" width="15" height="15" rx="4" fill="#F6F9FC" stroke="#C9D3DE"/><text x="25" y="12" fill="#6B7C93" font-family="Inter" font-size="10.5">Manter meu acesso neste dispositivo</text></g>
+
+          <g id="Primary Button" transform="translate(0 352)" filter="url(#button-shadow)"><rect width="366" height="50" rx="10" fill="url(#button)"/><text x="183" y="30" text-anchor="middle" fill="#FFFFFF" font-family="Inter" font-size="11.5" font-weight="650">Entrar no Nexus</text><path d="M270 25H281M277 21L281 25L277 29" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+
+          <g transform="translate(0 428)"><path d="M0 0H158" stroke="#E7ECF1"/><text x="183" y="4" text-anchor="middle" fill="#A0AEC0" font-family="Inter" font-size="9.5">OU</text><path d="M208 0H366" stroke="#E7ECF1"/></g>
+          <g id="SSO Button" transform="translate(0 452)"><rect x="0.5" y="0.5" width="365" height="47" rx="9.5" fill="#F8FAFC" stroke="#DCE3EB"/><rect x="99" y="14" width="18" height="18" rx="5" fill="#0A2540"/><path d="M104 26V19L112 26V19" stroke="#80E9FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><text x="128" y="29" fill="#425466" font-family="Inter" font-size="10.5" font-weight="600">Entrar com acesso corporativo</text></g>
+        </g>
+      </g>
+      <text x="1044" y="775" text-anchor="middle" fill="#8796A8" font-family="Inter" font-size="9.5">Ao entrar, você concorda com os Termos de uso e a Política de privacidade.</text>
+    </g>
+  </g>
+</svg>

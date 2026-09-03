@@ -1,0 +1,69 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Nexus — Lista de artigos</title>
+  <desc>Primeira tela do fluxo de artigos do projeto Passagem de Coleção.</desc>
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="1440" y2="900" gradientUnits="userSpaceOnUse"><stop stop-color="#F7F6F3"/><stop offset="1" stop-color="#F1F0ED"/></linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7057EB"/><stop offset="1" stop-color="#8065ED"/></linearGradient>
+    <linearGradient id="soft-purple" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F0ECFF"/><stop offset="1" stop-color="#E6E0FF"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="24" flood-color="#292529" flood-opacity="0.055"/></filter>
+    <filter id="button-shadow" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#7057EB" flood-opacity="0.18"/></filter>
+  </defs>
+
+  <g id="03 — Artigos / Lista">
+    <rect width="1440" height="900" fill="url(#page)"/>
+    <rect x="26.5" y="26.5" width="1387" height="847" rx="22.5" fill="#FCFBF9" stroke="#DFDCD7"/>
+
+    <g id="Sidebar">
+      <path d="M262.5 27V873" stroke="#E7E3DE"/>
+      <g transform="translate(56 55)"><rect width="38" height="38" rx="9" fill="url(#soft-purple)" stroke="#D7CFFF"/><path d="M10 28V10L28 28V10" stroke="#775FEA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="2" fill="#9C8BFF"/><circle cx="10" cy="28" r="2" fill="#775FEA"/><circle cx="28" cy="10" r="2" fill="#B5A8FF"/><circle cx="28" cy="28" r="2" fill="#8065ED"/><text x="50" y="17" fill="#282527" font-family="Inter" font-size="15" font-weight="700">Nexus</text><text x="50" y="30" fill="#9B9692" font-family="Inter" font-size="6.8" letter-spacing="0.45">PASSAGEM DE COLEÇÃO DIGITAL</text></g>
+      <text x="56" y="137" fill="#AAA5A0" font-family="Inter" font-size="8" font-weight="650" letter-spacing="0.9">PASSAGEM DE COLEÇÃO</text>
+      <g transform="translate(42 151)" font-family="Inter" font-size="10.5">
+        <g><rect x="14" y="12" width="18" height="18" rx="4" stroke="#938E8B"/><path d="M18 25V21M23 25V17M28 25V19" stroke="#938E8B" stroke-linecap="round"/><text x="45" y="26" fill="#66615E">Dashboard</text></g>
+        <g transform="translate(0 48)"><rect width="192" height="42" rx="9" fill="#F0ECFF"/><rect width="3" height="42" rx="1.5" fill="#775FEA"/><path d="M16 15L21 10H29V18L23 25L16 18V15Z" stroke="#7057E6" stroke-width="1.2"/><circle cx="25.5" cy="13.5" r="1" fill="#7057E6"/><text x="45" y="26" fill="#4E3EA6" font-weight="650">Artigos</text><text x="178" y="26" text-anchor="end" fill="#7967D2">2</text></g>
+        <g transform="translate(0 96)"><rect x="16" y="10" width="5" height="16" rx="1.5" stroke="#938E8B"/><rect x="27" y="10" width="5" height="16" rx="1.5" stroke="#938E8B"/><path d="M21.5 15H26.5M26.5 22H21.5" stroke="#938E8B"/><text x="45" y="21" fill="#66615E">Passagem de Coleção</text></g>
+        <g transform="translate(0 140)"><path d="M24 11C24 9.7 26 9.4 26.6 10.6C27.2 11.8 26.2 12.5 25.1 13.2L32 18.7C32.8 19.3 32.3 20.5 31.3 20.5H16.7C15.7 20.5 15.2 19.3 16 18.7L22.9 13.2" stroke="#938E8B"/><text x="45" y="21" fill="#66615E">Mostruário</text></g>
+        <g transform="translate(0 184)"><circle cx="24" cy="18" r="8" stroke="#938E8B"/><circle cx="24" cy="18" r="4" stroke="#938E8B"/><circle cx="24" cy="18" r="1.5" fill="#938E8B"/><text x="45" y="21" fill="#66615E">Radar</text></g>
+        <g transform="translate(0 228)"><circle cx="24" cy="18" r="8" stroke="#938E8B"/><path d="M24 14V18L27 20M18 12L16 12V10" stroke="#938E8B"/><text x="45" y="21" fill="#66615E">Histórico</text></g>
+      </g>
+      <g transform="translate(42 744)"><rect width="192" height="96" rx="11" fill="#F8F6F2" stroke="#E5E1DB"/><text x="14" y="24" fill="#A19C97" font-family="Inter" font-size="7.5" font-weight="650" letter-spacing="0.7">TODAS AS COLEÇÕES</text><text x="14" y="50" fill="#383436" font-family="Inter" font-size="12" font-weight="650">2 artigos ativos</text><circle cx="17" cy="70" r="3" fill="#67C795"/><text x="28" y="73" fill="#8F8A86" font-family="Inter" font-size="8.5">Dados sincronizados</text></g>
+    </g>
+
+    <g id="Topbar">
+      <path d="M263 112.5H1413" stroke="#E7E3DE"/>
+      <text x="300" y="72" fill="#292628" font-family="Inter" font-size="12" font-weight="650">Artigos da coleção</text><text x="300" y="91" fill="#9B9692" font-family="Inter" font-size="9">Preparação e cadastro da passagem</text>
+      <g transform="translate(1124 52)"><rect width="120" height="38" rx="9" fill="#F8F6F2" stroke="#E2DED8"/><circle cx="18" cy="19" r="4" fill="#67C795"/><text x="30" y="23" fill="#6D6864" font-family="Inter" font-size="9.5">Online</text><path d="M98 16L102 20L106 16" stroke="#918C88"/></g>
+      <circle cx="1280" cy="71" r="18" fill="#E9E3FF"/><text x="1280" y="75" text-anchor="middle" fill="#7057DF" font-family="Inter" font-size="9" font-weight="700">DD</text><text x="1308" y="68" fill="#393537" font-family="Inter" font-size="10" font-weight="650">Daniela</text><text x="1308" y="83" fill="#A09B97" font-family="Inter" font-size="8">Produto</text>
+    </g>
+
+    <g id="Main" transform="translate(300 148)">
+      <text x="0" y="11" fill="#8278B6" font-family="Inter" font-size="8" font-weight="700" letter-spacing="1.1">PREPARAÇÃO DA PASSAGEM</text>
+      <text x="0" y="47" fill="#292628" font-family="Inter" font-size="27" font-weight="700" letter-spacing="-0.7">Artigos da coleção</text>
+      <text x="0" y="73" fill="#8F8A86" font-family="Inter" font-size="11">Busque um artigo existente ou cadastre um novo para iniciar seu fluxo.</text>
+      <g transform="translate(875 13)" filter="url(#button-shadow)"><rect width="187" height="44" rx="9" fill="url(#purple)"/><path d="M17 12H29V28H17V12ZM20 9V16M17 12H24" stroke="#FFFFFF" stroke-width="1.3"/><path d="M27 24H34M30.5 20.5V27.5" stroke="#FFFFFF" stroke-width="1.3"/><text x="47" y="27" fill="#FFFFFF" font-family="Inter" font-size="10" font-weight="650">Cadastrar artigo</text></g>
+
+      <g id="Filters" transform="translate(0 107)" filter="url(#shadow)">
+        <rect width="1062" height="93" rx="12" fill="#FFFFFF"/><rect x="0.5" y="0.5" width="1061" height="92" rx="11.5" stroke="#E3DFD9"/>
+        <g transform="translate(18 17)" font-family="Inter"><text x="0" y="9" fill="#6E6965" font-size="8.5" font-weight="650">Coleção</text><rect x="0.5" y="19.5" width="238" height="42" rx="8.5" fill="#FFFFFF" stroke="#DDD9D3"/><text x="14" y="45" fill="#625D59" font-size="10">Todas as coleções</text><path d="M211 35L216 40L221 35" stroke="#918C88"/></g>
+        <g transform="translate(274 17)" font-family="Inter"><text x="0" y="9" fill="#6E6965" font-size="8.5" font-weight="650">Pesquisar artigos</text><rect x="0.5" y="19.5" width="512" height="42" rx="8.5" fill="#FFFFFF" stroke="#DDD9D3"/><circle cx="19" cy="40" r="6" stroke="#99948F"/><path d="M23.5 44.5L28 49" stroke="#99948F" stroke-linecap="round"/><text x="39" y="45" fill="#AAA5A0" font-size="10">Artigo, linha, categoria ou matéria-prima</text></g>
+        <g transform="translate(806 36)" font-family="Inter"><rect x="0.5" y="0.5" width="237" height="42" rx="8.5" fill="#F8F6F2" stroke="#E2DED8"/><path d="M17 13H31V29H17V13ZM20 10V16M17 13H24" stroke="#8D8884"/><text x="42" y="26" fill="#6E6965" font-size="9.5">Filtros avançados</text><path d="M211 17L216 22L221 17" stroke="#918C88"/></g>
+      </g>
+
+      <g id="Tabs" transform="translate(0 224)" font-family="Inter">
+        <path d="M0 39H1062" stroke="#E3DFD9"/>
+        <g><text x="0" y="23" fill="#5C49B3" font-size="10" font-weight="650">Ativos</text><rect x="39" y="7" width="28" height="21" rx="7" fill="#F0ECFF"/><text x="53" y="21" text-anchor="middle" fill="#7057E6" font-size="8.5" font-weight="650">2</text><rect x="0" y="37" width="67" height="2" rx="1" fill="#7057EB"/></g>
+        <g transform="translate(100)"><text x="0" y="23" fill="#8F8A86" font-size="10">Arquivados</text><rect x="66" y="7" width="24" height="21" rx="7" fill="#F0EEEA"/><text x="78" y="21" text-anchor="middle" fill="#918C88" font-size="8.5">1</text></g>
+        <text x="1062" y="23" text-anchor="end" fill="#99948F" font-size="9">2 artigos ativos</text>
+      </g>
+
+      <g id="Article Table" transform="translate(0 282)" font-family="Inter">
+        <rect width="1062" height="422" rx="13" fill="#FFFFFF" filter="url(#shadow)"/><rect x="0.5" y="0.5" width="1061" height="421" rx="12.5" stroke="#E3DFD9"/>
+        <g fill="#918C88" font-size="8" font-weight="650" letter-spacing="0.55"><text x="22" y="29">ARTIGO</text><text x="506" y="29">COLEÇÃO</text><text x="700" y="29">CRITICIDADE</text><text x="898" y="29">STATUS</text></g><path d="M0 44H1062" stroke="#E8E4DF"/>
+
+        <g id="Row 1" transform="translate(0 44)"><rect width="1062" height="63" fill="#FFFFFF"/><rect x="18" y="13" width="36" height="36" rx="8" fill="#EDF5F0"/><path d="M29 38L36 24L43 38M31 34H41" stroke="#4A8D69" stroke-width="1.3"/><text x="66" y="26" fill="#454042" font-size="10.5" font-weight="650">5454</text><text x="66" y="43" fill="#99948F" font-size="8.5">Adulto Feminino · Regatas · J26MP</text><text x="506" y="35" fill="#625D59" font-size="9.5">INVERNO 27</text><rect x="700" y="20" width="55" height="23" rx="7" fill="#EAF5EF"/><text x="727.5" y="35" text-anchor="middle" fill="#438361" font-size="8">Baixa</text><rect x="898" y="20" width="75" height="23" rx="7" fill="#EAF5EF"/><text x="935.5" y="35" text-anchor="middle" fill="#438361" font-size="8">Mostruário</text><text x="1036" y="35" text-anchor="end" fill="#7057E6" font-size="9" font-weight="650">Abrir →</text></g><path d="M18 107H1044" stroke="#EEEAE6"/>
+        <g id="Row 2" transform="translate(0 107)"><rect x="18" y="13" width="36" height="36" rx="8" fill="#F9ECEF"/><path d="M28 38L36 23L44 38M31 33H41" stroke="#A85270" stroke-width="1.3"/><text x="66" y="26" fill="#454042" font-size="10.5" font-weight="650">49HP - TESTE</text><text x="66" y="43" fill="#99948F" font-size="8.5">HERING FEMININO - TESTE · Camiseta - TESTE · J26 - TESTE</text><text x="506" y="35" fill="#625D59" font-size="9.5">INVERNO 27</text><rect x="700" y="20" width="55" height="23" rx="7" fill="#F9ECEF"/><text x="727.5" y="35" text-anchor="middle" fill="#A85270" font-size="8">Alta</text><rect x="898" y="20" width="75" height="23" rx="7" fill="#EAF5EF"/><text x="935.5" y="35" text-anchor="middle" fill="#438361" font-size="8">Mostruário</text><text x="1036" y="35" text-anchor="end" fill="#7057E6" font-size="9" font-weight="650">Abrir →</text></g><path d="M18 170H1044" stroke="#EEEAE6"/>
+        <g transform="translate(0 196)"><rect x="18" width="1026" height="142" rx="10" fill="#FAF9F7"/><path d="M526 37V67M511 52H541" stroke="#C9C4BE" stroke-width="1.4" stroke-linecap="round"/><text x="531" y="95" text-anchor="middle" fill="#77716E" font-size="10" font-weight="600">Todos os artigos ativos estão exibidos</text><text x="531" y="115" text-anchor="middle" fill="#AAA5A0" font-size="8.5">Use a pesquisa ou altere a coleção para refinar a lista.</text></g>
+        <g transform="translate(18 377)"><text x="0" y="14" fill="#99948F" font-size="8.5">Exibindo 2 de 2 artigos ativos</text></g>
+      </g>
+    </g>
+  </g>
+</svg>

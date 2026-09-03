@@ -1,0 +1,147 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Nexus — Login inspirado na Stripe</title>
+  <desc>Sexta proposta de login Nexus com gradientes, infraestrutura visual e formulário de alta precisão.</desc>
+  <defs>
+    <linearGradient id="stripe-bg" x1="76" y1="26" x2="1362" y2="876" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#312E81"/>
+      <stop offset="0.46" stop-color="#5554D9"/>
+      <stop offset="1" stop-color="#0A2540"/>
+    </linearGradient>
+    <linearGradient id="beam-one" x1="186" y1="75" x2="756" y2="817" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF80B5" stop-opacity="0.95"/>
+      <stop offset="0.48" stop-color="#7A73FF" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#36D7FF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="beam-two" x1="1162" y1="8" x2="775" y2="805" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7CF0FF" stop-opacity="0.8"/>
+      <stop offset="0.52" stop-color="#635BFF" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FFB7E8" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#635BFF"/>
+      <stop offset="1" stop-color="#5046E5"/>
+    </linearGradient>
+    <linearGradient id="nexus-stripe" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#80E9FF"/>
+      <stop offset="0.55" stop-color="#B8A8FF"/>
+      <stop offset="1" stop-color="#FF9DD5"/>
+    </linearGradient>
+    <filter id="login-shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feDropShadow dx="0" dy="30" stdDeviation="42" flood-color="#08182A" flood-opacity="0.28"/>
+    </filter>
+    <filter id="float-shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#07192D" flood-opacity="0.18"/>
+    </filter>
+    <filter id="blur-strong"><feGaussianBlur stdDeviation="55"/></filter>
+  </defs>
+
+  <g id="06 — Login / Stripe Inspired">
+    <rect width="1440" height="900" fill="url(#stripe-bg)"/>
+
+    <g id="Gradient Atmosphere">
+      <path d="M-56 614L446 -52L758 -52L250 676L-56 614Z" fill="url(#beam-one)" opacity="0.78"/>
+      <path d="M1448 50L1048 -46L646 878L1044 880L1448 50Z" fill="url(#beam-two)" opacity="0.68"/>
+      <ellipse cx="690" cy="132" rx="280" ry="156" fill="#F09BD8" fill-opacity="0.18" filter="url(#blur-strong)"/>
+      <ellipse cx="302" cy="768" rx="340" ry="170" fill="#42D5FF" fill-opacity="0.15" filter="url(#blur-strong)"/>
+      <path d="M0 708C360 604 635 654 850 900H0V708Z" fill="#081D34" fill-opacity="0.28"/>
+    </g>
+
+    <g id="Top Annotation">
+      <text x="52" y="52" fill="#E6E5FF" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="650" letter-spacing="1.6">06 / STRIPE-INSPIRED</text>
+      <text x="52" y="73" fill="#BAB9E8" font-family="Inter, Arial, sans-serif" font-size="10.5">Luminous • precise • infrastructure-led</text>
+    </g>
+
+    <g id="Experience Panel">
+      <g id="Brand" transform="translate(116 142)">
+        <rect width="46" height="46" rx="13" fill="#FFFFFF" fill-opacity="0.1"/>
+        <rect x="0.5" y="0.5" width="45" height="45" rx="12.5" stroke="#FFFFFF" stroke-opacity="0.26"/>
+        <path d="M11 34V12L35 34V12" stroke="url(#nexus-stripe)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="11" cy="12" r="3" fill="#80E9FF"/>
+        <circle cx="11" cy="34" r="3" fill="#A7B8FF"/>
+        <circle cx="35" cy="12" r="3" fill="#FF9DD5"/>
+        <circle cx="35" cy="34" r="3" fill="#B8A8FF"/>
+        <text x="62" y="20" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Nexus</text>
+        <text x="62" y="38" fill="#C6C7EC" font-family="Inter, Arial, sans-serif" font-size="8.5" font-weight="550" letter-spacing="0.8">PASSAGEM DE COLEÇÃO DIGITAL</text>
+      </g>
+
+      <g id="Headline">
+        <text x="116" y="303" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="45" font-weight="680" letter-spacing="-1.8">Da criação à decisão,</text>
+        <text x="116" y="357" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="45" font-weight="680" letter-spacing="-1.8">sem perder o contexto.</text>
+        <text x="116" y="405" fill="#D1D2F0" font-family="Inter, Arial, sans-serif" font-size="14">Uma infraestrutura visual para acompanhar cada passagem da coleção.</text>
+      </g>
+
+      <g id="Collection Signal" filter="url(#float-shadow)">
+        <rect x="116" y="468" width="476" height="196" rx="16" fill="#FFFFFF" fill-opacity="0.11"/>
+        <rect x="116.5" y="468.5" width="475" height="195" rx="15.5" stroke="#FFFFFF" stroke-opacity="0.22"/>
+        <text x="142" y="505" fill="#D6D7F1" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="650" letter-spacing="1">COLEÇÃO ATIVA</text>
+        <text x="142" y="541" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="650">Inverno 2027</text>
+        <rect x="467" y="498" width="98" height="27" rx="8" fill="#FFFFFF" fill-opacity="0.12"/>
+        <circle cx="484" cy="511.5" r="4" fill="#61E8B5"/>
+        <text x="497" y="515" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="9.5">Em fluxo</text>
+        <path d="M142 568H566" stroke="#FFFFFF" stroke-opacity="0.18"/>
+        <g id="Metrics">
+          <text x="142" y="602" fill="#C4C6EB" font-family="Inter, Arial, sans-serif" font-size="9.5">Artigos</text>
+          <text x="142" y="632" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">24</text>
+          <text x="272" y="602" fill="#C4C6EB" font-family="Inter, Arial, sans-serif" font-size="9.5">Concluídos</text>
+          <text x="272" y="632" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">18</text>
+          <text x="419" y="602" fill="#C4C6EB" font-family="Inter, Arial, sans-serif" font-size="9.5">Progresso</text>
+          <text x="419" y="632" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">75%</text>
+        </g>
+      </g>
+
+      <g id="Trust Note">
+        <circle cx="126" cy="716" r="5" fill="#5DE6B0"/>
+        <text x="142" y="720" fill="#C9CAEB" font-family="Inter, Arial, sans-serif" font-size="10.5">Decisões registradas com segurança e rastreabilidade.</text>
+      </g>
+    </g>
+
+    <g id="Login Card" filter="url(#login-shadow)">
+      <rect x="792" y="110" width="526" height="680" rx="22" fill="#FFFFFF"/>
+      <rect x="792.5" y="110.5" width="525" height="679" rx="21.5" stroke="#FFFFFF" stroke-opacity="0.7"/>
+
+      <g id="Login Content" transform="translate(842 163)">
+        <g id="Card Header">
+          <rect width="40" height="40" rx="11" fill="#F1F0FF"/>
+          <path d="M10 30V10L30 30V10" stroke="#635BFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="0" y="83" fill="#0A2540" font-family="Inter, Arial, sans-serif" font-size="29" font-weight="700" letter-spacing="-0.8">Acesse a Passagem</text>
+          <text x="0" y="113" fill="#6B7C93" font-family="Inter, Arial, sans-serif" font-size="13">Identifique-se para continuar no ambiente operacional.</text>
+        </g>
+
+        <g id="Name Field" transform="translate(0 158)">
+          <text x="0" y="0" fill="#425466" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="650">Nome completo</text>
+          <rect x="0.5" y="17.5" width="425" height="51" rx="9.5" fill="#FFFFFF"/>
+          <rect x="0.5" y="17.5" width="425" height="51" rx="9.5" stroke="#C7D0DD"/>
+          <text x="15" y="49" fill="#9AA9BC" font-family="Inter, Arial, sans-serif" font-size="13">Seu nome completo</text>
+        </g>
+
+        <g id="Profile Field" transform="translate(0 260)">
+          <text x="0" y="0" fill="#425466" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="650">Perfil</text>
+          <rect x="0.5" y="17.5" width="425" height="51" rx="9.5" fill="#FFFFFF"/>
+          <rect x="0.5" y="17.5" width="425" height="51" rx="9.5" stroke="#C7D0DD"/>
+          <text x="15" y="49" fill="#9AA9BC" font-family="Inter, Arial, sans-serif" font-size="13">Selecione seu perfil</text>
+          <path d="M398 39L403 44L408 39" stroke="#6B7C93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+
+        <g id="Primary Action" transform="translate(0 370)">
+          <rect width="426" height="51" rx="10" fill="url(#primary)"/>
+          <text x="213" y="32" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="650">Acessar a coleção</text>
+          <path d="M318 25H333M328 20L333 25L328 30" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+
+        <g id="Session Information" transform="translate(0 454)">
+          <path d="M0 0H426" stroke="#E6EBF1"/>
+          <rect y="27" width="426" height="76" rx="10" fill="#F6F9FC"/>
+          <circle cx="25" cy="65" r="10" fill="#E7F8F1"/>
+          <path d="M21 65L24 68L30 61" stroke="#2A9D6F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="45" y="61" fill="#425466" font-family="Inter, Arial, sans-serif" font-size="10.5" font-weight="650">Ambiente protegido</text>
+          <text x="45" y="79" fill="#8796A8" font-family="Inter, Arial, sans-serif" font-size="9.5">Seu acesso será associado às alterações realizadas.</text>
+        </g>
+
+        <g id="Card Footer" transform="translate(0 593)">
+          <text x="0" y="0" fill="#9AA9BC" font-family="Inter, Arial, sans-serif" font-size="10">Nexus • Passagem de Coleção Digital</text>
+          <text x="426" y="0" text-anchor="end" fill="#635BFF" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="650">Suporte</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

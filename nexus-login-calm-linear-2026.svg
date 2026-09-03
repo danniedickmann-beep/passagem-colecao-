@@ -1,0 +1,114 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Nexus — Login Calm Linear 2026</title>
+  <desc>Terceira proposta de login, inspirada nos princípios de interface calma do Linear em 2026.</desc>
+
+  <defs>
+    <linearGradient id="background" x1="164" y1="54" x2="1264" y2="846" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4F3F1"/>
+      <stop offset="1" stop-color="#ECEBE8"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#6D5CE7"/>
+      <stop offset="1" stop-color="#8170ED"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="8" y1="7" x2="39" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8A7BF2"/>
+      <stop offset="1" stop-color="#6958D8"/>
+    </linearGradient>
+    <filter id="card-shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feDropShadow dx="0" dy="18" stdDeviation="30" flood-color="#292724" flood-opacity="0.08"/>
+    </filter>
+    <filter id="button-shadow" x="-20%" y="-40%" width="140%" height="180%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#6252CE" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <g id="03 — Login / Calm Linear 2026">
+    <rect id="Background" width="1440" height="900" fill="url(#background)"/>
+
+    <g id="Ambient Details" opacity="0.65">
+      <circle cx="1128" cy="116" r="234" fill="#FFFFFF" fill-opacity="0.18"/>
+      <circle cx="188" cy="824" r="280" fill="#D8D3FF" fill-opacity="0.12"/>
+      <path d="M74 92H194" stroke="#D6D2CC" stroke-width="1"/>
+      <path d="M74 98H138" stroke="#D6D2CC" stroke-width="1"/>
+    </g>
+
+    <g id="Annotation">
+      <text x="64" y="58" fill="#817D77" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="1.4">03  /  CALM LINEAR 2026</text>
+      <text x="64" y="80" fill="#A19D97" font-family="Inter, Arial, sans-serif" font-size="11">Menos ruído. Mais foco.</text>
+    </g>
+
+    <g id="Login Card" filter="url(#card-shadow)">
+      <rect x="493" y="120" width="454" height="660" rx="18" fill="#FAF9F7"/>
+      <rect x="493.5" y="120.5" width="453" height="659" rx="17.5" stroke="#DCD9D4" stroke-opacity="0.8"/>
+
+      <g id="Brand" transform="translate(533 157)">
+        <rect width="42" height="42" rx="11" fill="#F0EEFF"/>
+        <rect x="0.5" y="0.5" width="41" height="41" rx="10.5" stroke="#DDD8FF"/>
+        <path d="M11 30V12L31 30V12" stroke="url(#mark)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="11" cy="12" r="2.7" fill="#8A7BF2"/>
+        <circle cx="11" cy="30" r="2.7" fill="#7766E6"/>
+        <circle cx="31" cy="12" r="2.7" fill="#6757D4"/>
+        <circle cx="31" cy="30" r="2.7" fill="#8170ED"/>
+        <text x="55" y="18" fill="#252421" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="650">Nexus</text>
+        <text x="55" y="34" fill="#8B8781" font-family="Inter, Arial, sans-serif" font-size="8.5" font-weight="500" letter-spacing="0.7">PASSAGEM DE COLEÇÃO DIGITAL</text>
+      </g>
+
+      <g id="Intro">
+        <text x="533" y="252" fill="#252421" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="620" letter-spacing="-0.6">Bem-vinda de volta</text>
+        <text x="533" y="280" fill="#77736D" font-family="Inter, Arial, sans-serif" font-size="13">Acesse o ambiente de passagem da sua coleção.</text>
+      </g>
+
+      <g id="Name Field">
+        <text x="533" y="329" fill="#5E5A55" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="550">Nome completo</text>
+        <rect x="533.5" y="343.5" width="373" height="47" rx="9.5" fill="#FFFFFF"/>
+        <rect x="533.5" y="343.5" width="373" height="47" rx="9.5" stroke="#D8D5D0"/>
+        <text x="548" y="373" fill="#A19D97" font-family="Inter, Arial, sans-serif" font-size="13">Seu nome completo</text>
+      </g>
+
+      <g id="Profile Field">
+        <text x="533" y="426" fill="#5E5A55" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="550">Perfil</text>
+        <rect x="533.5" y="440.5" width="373" height="47" rx="9.5" fill="#FFFFFF"/>
+        <rect x="533.5" y="440.5" width="373" height="47" rx="9.5" stroke="#D8D5D0"/>
+        <text x="548" y="470" fill="#A19D97" font-family="Inter, Arial, sans-serif" font-size="13">Selecione seu perfil</text>
+        <path d="M884 460L889 465L894 460" stroke="#8B8781" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+
+      <g id="Primary Action" filter="url(#button-shadow)">
+        <rect x="533" y="520" width="374" height="48" rx="10" fill="url(#accent)"/>
+        <rect x="533.5" y="520.5" width="373" height="47" rx="9.5" stroke="#5E4DCC" stroke-opacity="0.45"/>
+        <text x="720" y="550" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">Acessar a coleção</text>
+      </g>
+
+      <g id="Security Note">
+        <path d="M655 610C655 607.791 656.791 606 659 606H665C667.209 606 669 607.791 669 610V613H670C671.105 613 672 613.895 672 615V625C672 626.105 671.105 627 670 627H654C652.895 627 652 626.105 652 625V615C652 613.895 652.895 613 654 613H655V610Z" fill="#E9E6E1"/>
+        <path d="M658 613V610C658 609.448 658.448 609 659 609H665C665.552 609 666 609.448 666 610V613" stroke="#8B8781" stroke-width="1.2"/>
+        <text x="682" y="621" fill="#8B8781" font-family="Inter, Arial, sans-serif" font-size="10.5">Acesso seguro e rastreável</text>
+      </g>
+
+      <path d="M533 672H907" stroke="#E4E1DC"/>
+
+      <g id="Footer">
+        <text x="533" y="708" fill="#99958F" font-family="Inter, Arial, sans-serif" font-size="10.5">Ambiente operacional interno</text>
+        <circle cx="898" cy="704" r="4" fill="#58A97B"/>
+        <text x="886" y="708" text-anchor="end" fill="#77736D" font-family="Inter, Arial, sans-serif" font-size="10.5">Online</text>
+      </g>
+    </g>
+
+    <g id="Design Principles" transform="translate(1008 352)">
+      <text x="0" y="0" fill="#5E5A55" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1">DIREÇÃO</text>
+      <g transform="translate(0 32)">
+        <circle cx="5" cy="-4" r="3" fill="#8170ED"/>
+        <text x="18" y="0" fill="#77736D" font-family="Inter, Arial, sans-serif" font-size="12">Cinza quente e baixa saturação</text>
+      </g>
+      <g transform="translate(0 64)">
+        <circle cx="5" cy="-4" r="3" fill="#8170ED"/>
+        <text x="18" y="0" fill="#77736D" font-family="Inter, Arial, sans-serif" font-size="12">Estrutura sentida, não exibida</text>
+      </g>
+      <g transform="translate(0 96)">
+        <circle cx="5" cy="-4" r="3" fill="#8170ED"/>
+        <text x="18" y="0" fill="#77736D" font-family="Inter, Arial, sans-serif" font-size="12">Uma ação principal inequívoca</text>
+      </g>
+    </g>
+  </g>
+</svg>

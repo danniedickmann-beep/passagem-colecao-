@@ -1,0 +1,96 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Nexus — Dashboard inspirado no Linear</title>
+  <desc>Segunda tela do Nexus com linguagem visual calma, precisa e operacional.</desc>
+  <defs>
+    <linearGradient id="bg" x1="250" y1="0" x2="1440" y2="900" gradientUnits="userSpaceOnUse"><stop stop-color="#FAFAFB"/><stop offset="1" stop-color="#F5F4F8"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8B7CF6"/><stop offset="1" stop-color="#6E5ED6"/></linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B7ABFF"/><stop offset="1" stop-color="#6E5ED6"/></linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="18" flood-color="#17151F" flood-opacity="0.045"/></filter>
+  </defs>
+
+  <g id="02 — Dashboard / Linear Inspired">
+    <rect width="1440" height="900" fill="url(#bg)"/>
+
+    <g id="Sidebar">
+      <rect width="244" height="900" fill="#F7F7F8"/><path d="M243.5 0V900" stroke="#E8E7EB"/>
+      <g transform="translate(20 20)">
+        <rect width="30" height="30" rx="8" fill="#17151F"/>
+        <path d="M8 22V8L22 22V8" stroke="url(#mark)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="42" y="19" fill="#232129" font-family="Inter, Arial" font-size="14" font-weight="650">Nexus</text>
+        <path d="M190 13L194 17L198 13" stroke="#8D8995" stroke-width="1.3"/>
+      </g>
+      <g transform="translate(14 70)">
+        <rect width="216" height="34" rx="7" fill="#FFFFFF" stroke="#E5E3E8"/>
+        <circle cx="17" cy="17" r="5.5" stroke="#98949F"/><path d="M21 21L25 25" stroke="#98949F" stroke-linecap="round"/>
+        <text x="34" y="21" fill="#98949F" font-family="Inter" font-size="10.5">Buscar no Nexus...</text><text x="190" y="21" fill="#AAA6B0" font-family="Inter" font-size="9">⌘ K</text>
+      </g>
+      <text x="20" y="133" fill="#AAA6B0" font-family="Inter" font-size="8.5" font-weight="650" letter-spacing="0.9">ESPAÇO DE TRABALHO</text>
+      <g id="Navigation" transform="translate(12 146)" font-family="Inter" font-size="10.5">
+        <g><rect width="220" height="36" rx="7" fill="#EBE9F1"/><rect x="7" y="8" width="20" height="20" rx="5" fill="#DDD8FA"/><path d="M12 22V17M17 22V13M22 22V15" stroke="#6E5ED6" stroke-width="1.3" stroke-linecap="round"/><text x="38" y="22" fill="#27242D" font-weight="600">Visão geral</text></g>
+        <g transform="translate(0 40)"><path d="M10 12L15 7H23V15L17 22L10 15V12Z" stroke="#8C8893" stroke-width="1.2"/><circle cx="19.5" cy="10.5" r="1" fill="#8C8893"/><text x="38" y="19" fill="#625E68">Artigos</text><text x="202" y="19" text-anchor="end" fill="#AAA6B0">24</text></g>
+        <g transform="translate(0 80)"><rect x="10" y="7" width="5" height="16" rx="1.5" stroke="#8C8893"/><rect x="22" y="7" width="5" height="16" rx="1.5" stroke="#8C8893"/><path d="M15.5 12H21.5M19 10L21.5 12L19 14M21.5 19H15.5M18 17L15.5 19L18 21" stroke="#8C8893" stroke-linecap="round"/><text x="38" y="19" fill="#625E68">Passagem</text></g>
+        <g transform="translate(0 120)"><path d="M18 8C18 6.8 20 6.5 20.5 7.7C21 8.8 20.1 9.5 19 10.2L26 15.7C26.7 16.3 26.3 17.5 25.2 17.5H10.8C9.7 17.5 9.3 16.3 10 15.7L17 10.2" stroke="#8C8893" stroke-width="1.2"/><text x="38" y="19" fill="#625E68">Mostruário</text></g>
+        <g transform="translate(0 160)"><circle cx="18" cy="15" r="8" stroke="#8C8893"/><circle cx="18" cy="15" r="4" stroke="#8C8893"/><circle cx="18" cy="15" r="1.5" fill="#8C8893"/><text x="38" y="19" fill="#625E68">Radar</text><rect x="188" y="5" width="24" height="20" rx="7" fill="#F2E7EC"/><text x="200" y="19" text-anchor="middle" fill="#A64F72" font-size="9">6</text></g>
+        <g transform="translate(0 200)"><circle cx="18" cy="15" r="8" stroke="#8C8893"/><path d="M18 11V15L21 17M12 9L10 9V7" stroke="#8C8893" stroke-linecap="round"/><text x="38" y="19" fill="#625E68">Histórico</text></g>
+      </g>
+      <g transform="translate(14 798)">
+        <rect width="216" height="86" rx="9" fill="#FFFFFF" stroke="#E5E3E8"/>
+        <text x="14" y="23" fill="#A09CA6" font-family="Inter" font-size="8" font-weight="650" letter-spacing="0.7">COLEÇÃO ATIVA</text>
+        <text x="14" y="47" fill="#302D35" font-family="Inter" font-size="12" font-weight="600">Inverno 27</text>
+        <circle cx="17" cy="65" r="3" fill="#4DBA8A"/><text x="27" y="68" fill="#85818C" font-family="Inter" font-size="9">24 artigos sincronizados</text>
+      </g>
+    </g>
+
+    <g id="Topbar">
+      <rect x="244" width="1196" height="58" fill="#FFFFFF" fill-opacity="0.78"/><path d="M244 57.5H1440" stroke="#E8E7EB"/>
+      <text x="274" y="35" fill="#8C8893" font-family="Inter" font-size="10.5">Coleção</text><path d="M321 25L326 30L321 35" stroke="#BBB8C0"/><text x="340" y="35" fill="#34313A" font-family="Inter" font-size="10.5" font-weight="550">Visão geral</text>
+      <g transform="translate(1171 13)"><rect width="96" height="32" rx="7" fill="#FFFFFF" stroke="#E3E1E6"/><circle cx="17" cy="16" r="3.5" fill="#4DBA8A"/><text x="28" y="20" fill="#625E68" font-family="Inter" font-size="9.5">MVP ativo</text></g>
+      <circle cx="1300" cy="29" r="15" fill="#E8E4FF"/><text x="1300" y="33" text-anchor="middle" fill="#6758CF" font-family="Inter" font-size="8.5" font-weight="700">DD</text><text x="1324" y="26" fill="#34313A" font-family="Inter" font-size="9.5" font-weight="600">Daniela</text><text x="1324" y="40" fill="#9995A0" font-family="Inter" font-size="8">Produto</text>
+    </g>
+
+    <g id="Main" transform="translate(276 90)">
+      <g id="Header">
+        <text x="0" y="11" fill="#8C7AE6" font-family="Inter" font-size="8.5" font-weight="700" letter-spacing="1.2">IMPACTOS DA COLEÇÃO</text>
+        <text x="0" y="47" fill="#201E25" font-family="Inter" font-size="27" font-weight="650" letter-spacing="-0.8">Visão operacional</text>
+        <text x="0" y="72" fill="#85818C" font-family="Inter" font-size="11.5">Acompanhe o que avançou, o que parou e onde sua atenção é necessária.</text>
+        <g transform="translate(906 4)"><text x="0" y="9" fill="#A09CA6" font-family="Inter" font-size="8" font-weight="650">COLEÇÃO</text><rect x="0.5" y="18.5" width="226" height="38" rx="7.5" fill="#FFFFFF" stroke="#E2E0E5"/><text x="13" y="42" fill="#4C4852" font-family="Inter" font-size="10">Inverno 27</text><path d="M202 33L207 38L212 33" stroke="#8C8893"/></g>
+      </g>
+
+      <g id="Summary" transform="translate(0 105)">
+        <rect width="1132" height="116" rx="12" fill="#FFFFFF" stroke="#E5E3E8"/>
+        <path d="M283 18V98M566 18V98M849 18V98" stroke="#ECEAED"/>
+        <g transform="translate(22 21)"><circle cx="9" cy="9" r="9" fill="#ECE9FF"/><path d="M6 9H12M9 6V12" stroke="#7464DB"/><text x="0" y="39" fill="#8B8791" font-family="Inter" font-size="9.5">Artigos ativos</text><text x="0" y="70" fill="#29262E" font-family="Inter" font-size="25" font-weight="650">24</text><text x="42" y="69" fill="#AAA6B0" font-family="Inter" font-size="9">na coleção</text></g>
+        <g transform="translate(305 21)"><circle cx="9" cy="9" r="9" fill="#F5E8EE"/><circle cx="9" cy="9" r="3.5" fill="#C86488"/><text x="0" y="39" fill="#8B8791" font-family="Inter" font-size="9.5">Pendências abertas</text><text x="0" y="70" fill="#29262E" font-family="Inter" font-size="25" font-weight="650">06</text><text x="42" y="69" fill="#AAA6B0" font-family="Inter" font-size="9">3 resolvidas</text></g>
+        <g transform="translate(588 21)"><circle cx="9" cy="9" r="9" fill="#FBF0DE"/><path d="M9 4L14 13H4L9 4Z" fill="#C88D38"/><text x="0" y="39" fill="#8B8791" font-family="Inter" font-size="9.5">Criticidade alta</text><text x="0" y="70" fill="#29262E" font-family="Inter" font-size="25" font-weight="650">04</text><text x="42" y="69" fill="#AAA6B0" font-family="Inter" font-size="9">pedem atenção</text></g>
+        <g transform="translate(871 21)"><circle cx="9" cy="9" r="9" fill="#E5F4ED"/><path d="M5 9L8 12L14 6" stroke="#398B68" stroke-width="1.4"/><text x="0" y="39" fill="#8B8791" font-family="Inter" font-size="9.5">Com mostruário</text><text x="0" y="70" fill="#29262E" font-family="Inter" font-size="25" font-weight="650">18</text><text x="42" y="69" fill="#AAA6B0" font-family="Inter" font-size="9">6 pendentes</text></g>
+      </g>
+
+      <g id="Actions" transform="translate(0 247)">
+        <text x="0" y="10" fill="#514D57" font-family="Inter" font-size="10.5" font-weight="600">Ações rápidas</text>
+        <g transform="translate(842 -10)"><rect width="138" height="34" rx="7" fill="url(#accent)"/><path d="M14 10H24V23H14V10ZM17 7V13M14 10H20" stroke="#FFFFFF" stroke-width="1.2"/><text x="35" y="21" fill="#FFFFFF" font-family="Inter" font-size="9.5" font-weight="600">Novo artigo</text></g>
+        <g transform="translate(988 -10)"><rect width="144" height="34" rx="7" fill="#FFFFFF" stroke="#E2E0E5"/><rect x="13" y="9" width="4" height="16" rx="1" stroke="#7163D3"/><rect x="23" y="9" width="4" height="16" rx="1" stroke="#7163D3"/><path d="M17.5 14H22.5M22.5 20H17.5" stroke="#7163D3"/><text x="37" y="21" fill="#57535E" font-family="Inter" font-size="9.5" font-weight="550">Abrir Passagem</text></g>
+      </g>
+
+      <g id="Content Grid" transform="translate(0 289)">
+        <g id="Problems" filter="url(#soft)"><rect width="554" height="342" rx="12" fill="#FFFFFF"/><rect x="0.5" y="0.5" width="553" height="341" rx="11.5" stroke="#E5E3E8"/><text x="22" y="27" fill="#A09CA6" font-family="Inter" font-size="8" font-weight="700" letter-spacing="1">CONCENTRAÇÕES</text><text x="22" y="55" fill="#29262E" font-family="Inter" font-size="14" font-weight="620">Problemas mais citados</text><text x="22" y="75" fill="#98949F" font-family="Inter" font-size="9">Pendências abertas por tipo confirmado</text>
+          <g transform="translate(22 105)" font-family="Inter"><text x="0" y="11" fill="#B0ADB5" font-size="8.5">01</text><text x="32" y="11" fill="#57535E" font-size="10" font-weight="550">Modelagem</text><text x="504" y="11" text-anchor="end" fill="#34313A" font-size="10" font-weight="650">8</text><rect x="32" y="25" width="472" height="4" rx="2" fill="#EEECEF"/><rect x="32" y="25" width="405" height="4" rx="2" fill="#8172DF"/></g>
+          <g transform="translate(22 165)" font-family="Inter"><text x="0" y="11" fill="#B0ADB5" font-size="8.5">02</text><text x="32" y="11" fill="#57535E" font-size="10" font-weight="550">Acabamento</text><text x="504" y="11" text-anchor="end" fill="#34313A" font-size="10" font-weight="650">5</text><rect x="32" y="25" width="472" height="4" rx="2" fill="#EEECEF"/><rect x="32" y="25" width="278" height="4" rx="2" fill="#8172DF"/></g>
+          <g transform="translate(22 225)" font-family="Inter"><text x="0" y="11" fill="#B0ADB5" font-size="8.5">03</text><text x="32" y="11" fill="#57535E" font-size="10" font-weight="550">Matéria-prima</text><text x="504" y="11" text-anchor="end" fill="#34313A" font-size="10" font-weight="650">3</text><rect x="32" y="25" width="472" height="4" rx="2" fill="#EEECEF"/><rect x="32" y="25" width="172" height="4" rx="2" fill="#8172DF"/></g>
+          <text x="22" y="315" fill="#7464D7" font-family="Inter" font-size="9" font-weight="600">Ver análise completa →</text>
+        </g>
+        <g id="Activity" transform="translate(574)" filter="url(#soft)"><rect width="558" height="342" rx="12" fill="#FFFFFF"/><rect x="0.5" y="0.5" width="557" height="341" rx="11.5" stroke="#E5E3E8"/><text x="22" y="27" fill="#A09CA6" font-family="Inter" font-size="8" font-weight="700" letter-spacing="1">ACOMPANHAMENTO</text><text x="22" y="55" fill="#29262E" font-family="Inter" font-size="14" font-weight="620">Apontamentos recentes</text><text x="526" y="54" text-anchor="end" fill="#7464D7" font-family="Inter" font-size="9" font-weight="600">Abrir Radar →</text>
+          <g transform="translate(22 88)" font-family="Inter"><circle cx="7" cy="9" r="4" fill="#C76589"/><text x="24" y="8" fill="#4B4751" font-size="10" font-weight="600">Casaco Alba · Modelagem</text><text x="24" y="28" fill="#96929C" font-size="9">Ajustar cava antes da próxima prova.</text><rect x="453" y="0" width="59" height="20" rx="6" fill="#F6E9EE"/><text x="482.5" y="13.5" text-anchor="middle" fill="#A55070" font-size="8">Pendente</text><path d="M0 51H512" stroke="#EEECEF"/></g>
+          <g transform="translate(22 153)" font-family="Inter"><circle cx="7" cy="9" r="4" fill="#4DBA8A"/><text x="24" y="8" fill="#4B4751" font-size="10" font-weight="600">Tricot Íris · Qualidade</text><text x="24" y="28" fill="#96929C" font-size="9">Tonalidade aprovada no mostruário.</text><rect x="447" y="0" width="65" height="20" rx="6" fill="#E7F4EE"/><text x="479.5" y="13.5" text-anchor="middle" fill="#377E60" font-size="8">Resolvida</text><path d="M0 51H512" stroke="#EEECEF"/></g>
+          <g transform="translate(22 218)" font-family="Inter"><circle cx="7" cy="9" r="4" fill="#D39A43"/><text x="24" y="8" fill="#4B4751" font-size="10" font-weight="600">Calça Horizonte · Engenharia</text><text x="24" y="28" fill="#96929C" font-size="9">Revisar consumo da matéria-prima.</text><rect x="453" y="0" width="59" height="20" rx="6" fill="#FBF1E2"/><text x="482.5" y="13.5" text-anchor="middle" fill="#936B2E" font-size="8">Pendente</text><path d="M0 51H512" stroke="#EEECEF"/></g>
+          <g transform="translate(22 283)" font-family="Inter"><circle cx="7" cy="9" r="4" fill="#8172DF"/><text x="24" y="8" fill="#4B4751" font-size="10" font-weight="600">Saia Prisma · Mostruário</text><text x="24" y="28" fill="#96929C" font-size="9">Peça piloto incluída no conjunto.</text><rect x="459" y="0" width="53" height="20" rx="6" fill="#ECE9FC"/><text x="485.5" y="13.5" text-anchor="middle" fill="#6658C5" font-size="8">Novo</text></g>
+        </g>
+      </g>
+
+      <g id="Health" transform="translate(0 654)">
+        <rect width="1132" height="64" rx="10" fill="#201E25"/>
+        <circle cx="25" cy="32" r="5" fill="#56C997"/><text x="42" y="29" fill="#FFFFFF" font-family="Inter" font-size="10" font-weight="600">Saúde da coleção</text><text x="42" y="45" fill="#97939D" font-family="Inter" font-size="8.5">75% dos artigos avançam sem bloqueios críticos.</text>
+        <rect x="832" y="29" width="248" height="5" rx="2.5" fill="#3A3740"/><rect x="832" y="29" width="186" height="5" rx="2.5" fill="#8B7CF6"/><text x="1097" y="36" fill="#FFFFFF" font-family="Inter" font-size="9" font-weight="650">75%</text>
+      </g>
+    </g>
+  </g>
+</svg>

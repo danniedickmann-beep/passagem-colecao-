@@ -1,0 +1,52 @@
+<svg width="390" height="600" viewBox="0 0 390 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Nexus — Login em baixa fidelidade</title>
+  <desc>Wireframe da tela de acesso ao ambiente de Passagem de Coleção.</desc>
+  <g id="01 — Login / Baixa fidelidade">
+    <rect width="390" height="600" fill="#F2F2F2"/>
+    <rect x="15.5" y="36.5" width="359" height="527" rx="14.5" fill="#FFFFFF" stroke="#C7C7C7"/>
+
+    <g id="Brand" transform="translate(44 64)">
+      <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" fill="#E5E5E5" stroke="#B9B9B9"/>
+      <path d="M8 24V8L24 24V8" stroke="#777777" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="42" y="14" fill="#333333" font-family="Arial, sans-serif" font-size="12" font-weight="700">Nexus</text>
+      <text x="42" y="26" fill="#8B8B8B" font-family="Arial, sans-serif" font-size="6">PASSAGEM DE COLEÇÃO DIGITAL</text>
+    </g>
+
+    <g id="Introduction" transform="translate(44 118)">
+      <text x="0" y="16" fill="#2F2F2F" font-family="Arial, sans-serif" font-size="20" font-weight="700">Bem-vinda de volta</text>
+      <text x="0" y="39" fill="#777777" font-family="Arial, sans-serif" font-size="10.5">Acesse o ambiente de passagem da sua coleção.</text>
+    </g>
+
+    <g id="Form" transform="translate(44 183)" font-family="Arial, sans-serif">
+      <text x="0" y="10" fill="#555555" font-size="8.5">Nome completo</text>
+      <rect x="0.5" y="20.5" width="297" height="39" rx="7.5" fill="#FAFAFA" stroke="#BFBFBF"/>
+      <text x="12" y="45" fill="#999999" font-size="9.5">Seu nome completo</text>
+
+      <text x="0" y="87" fill="#555555" font-size="8.5">Perfil</text>
+      <rect x="0.5" y="97.5" width="297" height="39" rx="7.5" fill="#FAFAFA" stroke="#BFBFBF"/>
+      <text x="12" y="122" fill="#999999" font-size="9.5">Selecione seu perfil</text>
+      <path d="M279 113L283 117L287 113" stroke="#777777" stroke-width="1.2"/>
+
+      <g id="Primary Action" transform="translate(0 160)">
+        <rect width="298" height="39" rx="7" fill="#5F5F5F"/>
+        <text x="149" y="24" text-anchor="middle" fill="#FFFFFF" font-size="9.5" font-weight="700">Acessar a coleção</text>
+      </g>
+    </g>
+
+    <g id="Security" transform="translate(133 404)" font-family="Arial, sans-serif">
+      <rect x="0.5" y="5.5" width="13" height="11" rx="2" fill="#E6E6E6" stroke="#C7C7C7"/>
+      <path d="M3 6V4.5C3 2.6 4.6 1 6.5 1C8.4 1 10 2.6 10 4.5V6" stroke="#999999"/>
+      <text x="23" y="14" fill="#888888" font-family="Arial, sans-serif" font-size="7.5">Acesso seguro e rastreável</text>
+    </g>
+
+    <path d="M44 477H342" stroke="#D1D1D1"/>
+    <g id="Footer" transform="translate(44 500)" font-family="Arial, sans-serif" font-size="7.5">
+      <text x="0" y="8" fill="#999999">Ambiente operacional interno</text>
+      <text x="255" y="8" fill="#777777">Online</text><circle cx="292" cy="5" r="3" fill="#777777"/>
+    </g>
+
+    <g id="Wireframe Notes" font-family="Arial, sans-serif" font-size="7" fill="#999999">
+      <text x="16" y="583">Wireframe · Baixa fidelidade · 390 × 600</text>
+    </g>
+  </g>
+</svg>
