@@ -67,8 +67,8 @@ export default function App() {
     setSaving(true)
     try {
       if (!formPiece) {
-        const duplicate = pieces.find(piece => normalizeArticle(piece.artigo) === normalizeArticle(form.artigo))
-        if (duplicate) { setFormOpen(false); setDetailPiece(duplicate); throw new Error('Este artigo já está cadastrado. A ficha existente foi aberta.') }
+        const duplicate = pieces.find(piece => normalizeArticle(piece.artigo) === normalizeArticle(form.artigo) && normalizeArticle(piece.colecao) === normalizeArticle(form.colecao))
+        if (duplicate) { setFormOpen(false); setDetailPiece(duplicate); throw new Error('Este artigo já está cadastrado nesta coleção. A ficha existente foi aberta.') }
       }
       const drawingUrl = technicalFile ? await repository.uploadTechnicalDrawing(technicalFile) : form.desenho_tecnico_url
       const uploadedAttachments = await repository.uploadArticleAttachments(attachmentFiles)
@@ -94,21 +94,22 @@ export default function App() {
   }
 
   async function createPending(piece, description, area, problemType, severity, stage = 'apresentacao') {
-    if (saving) return
+    if (saving) return false
     setSaving(true)
     try {
       await repository.createPendencia({ peca_id: piece.id, descricao: description, area_responsavel: area, tipo_problema: problemType, gravidade: severity, etapa_origem: stage, created_by: user.nome })
       await repository.updatePiece(piece.id, { saude_operacional: 'atencao', updated_by: user.nome })
       await repository.addEvent(piece.id, 'pendencia_criada', `Pendência de ${problemType} criada para ${area}: ${description}`, user.nome, { perfil: user.perfil, area, tipo_problema: problemType, gravidade: severity, etapa_origem: stage })
       await refresh(); setNotice(successNotice(`Apontamento do artigo ${piece.artigo} enviado para o Radar Operacional.`))
-    } catch (error) { setNotice(readError(error)) } finally { setSaving(false) }
+      return true
+    } catch (error) { setNotice(readError(error)); return false } finally { setSaving(false) }
   }
 
   async function saveCriticalityVote(piece, sector, score) {
     if (saving) return false
     setSaving(true)
     try {
-      const storageKey = 'nexus-voter-token'
+      const storageKey = `nexus-voter-token-${normalizeArticle(sector)}`
       let voterToken = localStorage.getItem(storageKey)
       if (!voterToken) { voterToken = crypto.randomUUID(); localStorage.setItem(storageKey, voterToken) }
       await repository.saveCriticalityVote({ peca_id: piece.id, colecao: piece.colecao || 'Não informada', setor: sector, nota: Number(score), voter_token: voterToken })
@@ -130,6 +131,7 @@ export default function App() {
       await repository.addEvent(piece.id, 'registro_mostruario', form.ciclo_mostruario_encerrado ? 'Apontamento salvo e ciclo do mostruário encerrado' : 'Novo apontamento do mostruário', user.nome, { perfil: user.perfil, setor, registro: form.feedback_tecnico, ocorrencia: form.ocorrencia_mostruario, foto: uploadedPhotos[0] || null, fotos: uploadedPhotos })
       const hasNewOccurrence = Boolean(form.ocorrencia_mostruario.trim())
       if (hasNewOccurrence) await repository.createPendencia({ peca_id: piece.id, descricao: form.ocorrencia_mostruario.trim(), area_responsavel: setor, tipo_problema, gravidade, etapa_origem: 'mostruario', fotos: uploadedPhotos, created_by: user.nome })
+      if (hasNewOccurrence) await repository.updatePiece(piece.id, { saude_operacional: 'atencao', updated_by: user.nome })
       await refresh(); setNotice(successNotice(`Apontamento de mostruário do artigo ${piece.artigo} salvo.`))
       return true
     } catch (error) { setNotice(readError(error)); return false } finally { setSaving(false) }
@@ -175,7 +177,7 @@ export default function App() {
     {view === 'telao' && <TelaoView pieces={pieces} pendencias={pendencias} criticalityVotes={criticalityVotes} collectionOptions={collectionOptions} selectedCollection={operationalCollection} onCollectionChange={chooseActiveCollection} criticalityOptions={criticalityOptions} problemTypeOptions={problemTypeOptions} selectedId={selectedId} setSelectedId={setSelectedId} onCreatePending={createPending} onVote={saveCriticalityVote} saving={saving} />}
     {view === 'mostruario' && <MostruarioView pieces={pieces} events={events} collectionOptions={collectionOptions} selectedCollection={operationalCollection} onCollectionChange={chooseActiveCollection} problemTypeOptions={problemTypeOptions} selectedId={selectedId} setSelectedId={setSelectedId} onSave={saveMostruario} saving={saving} />}
     {view === 'radar' && <RadarView pieces={pieces} pendencias={pendencias} events={events} collectionOptions={collectionOptions} selectedCollection={activeCollection} onCollectionChange={chooseActiveCollection} criticalityOptions={criticalityOptions} onResolve={resolvePending} saving={saving} />}
-    {view === 'historico' && <HistoryView pieces={pieces} events={events} collectionOptions={collectionOptions} selectedCollection={activeCollection} onCollectionChange={chooseActiveCollection} />}
+    {view === 'historico' && <HistoryView pieces={[...pieces, ...archivedPieces]} events={events} collectionOptions={collectionOptions} selectedCollection={activeCollection} onCollectionChange={chooseActiveCollection} />}
     <ArticleDetailModal piece={detailPiece} canEdit={canEdit} onClose={() => setDetailPiece(null)} onArchive={piece => openStatus(piece, 'archive')} onEdit={piece => { setDetailPiece(null); setFormPiece(piece); setFormOpen(true) }} />
     <ArticleFormModal open={formOpen} piece={formPiece} defaultCollection={operationalCollection} collectionOptions={collectionOptions} lineOptions={lineOptions} categoryOptions={categoryOptions} materialOptions={materialOptions} attentionOptions={problemTypeOptions.filter(type => type !== 'Outro')} onClose={() => { if (!saving) { setFormOpen(false); setFormPiece(undefined) } }} onSave={saveArticle} saving={saving} />
     <ArticleStatusModal piece={statusPiece} mode={statusMode} onClose={() => { if (!saving) setStatusPiece(null) }} onConfirm={changeArticleStatus} saving={saving} />
@@ -185,6 +187,6 @@ export default function App() {
 }
 
 function readError(error) {
-  if (error?.code === '23505') return 'Este artigo já está cadastrado.'
+  if (error?.code === '23505') return 'Este artigo já está cadastrado nesta coleção.'
   return error?.message || 'Não foi possível concluir a operação. Tente novamente.'
 }

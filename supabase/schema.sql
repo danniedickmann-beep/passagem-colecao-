@@ -119,8 +119,9 @@ create index if not exists pendencias_status_created_at_idx
   on public.pendencias (status, created_at desc);
 create index if not exists votos_criticidade_peca_idx
   on public.votos_criticidade (peca_id, updated_at desc);
-create unique index if not exists pecas_artigo_ativo_unique_idx
-  on public.pecas (lower(trim(artigo))) where ativa = true;
+drop index if exists public.pecas_artigo_ativo_unique_idx;
+create unique index if not exists pecas_artigo_colecao_ativo_unique_idx
+  on public.pecas (lower(trim(artigo)), lower(trim(colecao))) where ativa = true;
 
 alter table public.pecas enable row level security;
 alter table public.historico_peca enable row level security;
