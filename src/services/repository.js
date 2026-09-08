@@ -21,6 +21,17 @@ function assertLocalPiece(db, id) {
   return index
 }
 
+async function listAllRows(table, orderColumn) {
+  const pageSize = 1000
+  const rows = []
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase.from(table).select('*').order(orderColumn, { ascending: false }).range(from, from + pageSize - 1)
+    if (error) throw error
+    rows.push(...(data || []))
+    if (!data || data.length < pageSize) return rows
+  }
+}
+
 export const repository = {
   configured,
   subscribePendencias(onChange) {
@@ -143,15 +154,11 @@ export const repository = {
   },
   async listAllEvents() {
     if (!supabase) return localRead().events.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-    const { data, error } = await supabase.from('historico_peca').select('*').order('created_at', { ascending: false }).limit(500)
-    if (error) throw error
-    return data || []
+    return listAllRows('historico_peca', 'created_at')
   },
   async listPendencias() {
     if (!supabase) return localRead().pendencias || []
-    const { data, error } = await supabase.from('pendencias').select('*').order('created_at', { ascending: false })
-    if (error) throw error
-    return data || []
+    return listAllRows('pendencias', 'created_at')
   },
   async createPendencia(payload) {
     const item = { id: crypto.randomUUID(), status: 'aberta', created_at: new Date().toISOString(), ...payload }
@@ -170,10 +177,11 @@ export const repository = {
   },
   async listVotes() {
     if (!supabase) return localRead().votos || []
-    const { data, error } = await supabase.from('votos_criticidade').select('*').order('updated_at', { ascending: false })
-    if (error?.code === 'PGRST205' || error?.code === '42P01') return []
-    if (error) throw error
-    return data || []
+    try { return await listAllRows('votos_criticidade', 'updated_at') }
+    catch (error) {
+      if (error?.code === 'PGRST205' || error?.code === '42P01') return []
+      throw error
+    }
   },
   async saveCriticalityVote(payload) {
     const timestamp = new Date().toISOString()
