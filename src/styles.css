@@ -44,6 +44,11 @@
   --shadow:0 18px 45px rgba(0,7,20,.3);
   --shadow-soft:0 8px 24px rgba(0,8,22,.2);
 }
+
+/* Mensagens operacionais: mesma posição, sem confundir falha com sucesso. */
+.toast.toast-error{border-color:#F1C7CD}.toast-error>i{align-self:stretch;width:8px;background:#D95769}.toast-error>div span{color:#A63B4A}.toast-error>button:hover{background:#FFF0F2;color:#B23C4D}
+.toast.toast-warning{border-color:#EBD9A9}.toast-warning>i{align-self:stretch;width:8px;background:#D7A83B}.toast-warning>div span{color:#8A671C}.toast-warning>button:hover{background:#FFF8E5;color:#8A671C}
+.toast.toast-info{border-color:#C9DAF3}.toast-info>i{align-self:stretch;width:8px;background:#2E74D6}.toast-info>div span{color:#315F9F}.toast-info>button:hover{background:#EDF4FF;color:#1957B9}
 *{scrollbar-color:#244c73 var(--navy-950)}
 html,body,#root{font-family:'Inter',sans-serif;color:var(--text);background:var(--navy-950)}
 body{background-image:linear-gradient(rgba(96,163,214,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(96,163,214,.035) 1px,transparent 1px),radial-gradient(circle at 72% 12%,rgba(35,111,221,.18),transparent 35%);background-size:56px 56px,56px 56px,auto;background-attachment:fixed}
@@ -478,3 +483,11 @@ html,body,#root{font-family:Inter,Arial,sans-serif;color:var(--ink-900);backgrou
   .login-card label select,
   .login-card button { font-size: 14px; }
 }
+
+.toast.toast-error,.toast.toast-warning,.toast.toast-info{top:24px;right:32px;bottom:auto;display:grid;width:min(460px,calc(100vw - 32px));min-height:112px;grid-template-columns:8px 1fr 44px;align-items:center;gap:20px;padding:0 18px 0 0;overflow:hidden;border-radius:var(--radius-card);background:var(--surface);color:var(--ink-900);box-shadow:0 14px 34px rgba(41,37,41,.16);text-align:left}
+.toast.toast-error>div,.toast.toast-warning>div,.toast.toast-info>div{display:flex;min-width:0;flex-direction:column;gap:5px}
+.toast.toast-error strong,.toast.toast-warning strong,.toast.toast-info strong{font-size:18px;line-height:1.2}
+.toast.toast-error>button,.toast.toast-warning>button,.toast.toast-info>button{display:grid;width:44px;height:44px;place-items:center;border:0;border-radius:9px;background:#F5F2EE;color:#77716E;font-size:28px;line-height:1}
+.toast.toast-error{border-color:#F1C7CD}.toast-error>i{align-self:stretch;width:8px;background:#D95769}.toast-error>div span{color:#A63B4A}.toast-error>button:hover{background:#FFF0F2;color:#B23C4D}
+.toast.toast-warning{border-color:#EBD9A9}.toast-warning>i{align-self:stretch;width:8px;background:#D7A83B}.toast-warning>div span{color:#8A671C}.toast-warning>button:hover{background:#FFF8E5;color:#8A671C}
+.toast.toast-info{border-color:#C9DAF3}.toast-info>i{align-self:stretch;width:8px;background:#2E74D6}.toast-info>div span{color:#315F9F}.toast-info>button:hover{background:#EDF4FF;color:#1957B9}

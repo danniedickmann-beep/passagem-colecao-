@@ -11,6 +11,9 @@ const EDITABLE_FIELDS = ['colecao', 'linha', 'categoria', 'mp_base', 'tipo_peca'
 const DEFAULT_LINES = ['Adulto Feminino', 'Adulto Masculino', 'Cápsula', 'Íntima', 'Kids Menina', 'Kids Menino', 'Teen']
 const DEFAULT_CATEGORIES = ['Blusas e Camisetas', 'Calças', 'Camisas e Polo', 'Jaquetas e Casacos', 'Regatas', 'Saias', 'Shorts e Bermudas', 'Vestidos', 'Pijamas', 'Conjuntos Longos', 'Conjuntos Curtos', 'Camisola + Cardigan', 'Camisola', 'Ceroula', 'Samba-canção']
 const successNotice = message => ({ type: 'success', title: 'Sucesso!', message })
+const infoNotice = message => ({ type: 'info', title: 'Atenção', message })
+const warningNotice = message => ({ type: 'warning', title: 'Alteração salva com ressalva', message })
+const errorNotice = message => ({ type: 'error', title: 'Não foi possível concluir', message })
 
 export default function App() {
   const [user, setUser] = useState(null)
@@ -80,14 +83,14 @@ export default function App() {
       } else {
         const updates = Object.fromEntries(EDITABLE_FIELDS.map(key => [key, preparedForm[key] ?? null]))
         const changes = Object.fromEntries(EDITABLE_FIELDS.filter(key => JSON.stringify(formPiece[key] ?? null) !== JSON.stringify(preparedForm[key] ?? null)).map(key => [key, { antes: formPiece[key] ?? null, depois: preparedForm[key] ?? null }]))
-        if (!Object.keys(changes).length) { setNotice('Nenhuma alteração para salvar.'); setFormOpen(false); return }
+        if (!Object.keys(changes).length) { setNotice(infoNotice('Nenhuma alteração foi identificada para salvar.')); setFormOpen(false); return }
         const updated = await repository.updatePiece(formPiece.id, { ...updates, updated_by: user.nome })
         await repository.addEvent(updated.id, 'ficha_tecnica_atualizada', `Dados da passagem do artigo ${updated.artigo} atualizados`, user.nome, { perfil: user.perfil, alteracoes: changes })
         let cleanupWarning = false
         if (formPiece.desenho_tecnico_url && formPiece.desenho_tecnico_url !== preparedForm.desenho_tecnico_url) {
           try { await repository.deleteTechnicalDrawing(formPiece.desenho_tecnico_url) } catch { cleanupWarning = true }
         }
-        setNotice(cleanupWarning ? 'Alterações salvas. A imagem antiga não pôde ser apagada; solicite a limpeza administrativa.' : successNotice(`Alterações do artigo ${updated.artigo} salvas e registradas no histórico.`))
+        setNotice(cleanupWarning ? warningNotice('As alterações foram salvas, mas a imagem antiga não pôde ser apagada. Solicite a limpeza administrativa.') : successNotice(`Alterações do artigo ${updated.artigo} salvas e registradas no histórico.`))
       }
       setFormOpen(false); setFormPiece(undefined); await refresh()
     } catch (error) { setNotice(readError(error)) } finally { setSaving(false) }
@@ -187,6 +190,6 @@ export default function App() {
 }
 
 function readError(error) {
-  if (error?.code === '23505') return 'Este artigo já está cadastrado nesta coleção.'
-  return error?.message || 'Não foi possível concluir a operação. Tente novamente.'
+  if (error?.code === '23505') return errorNotice('Este artigo já está cadastrado nesta coleção.')
+  return errorNotice(error?.message || 'Ocorreu uma falha inesperada. Tente novamente.')
 }
