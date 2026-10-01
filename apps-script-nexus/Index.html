@@ -154,12 +154,12 @@
 <section id="passagem" class="view">
 <div class="eyebrow">APRESENTAÇÃO</div>
 <h1>Passagem de Coleção</h1>
-<div class="empty">Selecione um artigo cadastrado para iniciar a apresentação.</div>
+<div id="passageContent" class="empty">Selecione um artigo cadastrado para iniciar a apresentação.</div>
 </section>
 <section id="mostruario" class="view">
 <div class="eyebrow">ACOMPANHAMENTO</div>
 <h1>Mostruário</h1>
-<div class="empty">Os artigos enviados ao mostruário aparecerão aqui.</div>
+<div id="sampleContent" class="empty">Os artigos enviados ao mostruário aparecerão aqui.</div>
 </section>
 <section id="radar" class="view">
 <div class="eyebrow">PENDÊNCIAS</div>
@@ -196,6 +196,21 @@ function render(){
   $('collectionSelect').innerHTML='<option value="">Selecione</option>'+state.collections.map(item=>'<option>'+esc(item.nome)+'</option>').join('');
   renderPieces();
   renderOperational();
+  renderPassage();
+  renderSamples();
+}
+function renderPassage(){
+  if(!state.pieces.length){$('passageContent').className='empty';$('passageContent').textContent='Cadastre um artigo antes de iniciar a apresentação.';return}
+  const selected=state.selected||state.pieces[0];state.selected=selected;
+  $('passageContent').className='panel';
+  $('passageContent').innerHTML='<div class="field"><label>Artigo em apresentação</label><select id="passagePiece">'+state.pieces.map(piece=>'<option value="'+piece.id+'" '+(piece.id===selected.id?'selected':'')+'>'+esc(piece.artigo)+' · '+esc(piece.colecao)+'</option>').join('')+'</select></div><div class="detail-grid" style="margin-top:16px"><div class="detail-image">'+(selected.imagem_url?'<img src="'+esc(selected.imagem_url)+'" alt="Imagem do artigo">':'Sem imagem')+'</div><div><h2>Artigo '+esc(selected.artigo)+'</h2><p>'+esc(selected.linha)+' · '+esc(selected.colecao)+'</p><div class="notes">'+esc(selected.observacoes||'Nenhuma observação registrada.')+'</div><div class="field" style="margin-top:14px"><label>Novo apontamento *</label><textarea id="issueText" rows="3" placeholder="Descreva o ajuste, ocorrência ou problema"></textarea></div><div class="form-grid"><div class="field"><label>Área *</label><input id="issueArea" placeholder="Ex.: Engenharia"></div><div class="field"><label>Gravidade *</label><select id="issueSeverity"><option value="">Selecione</option><option>Baixa</option><option>Média</option><option>Alta</option></select></div></div><button id="saveIssue" class="btn btn-primary" style="margin-top:14px">Registrar no Radar</button></div></div>';
+  $('passagePiece').onchange=event=>{state.selected=state.pieces.find(piece=>piece.id===event.target.value);renderPassage()};
+  $('saveIssue').onclick=()=>{const descricao=$('issueText').value.trim(),area=$('issueArea').value.trim(),gravidade=$('issueSeverity').value;if(!descricao||!area||!gravidade)return toast('Preencha descrição, área e gravidade.',true);google.script.run.withSuccessHandler(()=>{toast('Apontamento enviado ao Radar.');loadOperational();$('issueText').value=''}).withFailureHandler(failure).createIssue({artigo_id:selected.id,tipo:'Passagem de Coleção',area,descricao,gravidade})};
+}
+function renderSamples(){
+  const samples=state.pieces.filter(piece=>piece.mostruario==='Mostruário');
+  $('sampleContent').className=samples.length?'piece-grid':'empty';
+  $('sampleContent').innerHTML=samples.length?samples.map(piece=>'<article class="piece-card"><div class="piece-image">'+(piece.imagem_url?'<img src="'+esc(piece.imagem_url)+'" alt="Imagem do artigo">':'Sem imagem')+'</div><div class="piece-content"><h3>'+esc(piece.artigo)+'</h3><div class="piece-meta">'+esc(piece.colecao)+' · '+esc(piece.linha)+'</div><div class="tags"><span class="tag">Aguardando acompanhamento</span></div></div></article>').join(''):'Nenhum artigo destinado ao mostruário.';
 }
 function renderOperational(){
   const byId=Object.fromEntries(state.pieces.map(piece=>[piece.id,piece]));
