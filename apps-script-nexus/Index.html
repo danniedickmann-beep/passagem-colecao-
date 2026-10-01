@@ -164,12 +164,12 @@
 <section id="radar" class="view">
 <div class="eyebrow">PENDÊNCIAS</div>
 <h1>Radar Operacional</h1>
-<div class="empty">Nenhuma pendência aberta.</div>
+<div id="radarList" class="empty">Carregando pendências...</div>
 </section>
 <section id="historico" class="view">
 <div class="eyebrow">RASTREABILIDADE</div>
 <h1>Histórico da coleção</h1>
-<div class="empty">Os registros e soluções aparecerão aqui.</div>
+<div id="historyList" class="empty">Carregando histórico...</div>
 </section>
 </main>
 </div>
@@ -182,7 +182,7 @@
 </div>
 </div>
 <script>
-const state={collections:[],pieces:[],selected:null};
+const state={collections:[],pieces:[],pendencias:[],historico:[],selected:null};
 const $=id=>document.getElementById(id);
 const esc=v=>String(v||'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
 function toast(message,isError){const node=$('toast');node.textContent=message;node.className='toast'+(isError?' error':'');setTimeout(()=>node.classList.add('hidden'),3500)}
@@ -195,7 +195,18 @@ function render(){
   $('dashboardEmpty').innerHTML=state.pieces.length?'<strong>Ambiente pronto.</strong><br>Use o menu para continuar o fluxo.':'<strong>Nenhum artigo cadastrado.</strong><br>Comece criando uma coleção e cadastrando o primeiro artigo.';
   $('collectionSelect').innerHTML='<option value="">Selecione</option>'+state.collections.map(item=>'<option>'+esc(item.nome)+'</option>').join('');
   renderPieces();
+  renderOperational();
 }
+function renderOperational(){
+  const byId=Object.fromEntries(state.pieces.map(piece=>[piece.id,piece]));
+  const open=state.pendencias.filter(item=>item.status!=='resolvida');
+  $('radarList').className=open.length?'panel':'empty';
+  $('radarList').innerHTML=open.length?open.map(item=>'<article class="fact"><small>'+esc(item.gravidade||'Pendência')+' · '+esc(item.area||'Área não informada')+'</small><strong>'+esc(byId[item.artigo_id]?.artigo||'Artigo')+'</strong><p>'+esc(item.descricao)+'</p><button class="btn btn-secondary resolve-button" data-id="'+item.id+'">Registrar solução</button></article>').join(''):'Nenhuma pendência aberta.';
+  document.querySelectorAll('.resolve-button').forEach(button=>button.onclick=()=>{const text=prompt('Descreva como o problema foi resolvido:');if(!text||!text.trim())return;google.script.run.withSuccessHandler(()=>{toast('Solução registrada com sucesso.');loadOperational()}).withFailureHandler(failure).resolveIssue(button.dataset.id,text.trim())});
+  $('historyList').className=state.historico.length?'panel':'empty';
+  $('historyList').innerHTML=state.historico.length?[...state.historico].reverse().map(item=>'<article class="fact"><small>'+esc(item.tipo_evento)+' · '+esc(item.usuario)+'</small><strong>'+esc(byId[item.artigo_id]?.artigo||'Artigo')+'</strong><p>'+esc(item.descricao)+'</p></article>').join(''):'Nenhum evento registrado.';
+}
+function loadOperational(){google.script.run.withSuccessHandler(data=>{state.pendencias=data.pendencias||[];state.historico=data.historico||[];renderOperational()}).withFailureHandler(failure).getOperationalData()}
 function renderPieces(){
   const term=$('search').value.toLowerCase();
   const items=state.pieces.filter(piece=>[piece.artigo,piece.colecao,piece.linha,piece.categoria].join(' ').toLowerCase().includes(term));
@@ -222,7 +233,7 @@ $('form').onsubmit=async event=>{
   const button=$('savePieceButton');button.disabled=true;button.textContent='Enviando imagem...';
   try{const payload=await filePayload(file);google.script.run.withSuccessHandler(upload=>{const data=Object.fromEntries(new FormData(event.target).entries());delete data.articleImage;data.imagem_url=upload.url;button.textContent='Salvando artigo...';google.script.run.withSuccessHandler(item=>{state.pieces.unshift(item);event.target.reset();$('pieceForm').classList.add('hidden');$('pieceList').classList.remove('hidden');render();toast('Artigo '+item.artigo+' cadastrado com sucesso.');button.disabled=false;button.textContent='Salvar artigo'}).withFailureHandler(error=>{button.disabled=false;button.textContent='Salvar artigo';failure(error)}).savePiece(data)}).withFailureHandler(error=>{button.disabled=false;button.textContent='Salvar artigo';failure(error)}).uploadArticleImage(payload)}catch(error){button.disabled=false;button.textContent='Salvar artigo';failure(error)}
 };
-google.script.run.withSuccessHandler(data=>{state.collections=data.collections;state.pieces=data.pieces;$('user').textContent=data.userEmail||'Usuário corporativo';$('status').textContent='Ambiente conectado';render()}).withFailureHandler(failure).getBootstrapData();
+google.script.run.withSuccessHandler(data=>{state.collections=data.collections;state.pieces=data.pieces;$('user').textContent=data.userEmail||'Usuário corporativo';$('status').textContent='Ambiente conectado';render();loadOperational()}).withFailureHandler(failure).getBootstrapData();
 </script>
 </body>
 </html>
