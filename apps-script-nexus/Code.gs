@@ -178,11 +178,13 @@ function createIssue(payload) {
 
 function resolveIssue(id, resolution) {
   requireConfigured_();
-  const text = requiredText_(resolution, 'Descreva como o problema foi resolvido.');
+  const payload = typeof resolution === 'object' ? resolution : { descricao: resolution };
+  const text = requiredText_(payload.descricao, 'Descreva como o problema foi resolvido.');
+  const imageUrl = String(payload.imagem_url || '');
   const now = new Date().toISOString();
   const user = Session.getActiveUser().getEmail() || '';
   const item = updateRow_('pendencias', id, { status: 'resolvida', resolucao_descricao: text, resolved_by: user, resolved_at: now });
-  appendObject_('historico', { id: Utilities.getUuid(), artigo_id: item.artigo_id, tipo_evento: 'solucao', descricao: text, usuario: user, dados_extras: JSON.stringify({ pendencia_id: id }), created_at: now });
+  appendObject_('historico', { id: Utilities.getUuid(), artigo_id: item.artigo_id, tipo_evento: 'solucao', descricao: text, usuario: user, dados_extras: JSON.stringify({ pendencia_id: id, foto: imageUrl }), created_at: now });
   return item;
 }
 
@@ -205,6 +207,17 @@ function uploadSampleImage(payload) {
   const folder = DriveApp.getFolderById(PropertiesService.getScriptProperties().getProperty(CONECTA.filesFolderProperty));
   const safeName = String(payload.name || 'mostruario').replace(/[^a-zA-Z0-9._-]/g, '-');
   const file = folder.createFile(Utilities.newBlob(bytes, payload.mimeType, 'mostruario-' + Utilities.getUuid() + '-' + safeName));
+  return { id: file.getId(), url: 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w1200', name: file.getName() };
+}
+
+function uploadResolutionImage(payload) {
+  requireConfigured_();
+  if (!payload || !payload.base64 || !payload.mimeType || !String(payload.mimeType).startsWith('image/')) throw new Error('Selecione uma foto válida da solução.');
+  const bytes = Utilities.base64Decode(payload.base64);
+  if (bytes.length > 10 * 1024 * 1024) throw new Error('A foto da solução deve ter no máximo 10 MB.');
+  const folder = DriveApp.getFolderById(PropertiesService.getScriptProperties().getProperty(CONECTA.filesFolderProperty));
+  const safeName = String(payload.name || 'solucao').replace(/[^a-zA-Z0-9._-]/g, '-');
+  const file = folder.createFile(Utilities.newBlob(bytes, payload.mimeType, 'solucao-' + Utilities.getUuid() + '-' + safeName));
   return { id: file.getId(), url: 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w1200', name: file.getName() };
 }
 

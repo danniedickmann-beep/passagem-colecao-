@@ -185,6 +185,7 @@
 </div>
 </div>
 <div id="presentationStage" class="presentation-stage hidden" role="dialog" aria-modal="true"></div>
+<div id="resolutionModal" class="modal hidden"><form id="resolutionForm" class="modal-card" style="width:min(620px,100%)"><div class="page-head"><div><div class="eyebrow">SOLUÇÃO DA PENDÊNCIA</div><h1>Registrar solução</h1></div><button type="button" class="btn btn-secondary" id="closeResolution">Cancelar</button></div><div class="field"><label>Descrição da solução *</label><textarea id="resolutionText" rows="5" placeholder="Explique o que foi feito e qual foi o resultado"></textarea></div><div class="field" style="margin-top:14px"><label>Foto da solução</label><input id="resolutionImage" type="file" accept="image/*"><div class="muted">Opcional · imagem de até 10 MB.</div></div><div class="actions"><button id="saveResolution" class="btn btn-primary">Concluir pendência</button></div></form></div>
 <div id="pieceModal" class="modal hidden">
 <div class="modal-card">
 <div class="page-head"><div><div class="eyebrow">DETALHE DO ARTIGO</div><h1 id="detailTitle">Artigo</h1></div><button class="btn btn-secondary" id="closeDetail">Fechar</button></div>
@@ -193,7 +194,7 @@
 </div>
 </div>
 <script>
-const state={collections:[],pieces:[],archivedPieces:[],pendencias:[],historico:[],votos:[],selected:null,presentationOpen:false,voteScore:0,showArchived:false,editingId:null};
+const state={collections:[],pieces:[],archivedPieces:[],pendencias:[],historico:[],votos:[],selected:null,presentationOpen:false,voteScore:0,showArchived:false,editingId:null,resolvingId:null,radarStatus:'aberta',radarSeverity:'todas'};
 const $=id=>document.getElementById(id);
 const esc=v=>String(v||'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
 function toast(message,isError){const node=$('toast');node.textContent=message;node.className='toast'+(isError?' error':'');setTimeout(()=>node.classList.add('hidden'),3500)}
@@ -239,10 +240,11 @@ function renderSamples(){
 function renderOperational(){
   $('pendingCount').textContent=state.pendencias.filter(item=>item.status!=='resolvida').length;
   const byId=Object.fromEntries(state.pieces.map(piece=>[piece.id,piece]));
-  const open=state.pendencias.filter(item=>item.status!=='resolvida');
-  $('radarList').className=open.length?'panel':'empty';
-  $('radarList').innerHTML=open.length?open.map(item=>'<article class="fact"><small>'+esc(item.gravidade||'Pendência')+' · '+esc(item.area||'Área não informada')+'</small><strong>'+esc(byId[item.artigo_id]?.artigo||'Artigo')+'</strong><p>'+esc(item.descricao)+'</p><button class="btn btn-secondary resolve-button" data-id="'+item.id+'">Registrar solução</button></article>').join(''):'Nenhuma pendência aberta.';
-  document.querySelectorAll('.resolve-button').forEach(button=>button.onclick=()=>{const text=prompt('Descreva como o problema foi resolvido:');if(!text||!text.trim())return;google.script.run.withSuccessHandler(()=>{toast('Solução registrada com sucesso.');loadOperational()}).withFailureHandler(failure).resolveIssue(button.dataset.id,text.trim())});
+  const filtered=state.pendencias.filter(item=>(state.radarStatus==='todas'||item.status===state.radarStatus)&&(state.radarSeverity==='todas'||item.gravidade===state.radarSeverity));
+  $('radarList').className='panel';
+  $('radarList').innerHTML='<div class="form-grid"><div class="field"><label>Situação</label><select id="radarStatus"><option value="aberta">Pendências abertas</option><option value="resolvida">Resolvidas</option><option value="todas">Todas</option></select></div><div class="field"><label>Gravidade</label><select id="radarSeverity"><option value="todas">Todas as gravidades</option><option>Alta</option><option>Média</option><option>Baixa</option></select></div></div><div style="margin-top:18px">'+(filtered.length?filtered.map(item=>{const solution=state.historico.find(event=>event.tipo_evento==='solucao'&&(()=>{try{return JSON.parse(event.dados_extras||'{}').pendencia_id===item.id}catch(error){return false}})());let solutionExtra={};try{solutionExtra=JSON.parse(solution?.dados_extras||'{}')}catch(error){}return '<article class="fact" style="margin-bottom:12px"><small>'+esc(item.gravidade||'Pendência')+' · '+esc(item.area||'Área não informada')+' · '+esc(item.status)+'</small><strong>'+esc(byId[item.artigo_id]?.artigo||'Artigo')+'</strong><p>'+esc(item.descricao)+'</p>'+(item.status==='resolvida'?'<div class="notes"><strong>Solução registrada</strong><br><br>'+esc(item.resolucao_descricao)+(solutionExtra.foto?'<br><br><img src="'+esc(solutionExtra.foto)+'" alt="Foto da solução" style="max-width:220px;border-radius:10px">':'')+'</div>':'<button class="btn btn-secondary resolve-button" data-id="'+item.id+'">Registrar solução</button>')+'</article>'}).join(''):'<div class="sample-empty">Nenhuma pendência encontrada com estes filtros.</div>')+'</div>';
+  $('radarStatus').value=state.radarStatus;$('radarSeverity').value=state.radarSeverity;$('radarStatus').onchange=event=>{state.radarStatus=event.target.value;renderOperational()};$('radarSeverity').onchange=event=>{state.radarSeverity=event.target.value;renderOperational()};
+  document.querySelectorAll('.resolve-button').forEach(button=>button.onclick=()=>{state.resolvingId=button.dataset.id;$('resolutionText').value='';$('resolutionImage').value='';$('resolutionModal').classList.remove('hidden')});
   $('historyList').className=state.historico.length?'panel':'empty';
   $('historyList').innerHTML=state.historico.length?[...state.historico].reverse().map(item=>'<article class="fact"><small>'+esc(item.tipo_evento)+' · '+esc(item.usuario)+'</small><strong>'+esc(byId[item.artigo_id]?.artigo||'Artigo')+'</strong><p>'+esc(item.descricao)+'</p></article>').join(''):'Nenhum evento registrado.';
 }
@@ -265,6 +267,8 @@ function showDetail(id){
 }
 function openPieceForm(piece){state.editingId=piece?.id||null;$('form').reset();$('pieceFormTitle').textContent=piece?'Editar artigo':'Cadastrar artigo';$('articleImage').required=!piece;const names=['artigo','colecao','linha','categoria','mp_base','classificacao','criticidade','lacre','mostruario','observacoes'];names.forEach(name=>{if(piece&&$('form').elements[name])$('form').elements[name].value=piece[name]||''});$('pieceForm').classList.remove('hidden');$('pieceList').classList.add('hidden')}
 function filePayload(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve({name:file.name,mimeType:file.type,base64:String(reader.result).split(',')[1]});reader.onerror=reject;reader.readAsDataURL(file)})}
+$('closeResolution').onclick=()=>{$('resolutionModal').classList.add('hidden');state.resolvingId=null};
+$('resolutionForm').onsubmit=async event=>{event.preventDefault();const descricao=$('resolutionText').value.trim(),file=$('resolutionImage').files[0];if(!descricao)return toast('Descreva a solução aplicada.',true);if(file&&file.size>10*1024*1024)return toast('A foto deve ter no máximo 10 MB.',true);const button=$('saveResolution');button.disabled=true;button.textContent='Salvando solução...';const save=imagemUrl=>google.script.run.withSuccessHandler(()=>{button.disabled=false;button.textContent='Concluir pendência';$('resolutionModal').classList.add('hidden');state.resolvingId=null;toast('Solução registrada com sucesso.');loadOperational()}).withFailureHandler(error=>{button.disabled=false;button.textContent='Concluir pendência';failure(error)}).resolveIssue(state.resolvingId,{descricao,imagem_url:imagemUrl||''});try{if(file){const payload=await filePayload(file);google.script.run.withSuccessHandler(upload=>save(upload.url)).withFailureHandler(error=>{button.disabled=false;button.textContent='Concluir pendência';failure(error)}).uploadResolutionImage(payload)}else save('')}catch(error){button.disabled=false;button.textContent='Concluir pendência';failure(error)}};
 $('search').oninput=renderPieces;
 $('showActive').onclick=()=>{state.showArchived=false;renderPieces()};$('showArchived').onclick=()=>{state.showArchived=true;renderPieces()};
 $('newPiece').onclick=()=>openPieceForm(null);
