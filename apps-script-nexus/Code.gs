@@ -138,7 +138,30 @@ function setPieceArchived(id, archived) {
 
 function getOperationalData() {
   requireConfigured_();
-  return { pendencias: listRows_('pendencias'), historico: listRows_('historico') };
+  return { pendencias: listRows_('pendencias'), historico: listRows_('historico'), votos: listRows_('votos') };
+}
+
+function saveCriticalityVote(payload) {
+  requireConfigured_();
+  const articleId = requiredText_(payload && payload.artigo_id, 'Selecione um artigo.');
+  const sector = requiredText_(payload && payload.perfil, 'Selecione o setor.');
+  const score = Number(payload && payload.criticidade);
+  if (score < 1 || score > 5) throw new Error('Informe uma nota de criticidade entre 1 e 5.');
+  const now = new Date().toISOString();
+  const user = Session.getActiveUser().getEmail() || 'Participante não identificado';
+  const votes = listRows_('votos');
+  const existing = votes.find(function (item) {
+    return String(item.artigo_id) === String(articleId) && String(item.perfil) === String(sector) && String(item.usuario) === String(user);
+  });
+  let item;
+  if (existing) {
+    item = updateRow_('votos', existing.id, { criticidade: score, observacao: String(payload.observacao || ''), updated_at: now });
+  } else {
+    item = { id: Utilities.getUuid(), artigo_id: articleId, perfil: sector, usuario: user, criticidade: score, observacao: String(payload.observacao || ''), created_at: now, updated_at: now };
+    appendObject_('votos', item);
+  }
+  appendObject_('historico', { id: Utilities.getUuid(), artigo_id: articleId, tipo_evento: 'avaliacao_criticidade', descricao: 'Criticidade ' + score + '/5 registrada por ' + sector + '.', usuario: user, dados_extras: JSON.stringify({ setor: sector, nota: score }), created_at: now });
+  return item;
 }
 
 function createIssue(payload) {
