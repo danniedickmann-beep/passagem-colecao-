@@ -1,6 +1,6 @@
 const CONECTA = Object.freeze({
-  spreadsheetProperty: 'NEXUS_SPREADSHEET_ID',
-  filesFolderProperty: 'NEXUS_FILES_FOLDER_ID',
+  spreadsheetProperty: 'CONECTA_SPREADSHEET_ID',
+  filesFolderProperty: 'CONECTA_FILES_FOLDER_ID',
   spreadsheetName: 'Conecta - Base da Passagem de Coleção',
   filesFolderName: 'Conecta - Arquivos da Passagem de Coleção',
   sheets: {
