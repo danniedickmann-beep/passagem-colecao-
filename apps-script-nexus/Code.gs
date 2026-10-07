@@ -62,11 +62,13 @@ function configurarConecta() {
 function getBootstrapData() {
   const userEmail = Session.getActiveUser().getEmail() || '';
   const configured = isConfigured_();
+  const pieces = configured ? listRows_('artigos') : [];
   return {
     configured: configured,
     userEmail: userEmail,
     collections: configured ? listRows_('colecoes').filter(function (item) { return item.ativa !== false; }) : [],
-    pieces: configured ? listRows_('artigos').filter(function (item) { return item.ativa !== false; }) : [],
+    pieces: pieces.filter(function (item) { return item.ativa !== false; }),
+    archivedPieces: pieces.filter(function (item) { return item.ativa === false; }),
     generatedAt: new Date().toISOString()
   };
 }

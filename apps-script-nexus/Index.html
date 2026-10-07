@@ -82,13 +82,14 @@
 </div>
 <div class="toolbar">
 <input id="search" class="search" placeholder="Pesquisar por artigo, coleção, linha ou categoria">
+<div class="passage-actions"><button class="btn btn-secondary" id="showActive">Ativos</button><button class="btn btn-secondary" id="showArchived">Arquivados</button></div>
 <button class="btn btn-secondary" id="newCollection">+ Nova coleção</button>
 </div>
 <div id="pieceList">
 </div>
 <div id="pieceForm" class="panel hidden">
 <div class="eyebrow">NOVO REGISTRO</div>
-<h1 style="font-size:24px">Cadastrar artigo</h1>
+<h1 id="pieceFormTitle" style="font-size:24px">Cadastrar artigo</h1>
 <form id="form">
 <div class="form-grid">
 <div class="field">
@@ -188,11 +189,11 @@
 <div class="modal-card">
 <div class="page-head"><div><div class="eyebrow">DETALHE DO ARTIGO</div><h1 id="detailTitle">Artigo</h1></div><button class="btn btn-secondary" id="closeDetail">Fechar</button></div>
 <div id="detailBody"></div>
-<div class="actions"><button class="btn btn-secondary" id="archivePiece">Arquivar artigo</button><button class="btn btn-primary" id="openPassage">Abrir na Passagem</button></div>
+<div class="actions"><button class="btn btn-secondary" id="editPiece">Editar artigo</button><button class="btn btn-secondary" id="archivePiece">Arquivar artigo</button><button class="btn btn-primary" id="openPassage">Abrir na Passagem</button></div>
 </div>
 </div>
 <script>
-const state={collections:[],pieces:[],pendencias:[],historico:[],votos:[],selected:null,presentationOpen:false,voteScore:0};
+const state={collections:[],pieces:[],archivedPieces:[],pendencias:[],historico:[],votos:[],selected:null,presentationOpen:false,voteScore:0,showArchived:false,editingId:null};
 const $=id=>document.getElementById(id);
 const esc=v=>String(v||'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
 function toast(message,isError){const node=$('toast');node.textContent=message;node.className='toast'+(isError?' error':'');setTimeout(()=>node.classList.add('hidden'),3500)}
@@ -248,31 +249,38 @@ function renderOperational(){
 function loadOperational(){google.script.run.withSuccessHandler(data=>{state.pendencias=data.pendencias||[];state.historico=data.historico||[];state.votos=data.votos||[];renderOperational();if(document.getElementById('passagem').classList.contains('active'))renderPassage();if(document.getElementById('mostruario').classList.contains('active'))renderSamples()}).withFailureHandler(failure).getOperationalData()}
 function renderPieces(){
   const term=$('search').value.toLowerCase();
-  const items=state.pieces.filter(piece=>[piece.artigo,piece.colecao,piece.linha,piece.categoria].join(' ').toLowerCase().includes(term));
+  const source=state.showArchived?state.archivedPieces:state.pieces;
+  const items=source.filter(piece=>[piece.artigo,piece.colecao,piece.linha,piece.categoria].join(' ').toLowerCase().includes(term));
+  $('showActive').className='btn '+(state.showArchived?'btn-secondary':'btn-primary');$('showArchived').className='btn '+(state.showArchived?'btn-primary':'btn-secondary');
   $('pieceList').innerHTML=items.length?'<div class="piece-grid">'+items.map(piece=>'<article class="piece-card" data-id="'+piece.id+'"><div class="piece-image">'+(piece.imagem_url?'<img src="'+esc(piece.imagem_url)+'" alt="Imagem do artigo '+esc(piece.artigo)+'">':'Sem imagem')+'</div><div class="piece-content"><h3>'+esc(piece.artigo)+'</h3><div class="piece-meta">'+esc(piece.colecao)+' · '+esc(piece.categoria)+'</div><div class="tags"><span class="tag">'+esc(piece.classificacao)+'</span><span class="tag">'+esc(piece.criticidade)+'</span><span class="tag">'+esc(piece.status)+'</span></div></div></article>').join('')+'</div>':'<div class="empty">Nenhum artigo encontrado.</div>';
   document.querySelectorAll('.piece-card').forEach(card=>card.onclick=()=>showDetail(card.dataset.id));
 }
 function showDetail(id){
-  const piece=state.pieces.find(item=>String(item.id)===String(id));if(!piece)return;
+  const piece=[...state.pieces,...state.archivedPieces].find(item=>String(item.id)===String(id));if(!piece)return;
   state.selected=piece;$('detailTitle').textContent=piece.artigo;
   const facts=[['Coleção',piece.colecao],['Linha',piece.linha],['Categoria',piece.categoria],['Matéria-prima',piece.mp_base],['Classificação',piece.classificacao],['Criticidade',piece.criticidade],['Lacre',piece.lacre],['Mostruário',piece.mostruario],['Status',piece.status]];
   $('detailBody').innerHTML='<div class="detail-grid"><div class="detail-image">'+(piece.imagem_url?'<img src="'+esc(piece.imagem_url)+'" alt="Imagem do artigo">':'Sem imagem')+'</div><div><div class="facts">'+facts.map(item=>'<div class="fact"><small>'+item[0]+'</small><strong>'+esc(item[1])+'</strong></div>').join('')+'</div><div class="notes"><strong>Apontamentos para a passagem</strong><br><br>'+esc(piece.observacoes)+'</div></div></div>';
+  $('archivePiece').textContent=piece.ativa===false?'Restaurar artigo':'Arquivar artigo';$('editPiece').classList.toggle('hidden',piece.ativa===false);$('openPassage').classList.toggle('hidden',piece.ativa===false);
   $('pieceModal').classList.remove('hidden');
 }
+function openPieceForm(piece){state.editingId=piece?.id||null;$('form').reset();$('pieceFormTitle').textContent=piece?'Editar artigo':'Cadastrar artigo';$('articleImage').required=!piece;const names=['artigo','colecao','linha','categoria','mp_base','classificacao','criticidade','lacre','mostruario','observacoes'];names.forEach(name=>{if(piece&&$('form').elements[name])$('form').elements[name].value=piece[name]||''});$('pieceForm').classList.remove('hidden');$('pieceList').classList.add('hidden')}
 function filePayload(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve({name:file.name,mimeType:file.type,base64:String(reader.result).split(',')[1]});reader.onerror=reject;reader.readAsDataURL(file)})}
 $('search').oninput=renderPieces;
-$('newPiece').onclick=()=>{$('pieceForm').classList.remove('hidden');$('pieceList').classList.add('hidden')};
-$('cancelForm').onclick=()=>{$('pieceForm').classList.add('hidden');$('pieceList').classList.remove('hidden')};
+$('showActive').onclick=()=>{state.showArchived=false;renderPieces()};$('showArchived').onclick=()=>{state.showArchived=true;renderPieces()};
+$('newPiece').onclick=()=>openPieceForm(null);
+$('cancelForm').onclick=()=>{state.editingId=null;$('pieceForm').classList.add('hidden');$('pieceList').classList.remove('hidden')};
 $('closeDetail').onclick=()=>$('pieceModal').classList.add('hidden');
 $('openPassage').onclick=()=>{$('pieceModal').classList.add('hidden');navigate('passagem')};
-$('archivePiece').onclick=()=>{if(!state.selected||!confirm('Arquivar o artigo '+state.selected.artigo+'?'))return;google.script.run.withSuccessHandler(item=>{state.pieces=state.pieces.filter(piece=>piece.id!==item.id);$('pieceModal').classList.add('hidden');render();toast('Artigo arquivado com sucesso.')}).withFailureHandler(failure).setPieceArchived(state.selected.id,true)};
+$('editPiece').onclick=()=>{$('pieceModal').classList.add('hidden');openPieceForm(state.selected)};
+$('archivePiece').onclick=()=>{if(!state.selected)return;const archived=state.selected.ativa!==false;if(!confirm((archived?'Arquivar':'Restaurar')+' o artigo '+state.selected.artigo+'?'))return;google.script.run.withSuccessHandler(item=>{if(archived){state.pieces=state.pieces.filter(piece=>piece.id!==item.id);state.archivedPieces.unshift(item)}else{state.archivedPieces=state.archivedPieces.filter(piece=>piece.id!==item.id);state.pieces.unshift(item)}$('pieceModal').classList.add('hidden');render();toast(archived?'Artigo arquivado com sucesso.':'Artigo restaurado com sucesso.')}).withFailureHandler(failure).setPieceArchived(state.selected.id,archived)};
 $('newCollection').onclick=()=>{const nome=prompt('Nome da nova coleção:');if(!nome)return;google.script.run.withSuccessHandler(item=>{state.collections.unshift(item);render();toast('Coleção cadastrada com sucesso.')}).withFailureHandler(failure).saveCollection({nome})};
 $('form').onsubmit=async event=>{
-  event.preventDefault();const file=$('articleImage').files[0];if(!file)return toast('Selecione a imagem principal do artigo.',true);if(file.size>10*1024*1024)return toast('A imagem principal deve ter no máximo 10 MB.',true);
-  const button=$('savePieceButton');button.disabled=true;button.textContent='Enviando imagem...';
-  try{const payload=await filePayload(file);google.script.run.withSuccessHandler(upload=>{const data=Object.fromEntries(new FormData(event.target).entries());delete data.articleImage;data.imagem_url=upload.url;button.textContent='Salvando artigo...';google.script.run.withSuccessHandler(item=>{state.pieces.unshift(item);event.target.reset();$('pieceForm').classList.add('hidden');$('pieceList').classList.remove('hidden');render();toast('Artigo '+item.artigo+' cadastrado com sucesso.');button.disabled=false;button.textContent='Salvar artigo'}).withFailureHandler(error=>{button.disabled=false;button.textContent='Salvar artigo';failure(error)}).savePiece(data)}).withFailureHandler(error=>{button.disabled=false;button.textContent='Salvar artigo';failure(error)}).uploadArticleImage(payload)}catch(error){button.disabled=false;button.textContent='Salvar artigo';failure(error)}
+  event.preventDefault();const file=$('articleImage').files[0],editing=state.pieces.find(piece=>piece.id===state.editingId);if(!file&&!editing)return toast('Selecione a imagem principal do artigo.',true);if(file&&file.size>10*1024*1024)return toast('A imagem principal deve ter no máximo 10 MB.',true);
+  const button=$('savePieceButton');button.disabled=true;button.textContent=file?'Enviando imagem...':'Salvando artigo...';
+  const save=imagemUrl=>{const data=Object.fromEntries(new FormData(event.target).entries());delete data.articleImage;data.imagem_url=imagemUrl||editing?.imagem_url||'';const method=editing?'updatePiece':'savePiece';const runner=google.script.run.withSuccessHandler(item=>{if(editing){state.pieces=state.pieces.map(piece=>piece.id===item.id?item:piece)}else state.pieces.unshift(item);state.editingId=null;event.target.reset();$('pieceForm').classList.add('hidden');$('pieceList').classList.remove('hidden');render();toast('Artigo '+item.artigo+' salvo com sucesso.');button.disabled=false;button.textContent='Salvar artigo'}).withFailureHandler(error=>{button.disabled=false;button.textContent='Salvar artigo';failure(error)});if(method==='updatePiece')runner.updatePiece(editing.id,data);else runner.savePiece(data)};
+  try{if(file){const payload=await filePayload(file);google.script.run.withSuccessHandler(upload=>save(upload.url)).withFailureHandler(error=>{button.disabled=false;button.textContent='Salvar artigo';failure(error)}).uploadArticleImage(payload)}else save(editing.imagem_url)}catch(error){button.disabled=false;button.textContent='Salvar artigo';failure(error)}
 };
-google.script.run.withSuccessHandler(data=>{state.collections=data.collections;state.pieces=data.pieces;$('user').textContent=data.userEmail||'Usuário corporativo';$('status').textContent='Ambiente conectado';render();loadOperational()}).withFailureHandler(failure).getBootstrapData();
+google.script.run.withSuccessHandler(data=>{state.collections=data.collections;state.pieces=data.pieces;state.archivedPieces=data.archivedPieces||[];$('user').textContent=data.userEmail||'Usuário corporativo';$('status').textContent='Ambiente conectado';render();loadOperational()}).withFailureHandler(failure).getBootstrapData();
 </script>
 </body>
 </html>
