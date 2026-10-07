@@ -195,6 +195,36 @@ function uploadArticleImage(payload) {
   return { id: file.getId(), url: 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w1200', name: file.getName() };
 }
 
+function uploadSampleImage(payload) {
+  requireConfigured_();
+  if (!payload || !payload.base64 || !payload.mimeType || !String(payload.mimeType).startsWith('image/')) throw new Error('Selecione uma foto válida do mostruário.');
+  const bytes = Utilities.base64Decode(payload.base64);
+  if (bytes.length > 10 * 1024 * 1024) throw new Error('A foto do mostruário deve ter no máximo 10 MB.');
+  const folder = DriveApp.getFolderById(PropertiesService.getScriptProperties().getProperty(CONECTA.filesFolderProperty));
+  const safeName = String(payload.name || 'mostruario').replace(/[^a-zA-Z0-9._-]/g, '-');
+  const file = folder.createFile(Utilities.newBlob(bytes, payload.mimeType, 'mostruario-' + Utilities.getUuid() + '-' + safeName));
+  return { id: file.getId(), url: 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w1200', name: file.getName() };
+}
+
+function saveSampleRecord(payload) {
+  requireConfigured_();
+  const now = new Date().toISOString();
+  const user = Session.getActiveUser().getEmail() || 'Usuário não identificado';
+  const articleId = requiredText_(payload && payload.artigo_id, 'Selecione um artigo do mostruário.');
+  const sector = requiredText_(payload && payload.setor, 'Selecione o setor.');
+  const description = requiredText_(payload && payload.descricao, 'Descreva a ocorrência ou o acompanhamento.');
+  const severity = requiredText_(payload && payload.gravidade, 'Informe a gravidade.');
+  const type = requiredText_(payload && payload.tipo, 'Informe o tipo do registro.');
+  const imageUrl = requiredText_(payload && payload.imagem_url, 'Inclua uma foto do registro.');
+  const extras = { setor: sector, tipo: type, gravidade: severity, foto: imageUrl, ciclo_encerrado: Boolean(payload.ciclo_encerrado) };
+  const event = { id: Utilities.getUuid(), artigo_id: articleId, tipo_evento: 'registro_mostruario', descricao: description, usuario: user, dados_extras: JSON.stringify(extras), created_at: now };
+  appendObject_('historico', event);
+  let issue = null;
+  if (String(payload.enviar_radar) === 'true' || payload.enviar_radar === true) issue = createIssue({ artigo_id: articleId, tipo: type, area: sector, descricao: description, gravidade: severity });
+  if (payload.ciclo_encerrado) updateRow_('artigos', articleId, { status: 'pos-mostruario', updated_at: now });
+  return { event: event, issue: issue };
+}
+
 function isConfigured_() {
   const properties = PropertiesService.getScriptProperties();
   return Boolean(properties.getProperty(CONECTA.spreadsheetProperty) && properties.getProperty(CONECTA.filesFolderProperty));
