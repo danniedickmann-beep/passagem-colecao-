@@ -140,7 +140,34 @@ function setPieceArchived(id, archived) {
 
 function getOperationalData() {
   requireConfigured_();
-  return { pendencias: listRows_('pendencias'), historico: listRows_('historico'), votos: listRows_('votos') };
+  return { pendencias: listRows_('pendencias'), historico: listRows_('historico'), votos: listRows_('votos'), anexos: listRows_('anexos') };
+}
+
+function uploadArticleAttachment(payload) {
+  requireConfigured_();
+  const articleId = requiredText_(payload && payload.artigo_id, 'Selecione um artigo.');
+  const allowed = /^(image\/|video\/|application\/pdf$|text\/)/;
+  const mimeType = String(payload && payload.mimeType || '');
+  if (!payload || !payload.base64 || !allowed.test(mimeType)) throw new Error('Envie uma imagem, vídeo, PDF ou arquivo de texto válido.');
+  const bytes = Utilities.base64Decode(payload.base64);
+  if (bytes.length > 50 * 1024 * 1024) throw new Error('Cada anexo deve ter no máximo 50 MB.');
+  const folder = DriveApp.getFolderById(PropertiesService.getScriptProperties().getProperty(CONECTA.filesFolderProperty));
+  const safeName = String(payload.name || 'anexo').replace(/[^a-zA-Z0-9._-]/g, '-');
+  const file = folder.createFile(Utilities.newBlob(bytes, mimeType, 'anexo-' + articleId + '-' + Utilities.getUuid() + '-' + safeName));
+  const now = new Date().toISOString();
+  const user = Session.getActiveUser().getEmail() || 'Usuário não identificado';
+  const item = {
+    id: Utilities.getUuid(), artigo_id: articleId, nome: safeName, mime_type: mimeType,
+    tamanho: bytes.length, descricao: String(payload.descricao || '').trim(), drive_file_id: file.getId(),
+    url: file.getUrl(), created_by: user, created_at: now
+  };
+  appendObject_('anexos', item);
+  appendObject_('historico', {
+    id: Utilities.getUuid(), artigo_id: articleId, tipo_evento: 'anexo',
+    descricao: 'Anexo adicionado: ' + safeName + (item.descricao ? ' — ' + item.descricao : ''), usuario: user,
+    dados_extras: JSON.stringify({ anexo_id: item.id, nome: safeName, mime_type: mimeType, url: item.url }), created_at: now
+  });
+  return item;
 }
 
 function saveCriticalityVote(payload) {
