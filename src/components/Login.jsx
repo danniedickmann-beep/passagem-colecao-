@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { PROFILES } from '../config/mvp'
-import { NexusMark } from './NexusMark'
 
 export function Login({ onEnter }) {
   const previous = readPreviousUser()
@@ -16,7 +15,7 @@ export function Login({ onEnter }) {
   }
 
   return <div className="login-screen"><form className="login-card" onSubmit={submit}>
-    <div className="login-brand"><NexusMark /><div><strong>Nexus</strong><small>Passagem de Coleção Digital</small></div></div>
+    <div className="login-brand"><img className="conecta-login-logo" src={`${import.meta.env.BASE_URL}brand/conecta-logo.png`} alt="Conecta — do produto à indústria" /></div>
     <span className="login-kicker">Ambiente operacional</span>
     <h1>Acessar a Passagem de Coleção</h1>
     <p>Identifique-se para que decisões e alterações fiquem registradas.</p>

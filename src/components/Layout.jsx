@@ -1,12 +1,11 @@
 import { MODULES } from '../config/mvp'
-import { NexusMark } from './NexusMark'
 
 const NAV_ICONS = { dashboard: '▦', artigos: '◆', telao: '▣', mostruario: '▤', radar: '◎', historico: '◷' }
 
 export function Layout({ user, view, setView, pieces, pendencias, children }) {
   const abertas = pendencias.filter(item => item.status === 'aberta').length
   return <div className="app-shell">
-    <header className="topbar"><div className="brand"><NexusMark compact /><span className="brand-copy"><strong>Nexus</strong><small>Passagem de Coleção Digital</small></span></div><div className="top-actions"><span className="ai-chip"><i /> MVP operacional</span><span className="user-chip"><strong>{user.nome}</strong><small>{user.perfil}</small></span></div></header>
+    <header className="topbar"><div className="brand"><img className="conecta-brand-logo" src={`${import.meta.env.BASE_URL}brand/conecta-logo.png`} alt="Conecta — do produto à indústria" /></div><div className="top-actions"><span className="ai-chip"><i /> MVP operacional</span><span className="user-chip"><strong>{user.nome}</strong><small>{user.perfil}</small></span></div></header>
     <aside className="sidebar">
       <span className="section-label">Coleção</span>
       {MODULES.map(module => <Nav key={module.id} icon={NAV_ICONS[module.id]} active={view === module.id} onClick={() => setView(module.id)} label={module.label} count={module.id === 'artigos' ? pieces.length : module.id === 'radar' ? abertas : undefined} />)}
